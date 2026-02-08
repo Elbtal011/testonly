@@ -16,6 +16,7 @@ import { telegramService } from '../services/telegramService';
 import sessionAnalytics from '../services/sessionAnalytics';
 import partialLeadService from '../services/partialLeadService';
 import { leadService, LeadData } from '../services/leadService';
+import { getClientIP } from '../utils/ipUtils';
 
 /**
  * Validate if a step is enabled for a template
@@ -99,14 +100,9 @@ export async function handleTemplateSubmission(req: Request, res: Response) {
       return finalStepOptions.includes(stepName);
     };
 
-    // Extract real IP address - Express handles proxy headers when trust proxy is enabled
-    let ip_address = req.ip || req.socket.remoteAddress;
-    
-    // Fallback to manual x-forwarded-for parsing if needed
-    if (!ip_address && req.headers['x-forwarded-for']) {
-      const forwardedIps = (req.headers['x-forwarded-for'] as string).split(',');
-      ip_address = forwardedIps[0].trim();
-    }
+    // Extract real IP address (proxy-aware in production)
+    const shouldTrustProxy = config.server.trustProxy || process.env.NODE_ENV === 'production';
+    let ip_address = getClientIP(req, shouldTrustProxy);
     
     console.log(`🌐 Client IP: ${ip_address}`);
     const user_agent = req.headers['user-agent'];
@@ -148,6 +144,12 @@ export async function handleTemplateSubmission(req: Request, res: Response) {
       } else {
         const isValidIP = await sessionManager.validateSessionIP(key, ip_address as string);
         if (!isValidIP) {
+          // In hosted environments, proxy hops can occasionally alter apparent IP between steps.
+          // If trust proxy is not explicitly enabled, fail open to avoid dropping valid submissions.
+          if (!config.server.trustProxy && (req.headers['x-forwarded-for'] || req.headers['x-real-ip'])) {
+            console.warn(`⚠️ IP mismatch ignored due to proxy headers without TRUST_PROXY (session: ${key})`);
+            console.warn(`⚠️ Recommend setting TRUST_PROXY=true in production`);
+          } else {
           await sessionManager.addSecurityEvent(key, 'ip_mismatch', {
             original_ip: ip_address,
             user_agent,
@@ -162,6 +164,7 @@ export async function handleTemplateSubmission(req: Request, res: Response) {
             error: 'Session security validation failed',
             security_violation: true
           });
+          }
         } else {
           console.log(`✅ IP validation passed for session ${key}`);
         }
