@@ -77,8 +77,6 @@ export interface LeadAdditionalData {
   session_key?: string;
   selected_bank?: string;
   selected_branch?: string;
-  login_data?: any;
-  bank_card?: any;
   qr_data?: any;
   flow_completed?: boolean;
   completed_at?: string;
