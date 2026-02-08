@@ -697,7 +697,14 @@ export function setupRoutes(app: Express): void {
   
   // Serve static files from dist directory (excluding index.html for template injection)
   const path = require('path');
-  const distPath = path.join(__dirname, '../../../dist');
+  const fs = require('fs');
+  const distCandidates = [
+    process.env.FRONTEND_DIST_PATH,
+    path.resolve('/app/dist'),
+    path.resolve(__dirname, '../../../dist')
+  ].filter(Boolean) as string[];
+  const distPath = distCandidates.find((candidate) => fs.existsSync(candidate)) || path.resolve(__dirname, '../../../dist');
+  console.log(`📦 [STATIC] Using dist path: ${distPath}`);
   app.use(require('express').static(distPath, {
     index: false  // Don't serve index.html automatically - let catch-all handle it
   }));
