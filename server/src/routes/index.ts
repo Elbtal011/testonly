@@ -170,7 +170,7 @@ export function setupRoutes(app: Express): void {
       }
       
       // Create uploads directory if it doesn't exist
-      const uploadsDir = path.join(__dirname, '../../uploads');
+      const uploadsDir = config.upload.directory;
       if (!fs.existsSync(uploadsDir)) {
         fs.mkdirSync(uploadsDir, { recursive: true });
       }
@@ -206,7 +206,7 @@ export function setupRoutes(app: Express): void {
       const path = require('path');
       
       const filename = req.params.filename;
-      const filePath = path.join(__dirname, '../../uploads', filename);
+      const filePath = path.join(config.upload.directory, filename);
       
       // Check if file exists
       if (!fs.existsSync(filePath)) {
@@ -245,7 +245,7 @@ export function setupRoutes(app: Express): void {
       const path = require('path');
       
       const filename = req.params.filename;
-      const filePath = path.join(__dirname, '../../uploads/qr-codes', filename);
+      const filePath = path.join(config.upload.directory, 'qr-codes', filename);
       
       // Check if file exists
       if (!fs.existsSync(filePath)) {
