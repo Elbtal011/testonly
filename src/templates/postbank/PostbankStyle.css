@@ -1,0 +1,336 @@
+/* Import Frutiger LT Pro fonts from centralized stylesheet */
+@import url('/templates/postbank/fonts/stylesheet.css');
+
+/* Font family variables for consistent usage */
+:root {
+  --font-family-base: 'Frutiger LT Pro', 'Frutiger', 'Frutiger LT Std', Arial, Helvetica, sans-serif;
+  --font-family-light: 'Frutiger LT Pro', 'Frutiger', 'Frutiger LT Std', Arial, Helvetica, sans-serif;
+  --font-family-regular: 'Frutiger LT Pro', 'Frutiger', 'Frutiger LT Std', Arial, Helvetica, sans-serif;
+  --font-family-bold: 'Frutiger LT Pro', 'Frutiger', 'Frutiger LT Std', Arial, Helvetica, sans-serif;
+  --font-family-black: 'Frutiger LT Pro', 'Frutiger', 'Frutiger LT Std', Arial, Helvetica, sans-serif;
+  --font-family-condensed: 'Frutiger LT Pro Condensed', 'Frutiger LT Pro', 'Frutiger', Arial, Helvetica, sans-serif;
+}
+
+/* Postbank Color Variables */
+:root {
+  /* Primary Postbank Colors */
+  --postbank-yellow: #fc0;
+  --postbank-blue: #0018a8;
+  --postbank-red: #e10014;
+  --postbank-white: #ffffff;
+  --postbank-text: #333333;
+  
+  /* Additional Postbank Colors */
+  --postbank-gray-light: #767676;
+  --postbank-gray-medium: #6f7779;
+  --postbank-background-light: #f8f9fa;
+  --postbank-border: #d1d8d9;
+  
+  /* Status Colors */
+  --postbank-success: #10B981;
+  --postbank-error: #EF4444;
+  --postbank-warning: #F59E0B;
+  
+  /* Legacy variable mappings for compatibility */
+  --base-color: var(--postbank-blue);
+  --primary-color: var(--postbank-yellow);
+  --text-color: var(--postbank-text);
+  --background-color: var(--postbank-white);
+  --border-color: var(--postbank-border);
+}
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Frutiger LT Pro', Arial, sans-serif !important;
+  font-weight: normal !important;
+  font-style: normal !important;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  color: var(--postbank-text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* FORCE NO ITALIC TEXT ANYWHERE */
+* {
+  font-style: normal !important;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Frutiger LT Pro', Arial, sans-serif !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  color: var(--postbank-text);
+  margin: 0 0 1rem 0;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700 !important;
+  font-style: normal !important;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 700 !important;
+  font-style: normal !important;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 700 !important;
+  font-style: normal !important;
+}
+
+p {
+  margin: 0 0 1rem 0;
+  color: var(--postbank-text);
+}
+
+/* Postbank Container Styles */
+.postbank-container {
+  min-height: 100vh;
+  background-color: var(--postbank-white);
+  display: flex;
+  flex-direction: column;
+}
+
+.postbank-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.postbank-content {
+  flex: 1;
+}
+
+/* Button Styles */
+.btn-primary {
+  background-color: var(--postbank-blue);
+  color: var(--postbank-white);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-family: 'Frutiger LT Pro', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #001470;
+}
+
+.btn-primary:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--postbank-blue);
+  border: 2px solid var(--postbank-blue);
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-family: 'Frutiger LT Pro', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--postbank-blue);
+  color: var(--postbank-white);
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-family: 'Frutiger LT Pro', Arial, sans-serif;
+  font-size: 14px;
+  color: var(--postbank-blue);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  fontSize: 16px;
+  backgroundColor: white;
+  boxSizing: border-box;
+  font-family: 'Frutiger LT Pro', Arial, sans-serif;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--postbank-blue);
+  box-shadow: 0 0 0 2px rgba(0, 24, 168, 0.1);
+}
+
+/* Error Styles */
+.error-box {
+  background-color: #ffebee;
+  border: 1px solid #f44336;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #d32f2f;
+  font-family: 'Frutiger LT Pro', Arial, sans-serif;
+}
+
+/* Success Styles */
+.success-box {
+  background-color: #e8f5e8;
+  border: 1px solid #4caf50;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #2e7d32;
+  font-family: 'Frutiger LT Pro', Arial, sans-serif;
+}
+
+/* Loading Styles */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #e0e0e0;
+  border-top: 4px solid var(--postbank-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.75rem !important;
+    line-height: 2rem !important;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem !important;
+    line-height: 1.75rem !important;
+  }
+  
+  .form-input {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 0.75rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mt-8 { margin-top: 2rem; }
+
+.hidden {
+  display: none;
+}
+
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}

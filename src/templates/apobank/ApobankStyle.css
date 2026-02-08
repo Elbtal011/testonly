@@ -1,0 +1,705 @@
+/* APOBANK FONT LOADING - SOURCE SANS PRO */
+
+/* Load Source Sans Pro font family */
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url('/templates/apobank/fonts/SourceSansPro-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url('/templates/apobank/fonts/SourceSansPro-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url('/templates/apobank/fonts/SourceSansPro-Semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url('/templates/apobank/fonts/SourceSansPro-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Apobank Color Variables */
+:root {
+  /* Primary Apobank Colors */
+  --apobank-primary: #012169;
+  --apobank-secondary: #0056b3;
+  --apobank-accent: #00a0e6;
+  --apobank-background: #f8f9fa;
+  --apobank-text: #1e325f;
+  --apobank-white: #ffffff;
+  --apobank-light-gray: #f1f3f4;
+  --apobank-medium-gray: #6c757d;
+  --apobank-dark-gray: #495057;
+  
+  /* Additional Colors */
+  --apobank-success: #28a745;
+  --apobank-error: #dc3545;
+  --apobank-warning: #ffc107;
+  --apobank-border: #dee2e6;
+  --apobank-border-light: #e9ecef;
+  
+  /* Legacy variable mappings for compatibility */
+  --base-color: var(--apobank-accent);
+  --primary-color: var(--apobank-primary);
+  --text-color: var(--apobank-text);
+  --background-color: var(--apobank-white);
+  --border-color: var(--apobank-border);
+}
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--apobank-background);
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Source Sans Pro', Arial, sans-serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  margin: 0;
+  padding: 0;
+  background-color: var(--apobank-background);
+  color: var(--apobank-text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* FORCE NO ITALIC TEXT ANYWHERE */
+* {
+  font-style: normal !important;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Source Sans Pro', Arial, sans-serif !important;
+  font-weight: 600 !important;
+  font-style: normal !important;
+  color: var(--apobank-text);
+  margin: 0 0 1rem 0;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 600 !important;
+  font-style: normal !important;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600 !important;
+  font-style: normal !important;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600 !important;
+  font-style: normal !important;
+}
+
+p {
+  margin: 0 0 1rem 0;
+  color: var(--apobank-text);
+}
+
+/* Header Styles */
+.header {
+  background-color: var(--apobank-white);
+  border-bottom: 1px solid var(--apobank-border);
+  padding: 0;
+  position: relative;
+  z-index: 1000;
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  height: 80px;
+}
+
+.header-logo {
+  height: 40px;
+  width: auto;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.header-nav a {
+  color: var(--apobank-text);
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.header-nav a:hover {
+  color: var(--apobank-primary);
+}
+
+/* Login Form Container */
+.login-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: calc(100vh - 200px);
+}
+
+.login-card {
+  background-color: var(--apobank-white);
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  width: 100%;
+  max-width: 480px;
+  margin-top: 40px;
+}
+
+/* Tab Interface */
+.login-tabs {
+  display: flex;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--apobank-border);
+}
+
+.login-tab {
+  flex: 1;
+  padding: 16px 24px;
+  background: none;
+  border: none;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
+  font-size: 1rem;
+  color: var(--apobank-medium-gray);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.login-tab.active {
+  color: var(--apobank-primary);
+  border-bottom-color: var(--apobank-primary);
+  font-weight: 600;
+}
+
+.login-tab:hover {
+  color: var(--apobank-primary);
+}
+
+/* Form Styles */
+.form-container {
+  background-color: var(--apobank-white);
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.form-section {
+  margin-bottom: 24px;
+}
+
+.form-group {
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.form-label {
+  display: block;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
+  font-size: 0.9rem;
+  color: var(--apobank-text);
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+
+/* Floating label styles */
+.form-group-floating {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.form-group-floating .input-field {
+  padding-top: 28px;
+  padding-bottom: 8px;
+}
+
+.form-group-floating .input-field:placeholder-shown + .form-label-floating {
+  top: 24px;
+  font-size: 16px;
+}
+
+.form-group-floating .input-field:focus + .form-label-floating,
+.form-group-floating .input-field:not(:placeholder-shown) + .form-label-floating {
+  top: 8px;
+  font-size: 12px;
+  color: var(--apobank-primary);
+}
+
+.form-label-floating {
+  position: absolute;
+  left: 16px;
+  top: 8px;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: 'Source Sans Pro', Arial, sans-serif;
+  transition: all 0.2s ease;
+  pointer-events: none;
+  transform-origin: left top;
+  background-color: transparent;
+  z-index: 1;
+}
+
+.input-field {
+  width: 100%;
+  padding: 28px 16px 8px 16px; /* Fixed padding - always the same */
+  border: 1px solid rgba(0, 0, 0, 0.65);
+  border-radius: 4px;
+  background-color: transparent;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--apobank-text);
+  transition: all 0.2s ease;
+  outline: none;
+  min-height: 65px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.input-field:focus {
+  border: 2px solid var(--apobank-primary);
+  background-color: transparent;
+}
+
+.input-field:hover {
+  background-color: #f2f7fb;
+}
+
+.input-field.error {
+  border-color: var(--apobank-error);
+}
+
+/* Button Styles */
+.button-primary {
+  background-color: var(--apobank-primary);
+  color: var(--apobank-white);
+  border: 2px solid var(--apobank-primary);
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  font-style: normal;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  width: 11.2rem;
+  min-height: 48px;
+  line-height: 20px;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.button-primary:hover {
+  background-color: var(--apobank-secondary);
+  border-color: var(--apobank-secondary);
+  transform: none;
+  box-shadow: none;
+}
+
+.button-primary:disabled {
+  background-color: var(--apobank-medium-gray);
+  border-color: var(--apobank-medium-gray);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.button-secondary {
+  background-color: transparent;
+  color: var(--apobank-primary);
+  border: 0.125rem solid var(--apobank-primary);
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-family: 'Source Sans Pro', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  font-style: normal;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  width: 11.2rem;
+  min-height: 48px;
+  line-height: 20px;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.button-secondary:hover {
+  background-color: var(--apobank-primary);
+  color: var(--apobank-white);
+}
+
+/* Button Container for Side-by-Side Layout */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 32px;
+}
+
+.button-container .button-primary,
+.button-container .button-secondary {
+  flex: 1;
+  margin-top: 0;
+}
+
+/* Single Button Layout */
+.button-single {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.button-single .button-primary {
+  margin-top: 0;
+}
+
+/* Link Styles */
+.forgot-password-link {
+  color: var(--apobank-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-top: 16px;
+  transition: color 0.3s ease;
+}
+
+.forgot-password-link:hover {
+  color: var(--apobank-secondary);
+  text-decoration: underline;
+}
+
+/* Error and Success Messages */
+.error-box {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+  padding: 16px;
+  border-radius: 4px;
+  margin-bottom: 24px;
+  font-size: 0.9rem;
+}
+
+.success-box {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+  padding: 16px;
+  border-radius: 4px;
+  margin-bottom: 24px;
+  font-size: 0.9rem;
+}
+
+.info-box {
+  background-color: #d1ecf1;
+  border: 1px solid #bee5eb;
+  color: #0c5460;
+  padding: 16px;
+  border-radius: 4px;
+  margin-bottom: 24px;
+  font-size: 0.9rem;
+}
+
+/* Footer Styles */
+.footer {
+  background-color: var(--apobank-white);
+  border-top: 1px solid var(--apobank-border);
+  padding: 40px 0;
+  margin-top: auto;
+}
+
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.footer-partners {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.footer-partner-logo {
+  height: 32px;
+  width: auto;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.footer-partner-logo:hover {
+  opacity: 1;
+}
+
+.footer-language {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--apobank-medium-gray);
+  font-size: 0.9rem;
+}
+
+.footer-flag {
+  width: 20px;
+  height: auto;
+}
+
+/* Loading Styles */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(248, 249, 250, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--apobank-border);
+  border-top: 4px solid var(--apobank-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Card Styles */
+.apobank-card {
+  background-color: var(--apobank-white);
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  padding: 32px;
+  margin-bottom: 24px;
+}
+
+/* Main Container */
+.main-container {
+  min-height: calc(100vh - 160px);
+  display: flex;
+  flex-direction: column;
+}
+
+.content-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header-container {
+    padding: 12px 20px;
+    height: 64px;
+  }
+  
+  .header-logo {
+    height: 32px;
+  }
+  
+  .login-container {
+    padding: 20px;
+  }
+  
+  .login-card {
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  .footer-partners {
+    gap: 16px;
+  }
+  
+  .footer-partner-logo {
+    height: 24px;
+  }
+  
+  h1 {
+    font-size: 1.75rem !important;
+    line-height: 2rem !important;
+    margin-bottom: 12px !important;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-container {
+    padding: 12px 16px;
+  }
+  
+  .login-container {
+    padding: 16px;
+  }
+  
+  .login-card {
+    padding: 16px;
+    margin-top: 16px;
+  }
+  
+  .apobank-card {
+    padding: 16px;
+  }
+  
+  h1 {
+    font-size: 1.5rem !important;
+    line-height: 1.75rem !important;
+  }
+  
+  .footer-partners {
+    gap: 12px;
+  }
+  
+  .footer-partner-logo {
+    height: 20px;
+  }
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 0.75rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mt-8 { margin-top: 2rem; }
+
+.hidden {
+  display: none;
+}
+
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+/* Focus and accessibility improvements */
+.input-field:focus,
+.button-primary:focus,
+.button-secondary:focus {
+  outline: 2px solid var(--apobank-accent);
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .header,
+  .footer {
+    display: none;
+  }
+  
+  .main-container {
+    min-height: auto;
+  }
+  
+  .apobank-card {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+} 

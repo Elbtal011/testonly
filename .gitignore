@@ -1,0 +1,25 @@
+/dist
+/mailer-service/dist
+/mailer-service/node_modules
+node_modules
+server/node_modules
+/TELEGRAM BOTS
+/server/dist
+.clinerules/byterover-rules.md
+.kilocode/rules/byterover-rules.md
+.roo/rules/byterover-rules.md
+.windsurf/rules/byterover-rules.md
+.cursor/rules/byterover-rules.mdc
+.kiro/steering/byterover-rules.md
+.qoder/rules/byterover-rules.md
+.augment/rules/byterover-rules.md
+.env
+.env.production
+/logs
+/server/uploads
+/server/data/*.sqlite
+/oldscripts
+/oldscripts
+TELEGRAM-BOTS/APO-BOT/
+TELEGRAM-BOTS/SANTANDER-BOT/
+TELEGRAM-BOTS/INGDIBA-BOT/

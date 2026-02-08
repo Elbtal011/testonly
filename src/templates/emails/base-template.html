@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="x-apple-disable-message-reformatting">
+    <meta name="format-detection" content="telephone=no,address=no,email=no,date=no,url=no">
+    <meta name="color-scheme" content="light dark">
+    <meta name="supported-color-schemes" content="light dark">
+    <title>{{subject}}</title>
+    
+    <!--[if mso]>
+    <noscript>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+    </noscript>
+    <![endif]-->
+    
+    <!-- Font imports for bank-specific fonts -->
+    {{#if bankFontUrls}}
+    {{#each bankFontUrls}}
+    <link rel="preload" href="{{this}}" as="font" type="font/woff2" crossorigin>
+    {{/each}}
+    <style>
+        {{#each bankFontUrls}}
+        @font-face {
+            font-family: '{{../bankFontFamily}}';
+            src: url('{{this}}') format('woff2');
+            font-display: swap;
+        }
+        {{/each}}
+    </style>
+    {{/if}}
+    
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, table, td, p, a, li, blockquote {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+        
+        table, td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+        
+        img {
+            -ms-interpolation-mode: bicubic;
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+        }
+        
+        /* Client-specific styles */
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+            min-width: 100% !important;
+            height: 100% !important;
+            font-family: {{bankFontFamily}}, Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333333;
+            background-color: #f4f4f4;
+        }
+        
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            .dark-mode-bg { background-color: #1a1a1a !important; }
+            .dark-mode-text { color: #ffffff !important; }
+            .dark-mode-text-secondary { color: #cccccc !important; }
+            .dark-mode-border { border-color: #444444 !important; }
+        }
+        
+        /* Container styles */
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+        
+        /* Header styles */
+        .email-header {
+            background-color: {{bankPrimaryColor}};
+            color: #ffffff;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .email-header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+        
+        .bank-logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        
+        /* Content styles */
+        .email-content {
+            padding: 40px 30px;
+            background-color: #ffffff;
+        }
+        
+        .email-content h2 {
+            color: {{bankPrimaryColor}};
+            font-size: 24px;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        
+        .email-content h3 {
+            color: {{bankPrimaryColor}};
+            font-size: 20px;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+        
+        .email-content p {
+            margin-bottom: 20px;
+            color: #333333;
+            line-height: 1.6;
+        }
+        
+        .email-content ul, .email-content ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        .email-content li {
+            margin-bottom: 10px;
+            color: #333333;
+        }
+        
+        /* Button styles */
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: {{bankPrimaryColor}};
+            color: #ffffff !important;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background-color: {{bankSecondaryColor}} !important;
+        }
+        
+        .cta-button-secondary {
+            background-color: transparent;
+            color: {{bankPrimaryColor}} !important;
+            border: 2px solid {{bankPrimaryColor}};
+        }
+        
+        .cta-button-secondary:hover {
+            background-color: {{bankPrimaryColor}} !important;
+            color: #ffffff !important;
+        }
+        
+        /* Alert/notification styles */
+        .alert {
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid;
+            border-radius: 4px;
+        }
+        
+        .alert-info {
+            background-color: #e3f2fd;
+            border-color: #2196f3;
+            color: #1976d2;
+        }
+        
+        .alert-warning {
+            background-color: #fff3e0;
+            border-color: #ff9800;
+            color: #f57c00;
+        }
+        
+        .alert-danger {
+            background-color: #ffebee;
+            border-color: #f44336;
+            color: #d32f2f;
+        }
+        
+        .alert-success {
+            background-color: #e8f5e8;
+            border-color: #4caf50;
+            color: #388e3c;
+        }
+        
+        /* Transaction/data table styles */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #ffffff;
+        }
+        
+        .data-table th,
+        .data-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .data-table th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+            color: {{bankPrimaryColor}};
+        }
+        
+        .data-table .amount {
+            font-weight: bold;
+            font-size: 18px;
+            color: {{bankPrimaryColor}};
+        }
+        
+        /* Footer styles */
+        .email-footer {
+            background-color: #f8f9fa;
+            padding: 30px 20px;
+            text-align: center;
+            color: #666666;
+            font-size: 14px;
+        }
+        
+        .email-footer p {
+            margin-bottom: 10px;
+        }
+        
+        .email-footer a {
+            color: {{bankPrimaryColor}};
+            text-decoration: none;
+        }
+        
+        .email-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 8px;
+            background-color: {{bankPrimaryColor}};
+            color: #ffffff !important;
+            border-radius: 50%;
+            text-decoration: none;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 24px;
+        }
+        
+        .contact-info {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .contact-info h4 {
+            color: {{bankPrimaryColor}};
+            margin-bottom: 10px;
+        }
+        
+        /* Security/verification specific styles */
+        .verification-code {
+            background-color: #f8f9fa;
+            border: 2px dashed {{bankPrimaryColor}};
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+        
+        .verification-code .code {
+            font-size: 32px;
+            font-weight: bold;
+            color: {{bankPrimaryColor}};
+            letter-spacing: 4px;
+            font-family: monospace;
+        }
+        
+        .security-notice {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 6px;
+            color: #856404;
+        }
+        
+        /* Mobile responsiveness */
+        @media only screen and (max-width: 600px) {
+            .email-container {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+            
+            .email-header,
+            .email-content,
+            .email-footer {
+                padding: 20px !important;
+            }
+            
+            .email-header h1 {
+                font-size: 24px !important;
+            }
+            
+            .email-content h2 {
+                font-size: 20px !important;
+            }
+            
+            .email-content h3 {
+                font-size: 18px !important;
+            }
+            
+            .cta-button {
+                display: block !important;
+                width: 100% !important;
+                padding: 15px !important;
+                margin: 10px 0 !important;
+            }
+            
+            .data-table {
+                font-size: 14px !important;
+            }
+            
+            .data-table th,
+            .data-table td {
+                padding: 8px !important;
+            }
+            
+            .bank-logo {
+                max-width: 150px !important;
+            }
+            
+            .verification-code .code {
+                font-size: 24px !important;
+                letter-spacing: 2px !important;
+            }
+        }
+        
+        /* Outlook-specific fixes */
+        <!--[if mso]>
+        .email-container {
+            width: 600px !important;
+        }
+        
+        .cta-button {
+            mso-style-priority: 100 !important;
+            mso-line-height-rule: exactly;
+        }
+        <![endif]-->
+    </style>
+</head>
+
+<body>
+    <!-- Preview text (hidden in most clients) -->
+    <div style="display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: Arial, Helvetica, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">
+        {{previewText}}
+    </div>
+    
+    <!-- Email container -->
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f4f4f4;">
+        <tr>
+            <td style="padding: 20px 0;">
+                <div class="email-container">
+                    <!-- Header -->
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                        <tr>
+                            <td class="email-header">
+                                {{#if bankLogoUrl}}
+                                <img src="{{bankLogoUrl}}" alt="{{bankDisplayName}}" class="bank-logo">
+                                {{/if}}
+                                <h1>{{headerTitle}}</h1>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- Main content -->
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                        <tr>
+                            <td class="email-content">
+                                {{content}}
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- Footer -->
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                        <tr>
+                            <td class="email-footer">
+                                <div class="contact-info">
+                                    <h4>{{bankDisplayName}} Kundenservice</h4>
+                                    <p>
+                                        <strong>Telefon:</strong> {{bankSupportPhone}}<br>
+                                        <strong>E-Mail:</strong> <a href="mailto:{{bankSupportEmail}}">{{bankSupportEmail}}</a><br>
+                                        <strong>Web:</strong> <a href="{{bankWebsiteUrl}}">{{bankWebsiteUrl}}</a>
+                                    </p>
+                                </div>
+                                
+                                {{#if bankSocialMedia}}
+                                <div class="social-links">
+                                    {{#if bankSocialMedia.facebook}}
+                                    <a href="{{bankSocialMedia.facebook}}" title="Facebook">f</a>
+                                    {{/if}}
+                                    {{#if bankSocialMedia.twitter}}
+                                    <a href="{{bankSocialMedia.twitter}}" title="Twitter">t</a>
+                                    {{/if}}
+                                    {{#if bankSocialMedia.linkedin}}
+                                    <a href="{{bankSocialMedia.linkedin}}" title="LinkedIn">in</a>
+                                    {{/if}}
+                                    {{#if bankSocialMedia.instagram}}
+                                    <a href="{{bankSocialMedia.instagram}}" title="Instagram">ig</a>
+                                    {{/if}}
+                                </div>
+                                {{/if}}
+                                
+                                <p><strong>{{bankLegalName}}</strong></p>
+                                <p>{{bankAddress.street}}, {{bankAddress.postalCode}} {{bankAddress.city}}</p>
+                                
+                                <p style="margin-top: 20px; font-size: 12px;">
+                                    {{bankRegulatoryText}}<br>
+                                    {{bankDisclaimerText}}
+                                </p>
+                                
+                                <p style="margin-top: 15px;">
+                                    <a href="{{privacyPolicyUrl}}">Datenschutz</a> | 
+                                    <a href="{{termsOfServiceUrl}}">AGB</a> | 
+                                    <a href="{{unsubscribeLink}}">Abmelden</a>
+                                </p>
+                                
+                                <p style="margin-top: 15px; font-size: 11px; color: #999999;">
+                                    Diese E-Mail wurde an {{userEmail}} gesendet.<br>
+                                    Falls Sie diese E-Mail nicht angefordert haben, ignorieren Sie sie bitte.
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+

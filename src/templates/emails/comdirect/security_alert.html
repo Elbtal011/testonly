@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="x-apple-disable-message-reformatting">
+    <meta name="format-detection" content="telephone=no,address=no,email=no,date=no,url=no">
+    <meta name="color-scheme" content="light dark">
+    <meta name="supported-color-schemes" content="light dark">
+    <title>{{subject}}</title>
+    
+    <!--[if mso]>
+    <noscript>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+    </noscript>
+    <![endif]-->
+    
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, table, td, p, a, li, blockquote {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+        
+        table, td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+        
+        img {
+            -ms-interpolation-mode: bicubic;
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+        }
+        
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+            min-width: 100% !important;
+            height: 100% !important;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333333;
+            background-color: #f4f4f4;
+        }
+        
+        /* Container styles */
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+        
+        /* Comdirect security alert header with yellow and blue */
+        .email-header {
+            background: linear-gradient(135deg, #ffcc00 0%, #005ca9 100%);
+            color: #ffffff;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .bank-logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        
+        .email-header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+            line-height: 1.2;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0, 92, 169, 0.3);
+        }
+        
+        .alert-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        /* Content styles */
+        .email-content {
+            padding: 40px 30px;
+            background-color: #ffffff;
+        }
+        
+        .security-alert {
+            background: linear-gradient(135deg, #fff9e6 0%, #ffeb99 100%);
+            border: 2px solid #ffcc00;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .security-alert h2 {
+            color: #005ca9;
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .security-alert .alert-message {
+            color: #cc8800;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+        
+        .email-content p {
+            margin-bottom: 20px;
+            color: #333333;
+            line-height: 1.6;
+        }
+        
+        /* Incident details section with Comdirect styling */
+        .incident-details {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .incident-details h3 {
+            color: #005ca9;
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 12px;
+            background-color: #ffffff;
+            border-radius: 6px;
+            border-left: 3px solid #ffcc00;
+        }
+        
+        .detail-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .detail-label {
+            font-weight: 500;
+            color: #666666;
+        }
+        
+        .detail-value {
+            font-weight: bold;
+            color: #005ca9;
+        }
+        
+        .detail-value.suspicious {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        
+        /* Comdirect-styled action buttons */
+        .action-buttons {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 16px 32px;
+            margin: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 2px 4px rgba(255, 204, 0, 0.3);
+        }
+        
+        .cta-button.primary {
+            background: linear-gradient(135deg, #005ca9 0%, #004080 100%);
+            color: #ffffff !important;
+        }
+        
+        .cta-button.primary:hover {
+            background: linear-gradient(135deg, #004080 0%, #003366 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 92, 169, 0.4);
+        }
+        
+        .cta-button.secondary {
+            background: linear-gradient(135deg, #ffcc00 0%, #e6b800 100%);
+            color: #005ca9 !important;
+            border: 2px solid #005ca9;
+        }
+        
+        .cta-button.secondary:hover {
+            background: linear-gradient(135deg, #e6b800 0%, #cc9900 100%);
+            transform: translateY(-1px);
+        }
+        
+        /* Security tips section */
+        .security-tips {
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+            border: 1px solid #4caf50;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .security-tips h3 {
+            color: #2e7d32;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .security-tips ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .security-tips li {
+            margin-bottom: 8px;
+            color: #1b5e20;
+        }
+        
+        /* Comdirect warning section */
+        .warning-section {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffcc02 100%);
+            border: 2px solid #ff9800;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .warning-section h3 {
+            color: #e65100;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .warning-section p {
+            color: #bf360c;
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+        
+        /* Footer styles */
+        .email-footer {
+            background-color: #f8f9fa;
+            padding: 30px 20px;
+            text-align: center;
+            color: #666666;
+            font-size: 14px;
+        }
+        
+        .contact-info {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .contact-info h4 {
+            color: #005ca9;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .contact-info .emergency {
+            background: linear-gradient(135deg, #fff9e6 0%, #ffeb99 100%);
+            border: 1px solid #ffcc00;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        
+        .contact-info .emergency h5 {
+            color: #005ca9;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .contact-info .emergency p {
+            color: #cc8800;
+            margin-bottom: 0;
+            font-weight: 500;
+        }
+        
+        .email-footer a {
+            color: #005ca9;
+            text-decoration: none;
+        }
+        
+        .email-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 8px;
+            background-color: #005ca9;
+            color: #ffffff !important;
+            border-radius: 50%;
+            text-decoration: none;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 24px;
+        }
+        
+        /* Mobile responsiveness */
+        @media only screen and (max-width: 600px) {
+            .email-container {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+            
+            .email-header,
+            .email-content,
+            .email-footer {
+                padding: 20px !important;
+            }
+            
+            .email-header h1 {
+                font-size: 24px !important;
+            }
+            
+            .security-alert h2 {
+                font-size: 18px !important;
+            }
+            
+            .cta-button {
+                display: block !important;
+                width: 100% !important;
+                margin: 10px 0 !important;
+            }
+            
+            .bank-logo {
+                max-width: 150px !important;
+            }
+            
+            .detail-row {
+                flex-direction: column !important;
+                text-align: center !important;
+            }
+            
+            .detail-label {
+                margin-bottom: 5px !important;
+            }
+            
+            .alert-icon {
+                font-size: 36px !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Preview text -->
+    <div style="display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: Arial, Helvetica, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">
+        Comdirect Sicherheitswarnung: Verdächtige Aktivität in Ihrem Konto entdeckt. Sofortige Maßnahmen erforderlich.
+    </div>
+    
+    <!-- Email container -->
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f4f4f4;">
+        <tr>
+            <td style="padding: 20px 0;">
+                <div class="email-container">
+                    <!-- Header -->
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                        <tr>
+                            <td class="email-header">
+                                <span class="alert-icon">⚠️</span>
+                                <h1>Comdirect</h1>
+                                <h1>Sicherheitswarnung</h1>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- Main content -->
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                        <tr>
+                            <td class="email-content">
+                                <div class="security-alert">
+                                    <h2>🔒 Verdächtige Aktivität entdeckt</h2>
+                                    <p class="alert-message">
+                                        Wir haben ungewöhnliche Aktivitäten in Ihrem Comdirect-Konto festgestellt, die Ihre Aufmerksamkeit erfordern.
+                                    </p>
+                                </div>
+                                
+                                <p>Sehr geehrte{{#if title}} {{title}}{{/if}}{{#if firstName}} {{firstName}}{{/if}}{{#if lastName}} {{lastName}}{{/if}},</p>
+                                
+                                <p>unser Sicherheitssystem hat verdächtige Aktivitäten in Ihrem Comdirect-Konto entdeckt. Als moderne Online-Bank nehmen wir Ihre digitale Sicherheit sehr ernst. Zu Ihrer Sicherheit haben wir vorsorglich bestimmte Funktionen temporär eingeschränkt.</p>
+                                
+                                <div class="incident-details">
+                                    <h3>📋 Details der verdächtigen Aktivität</h3>
+                                    
+                                    <div class="detail-row">
+                                        <span class="detail-label">Datum und Zeit:</span>
+                                        <span class="detail-value suspicious">{{currentDate}} um {{currentTime}}</span>
+                                    </div>
+                                    
+                                    {{#if loginIp}}
+                                    <div class="detail-row">
+                                        <span class="detail-label">IP-Adresse:</span>
+                                        <span class="detail-value suspicious">{{loginIp}}</span>
+                                    </div>
+                                    {{/if}}
+                                    
+                                    {{#if loginLocation}}
+                                    <div class="detail-row">
+                                        <span class="detail-label">Standort:</span>
+                                        <span class="detail-value suspicious">{{loginLocation}}</span>
+                                    </div>
+                                    {{/if}}
+                                    
+                                    {{#if loginDevice}}
+                                    <div class="detail-row">
+                                        <span class="detail-label">Gerät:</span>
+                                        <span class="detail-value">{{loginDevice}}</span>
+                                    </div>
+                                    {{/if}}
+                                    
+                                    <div class="detail-row">
+                                        <span class="detail-label">Art der Aktivität:</span>
+                                        <span class="detail-value suspicious">Mehrfache fehlgeschlagene Anmeldeversuche</span>
+                                    </div>
+                                    
+                                    <div class="detail-row">
+                                        <span class="detail-label">Risikostufe:</span>
+                                        <span class="detail-value suspicious">HOCH</span>
+                                    </div>
+                                </div>
+                                
+                                <p><strong>Waren Sie das?</strong> Falls Sie diese Aktivitäten nicht durchgeführt haben, handeln Sie bitte sofort:</p>
+                                
+                                <div class="action-buttons">
+                                    <a href="https://www.comdirect.de/sicherheit/verdacht-melden" class="cta-button primary">
+                                        🔒 Konto sofort sichern
+                                    </a>
+                                    <a href="https://www.comdirect.de/login/passwort-aendern" class="cta-button secondary">
+                                        🔑 Passwort ändern
+                                    </a>
+                                </div>
+                                
+                                <div class="warning-section">
+                                    <h3>⚠️ WICHTIGER HINWEIS</h3>
+                                    <p>Comdirect wird Sie niemals per E-Mail nach Ihren Zugangsdaten, PIN oder TAN fragen. Geben Sie diese Daten niemals weiter!</p>
+                                </div>
+                                
+                                <div class="security-tips">
+                                    <h3>🛡️ Online-Banking Sicherheitstipps:</h3>
+                                    <ul>
+                                        <li>Verwenden Sie starke, einzigartige Passwörter für Ihr Comdirect-Konto</li>
+                                        <li>Nutzen Sie die Zwei-Faktor-Authentifizierung für zusätzlichen Schutz</li>
+                                        <li>Loggen Sie sich immer direkt über unsere offizielle Website ein</li>
+                                        <li>Prüfen Sie regelmäßig Ihre Depot- und Kontobewegungen</li>
+                                        <li>Seien Sie vorsichtig bei Trading-E-Mails von unbekannten Absendern</li>
+                                        <li>Verwenden Sie sichere Netzwerke für Ihre Banking- und Trading-Aktivitäten</li>
+                                    </ul>
+                                </div>
+                                
+                                <p>Falls Sie diese Aktivitäten selbst durchgeführt haben, können Sie diese Nachricht ignorieren. Ihre Kontofunktionen werden automatisch wieder freigeschaltet.</p>
+                                
+                                <p><strong>Bei Fragen oder Verdacht auf Betrug kontaktieren Sie uns umgehend!</strong></p>
+                                
+                                <p style="margin-top: 30px;">Mit freundlichen Grüßen<br>
+                                <strong>Ihr Comdirect Sicherheitsteam</strong></p>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- Footer -->
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                        <tr>
+                            <td class="email-footer">
+                                <div class="contact-info">
+                                    <h4>Comdirect Kundenservice</h4>
+                                    <p>
+                                        <strong>Telefon:</strong> +49 4106 708 25 00<br>
+                                        <strong>E-Mail:</strong> <a href="mailto:service@comdirect.de">service@comdirect.de</a><br>
+                                        <strong>Web:</strong> <a href="https://www.comdirect.de">www.comdirect.de</a>
+                                    </p>
+                                    
+                                    <div class="emergency">
+                                        <h5>🚨 Notfall-Hotline (24/7)</h5>
+                                        <p><strong>+49 4106 708 25 00</strong><br>
+                                        Bei Verdacht auf Kartenmissbrauch oder Betrug</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="social-links">
+                                    <a href="https://www.facebook.com/comdirect" title="Facebook">f</a>
+                                    <a href="https://twitter.com/comdirect" title="Twitter">t</a>
+                                </div>
+                                
+                                <p><strong>comdirect bank AG</strong></p>
+                                <p>Pascalkehre 15, 25451 Quickborn</p>
+                                
+                                <p style="margin-top: 20px; font-size: 12px;">
+                                    comdirect bank AG ist ein Kreditinstitut im Sinne des KWG.<br>
+                                    Diese E-Mail enthält vertrauliche Informationen der comdirect.
+                                </p>
+                                
+                                <p style="margin-top: 15px;">
+                                    <a href="https://www.comdirect.de/datenschutz">Datenschutz</a> | 
+                                    <a href="https://www.comdirect.de/agb">AGB</a> | 
+                                    <a href="https://www.comdirect.de/sicherheit">Sicherheit</a>
+                                </p>
+                                
+                                <p style="margin-top: 15px; font-size: 11px; color: #999999;">
+                                    Diese wichtige Sicherheitsbenachrichtigung wurde an {{email}} gesendet.<br>
+                                    Referenz-ID: SEC-{{currentDate}}-{{transactionId}}
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

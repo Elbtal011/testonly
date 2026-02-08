@@ -1,0 +1,86 @@
+# Docker Compose for Multi-Banking Panel - Coolify Deployment
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    restart: unless-stopped
+    # Port 80 not exposed - accessed via backend proxy in production
+    # Or use different port if needed: "127.0.0.1:8080:80"
+    expose:
+      - "80"  # Internal only, not bound to host
+    depends_on:
+      - backend
+    labels:
+      - "coolify.managed=true"
+      - "coolify.type=application"
+      - "coolify.name=multibanking-frontend"
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    restart: unless-stopped
+    ports:
+      - "3001:3001"  # Bind to all interfaces - firewall protects it
+    volumes:
+      - backend_data:/app/data
+      - backend_uploads:/app/uploads
+      - backend_logs:/app/logs
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - DB_PATH=/app/data/database.sqlite
+      - TRUST_PROXY=true  # Required for reverse proxy
+    labels:
+      - "coolify.managed=true"
+      - "coolify.type=application"
+      - "coolify.name=multibanking-backend"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3001/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+  mailer:
+    build:
+      context: .
+      dockerfile: Dockerfile.mailer
+    restart: unless-stopped
+    expose:
+      - "3002"
+    volumes:
+      - mailer_logs:/app/logs
+    environment:
+      - NODE_ENV=production
+      - PORT=3002
+    depends_on:
+      - backend
+    labels:
+      - "coolify.managed=true"
+      - "coolify.type=application"
+      - "coolify.name=multibanging-mailer"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+networks:
+  default:
+    name: coolify
+    external: true
+
+volumes:
+  backend_data:
+    driver: local
+  backend_uploads:
+    driver: local
+  backend_logs:
+    driver: local
+  mailer_logs:
+    driver: local

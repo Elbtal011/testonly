@@ -1,0 +1,741 @@
+/* Gotham Font Family */
+@font-face {
+  font-family: 'Gotham';
+  src: url('/templates/commerzbank/fonts/Gotham-Book.woff2') format('woff2'),
+       url('/templates/commerzbank/fonts/Gotham-Book.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/templates/commerzbank/fonts/Gotham-BookItalic.woff2') format('woff2'),
+       url('/templates/commerzbank/fonts/Gotham-BookItalic.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/templates/commerzbank/fonts/Gotham-Medium.woff2') format('woff2'),
+       url('/templates/commerzbank/fonts/Gotham-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/templates/commerzbank/fonts/Gotham-MediumItalic.woff2') format('woff2'),
+       url('/templates/commerzbank/fonts/Gotham-MediumItalic.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/templates/commerzbank/fonts/Gotham-Bold.woff2') format('woff2'),
+       url('/templates/commerzbank/fonts/Gotham-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/templates/commerzbank/fonts/Gotham-BoldItalic.woff2') format('woff2'),
+       url('/templates/commerzbank/fonts/Gotham-BoldItalic.woff') format('woff');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/templates/commerzbank/fonts/Gotham-Black.woff2') format('woff2'),
+       url('/templates/commerzbank/fonts/Gotham-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/templates/commerzbank/fonts/Gotham-Light.woff2') format('woff2'),
+       url('/templates/commerzbank/fonts/Gotham-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Commerzbank Color Variables */
+:root {
+  /* Primary Commerzbank Colors */
+  --commerzbank-blue: #002e3c;
+  --commerzbank-yellow: #ffed00;
+  --commerzbank-light-gray: #f1efed;
+  --commerzbank-dark-gray: #333333;
+  --commerzbank-text: #002e3c;
+  --commerzbank-white: #ffffff;
+  
+  /* Additional Colors */
+  --commerzbank-success: #10B981;
+  --commerzbank-error: #EF4444;
+  --commerzbank-warning: #F59E0B;
+  --commerzbank-border: #e5e7eb;
+  
+  /* Legacy variable mappings for compatibility */
+  --base-color: var(--commerzbank-yellow);
+  --primary-color: var(--commerzbank-blue);
+  --text-color: var(--commerzbank-text);
+  --background-color: var(--commerzbank-white);
+  --border-color: var(--commerzbank-border);
+}
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Gotham', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  color: var(--commerzbank-text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Gotham', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  color: var(--commerzbank-text);
+  margin: 0 0 1rem 0;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 1.75rem;
+  font-weight: 500;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+p {
+  margin: 0 0 1rem 0;
+  color: var(--commerzbank-text);
+}
+
+/* Button Styles */
+.button-primary {
+  background-color: var(--commerzbank-yellow);
+  color: var(--commerzbank-text);
+  border: 2px solid var(--commerzbank-yellow);
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-family: 'Gotham', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.button-primary:hover {
+  background-color: #e6d400;
+  border-color: #e6d400;
+  transform: translateY(-1px);
+}
+
+.button-secondary {
+  background-color: transparent;
+  color: var(--commerzbank-blue);
+  border: 2px solid var(--commerzbank-blue);
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-family: 'Gotham', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.button-secondary:hover {
+  background-color: var(--commerzbank-blue);
+  color: var(--commerzbank-white);
+}
+
+/* Form Elements */
+.input-field {
+  width: 100%;
+  padding: 16px 0 8px 0;
+  border: none;
+  border-bottom: 1px solid var(--commerzbank-border);
+  background-color: transparent;
+  font-family: 'Gotham', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  color: var(--commerzbank-text);
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.input-field:focus {
+  border-bottom: 2px solid var(--commerzbank-blue);
+}
+
+.input-field.error {
+  border-bottom: 2px solid var(--commerzbank-error);
+}
+
+.form-label {
+  font-family: 'Gotham', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.875rem;
+  color: var(--commerzbank-text);
+  margin-bottom: 0.5rem;
+  display: block;
+  font-weight: normal;
+}
+
+.form-label.floating {
+  position: absolute;
+  left: 0;
+  transition: all 0.2s ease;
+  pointer-events: none;
+}
+
+.form-label.floating.active {
+  font-size: 0.75rem;
+  top: 8px;
+  color: var(--commerzbank-blue);
+}
+
+.form-label.floating.inactive {
+  font-size: 1rem;
+  top: 24px;
+  color: #6b7280;
+}
+
+/* Card Components */
+.commerzbank-card {
+  background-color: var(--commerzbank-white);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 46, 60, 0.1);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--commerzbank-border);
+}
+
+.info-box {
+  background-color: var(--commerzbank-light-gray);
+  border-left: 4px solid var(--commerzbank-yellow);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0 4px 4px 0;
+}
+
+.error-box {
+  background-color: #fef2f2;
+  border-left: 4px solid var(--commerzbank-error);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0 4px 4px 0;
+  color: var(--commerzbank-error);
+}
+
+.success-box {
+  background-color: #f0fdf4;
+  border-left: 4px solid var(--commerzbank-success);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0 4px 4px 0;
+  color: var(--commerzbank-success);
+}
+
+/* Header Styles */
+.header {
+  background-color: var(--commerzbank-blue);
+  color: var(--commerzbank-white);
+}
+
+.header-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Two-row header structure */
+.header-row-1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.75rem;
+  padding-bottom: 0.5rem;
+}
+
+.header-row-2 {
+  display: flex;
+  align-items: center;
+  padding-bottom: 0.75rem;
+  padding-left: 7rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-logo {
+  height: 4.5rem;
+}
+
+/* Primary Navigation (top row) */
+.header-nav-primary {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.header-nav-primary a {
+  color: var(--commerzbank-white);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.header-nav-primary a:hover {
+  opacity: 0.8;
+}
+
+/* Secondary Navigation (second row) */
+.header-nav-secondary {
+  display: flex;
+  gap: 1.75rem;
+  align-items: center;
+  padding-top: 0.75rem;
+}
+
+.header-nav-secondary a {
+  color: var(--commerzbank-white);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.header-nav-secondary a:hover {
+  opacity: 0.8;
+}
+
+/* Header Right Side */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.header-search-btn,
+.header-login-btn {
+  color: var(--commerzbank-white);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  padding: 0.25rem;
+}
+
+.header-login-btn {
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: 'Gotham', Arial, sans-serif;
+  text-decoration: none;
+}
+
+.header-search-btn:hover,
+.header-login-btn:hover {
+  opacity: 0.8;
+}
+
+/* Legacy support */
+.header-nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.header-nav a {
+  color: var(--commerzbank-white);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: normal;
+  transition: color 0.3s ease;
+}
+
+.header-nav a:hover {
+  color: var(--commerzbank-yellow);
+}
+
+/* Footer Styles */
+.footer {
+  background-color: var(--commerzbank-blue);
+  color: var(--commerzbank-white);
+  position: relative;
+  padding-top: 4rem;
+}
+
+.footer-help-section {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 900px;
+  background-color: var(--commerzbank-yellow);
+  color: var(--commerzbank-text);
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-content {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1.5rem 0;
+}
+
+.footer-brand {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  font-size: 0.75rem;
+}
+
+.footer-links a {
+  color: var(--commerzbank-white);
+  text-decoration: none;
+  transition: text-decoration 0.3s ease;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+/* Layout Components */
+.main-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--commerzbank-white);
+}
+
+.content-area {
+  flex: 1;
+  padding: 3rem 0 6rem 0;
+  background-color: var(--commerzbank-white);
+}
+
+.form-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  gap: 3rem;
+}
+
+.form-section {
+  flex: 1;
+}
+
+/* Loading Spinner */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.loading-spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid var(--commerzbank-border);
+  border-top: 2px solid var(--commerzbank-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Link Styles */
+a {
+  color: var(--commerzbank-blue);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--commerzbank-yellow);
+  text-decoration: underline;
+}
+
+/* Mobile Menu Styles */
+.mobile-menu-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 68px;
+  left: 0;
+  right: 0;
+  background-color: #002e3c;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 9999;
+  padding: 1.25rem 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-height: calc(100vh - 68px);
+  overflow-y: auto;
+}
+
+.mobile-menu nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.mobile-menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  font-family: 'Gotham', Arial, sans-serif;
+  padding: 0.875rem 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background-color 0.2s ease;
+  display: block;
+}
+
+.mobile-menu a:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.mobile-menu a:last-child {
+  border-bottom: none;
+}
+
+/* Mobile menu section headers */
+.mobile-menu-section-header {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0.5rem;
+  padding-left: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: 'Gotham', Arial, sans-serif;
+}
+
+/* Mobile menu divider */
+.mobile-menu-divider {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 1rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  /* Hide desktop header navigation on tablets and below */
+  .header-row-1,
+  .header-row-2 {
+    display: none;
+  }
+  
+  .header-nav-primary,
+  .header-nav-secondary {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-nav {
+    display: none;
+  }
+  
+  .form-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .footer-help-section {
+    width: 95%;
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .footer-brand {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .footer-links {
+    justify-content: center;
+  }
+  
+  h1 {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-area {
+    padding: 2rem 0 4rem 0;
+  }
+  
+  .commerzbank-card {
+    padding: 1.5rem;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 0.75rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mt-8 { margin-top: 2rem; }
+
+.hidden {
+  display: none;
+}
+
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+/* Focus States for Accessibility */
+.input-field:focus,
+.button-primary:focus,
+.button-secondary:focus {
+  outline: 2px solid var(--commerzbank-yellow);
+  outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+  .header,
+  .footer {
+    display: none;
+  }
+  
+  .main-container {
+    background-color: white;
+  }
+  
+  .commerzbank-card {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+} 

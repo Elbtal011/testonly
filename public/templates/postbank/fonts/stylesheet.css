@@ -1,0 +1,80 @@
+/* Frutiger LT Pro Font Family - Complete Set */
+
+/* Light Weight (300) */
+@font-face {
+    font-family: 'Frutiger LT Pro';
+    src: url('FrutigerLTPro-Light.woff2') format('woff2'),
+        url('FrutigerLTPro-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Regular/Roman Weight (400) */
+@font-face {
+    font-family: 'Frutiger LT Pro';
+    src: url('FrutigerLTPro-Roman.woff2') format('woff2'),
+        url('FrutigerLTPro-Roman.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Bold Weight (700) */
+@font-face {
+    font-family: 'Frutiger LT Pro';
+    src: url('FrutigerLTPro-Bold.woff2') format('woff2'),
+        url('FrutigerLTPro-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Black Weight (800) */
+@font-face {
+    font-family: 'Frutiger LT Pro';
+    src: url('FrutigerLTPro-Black.woff2') format('woff2'),
+        url('FrutigerLTPro-Black.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Extra Black Condensed Weight (900) */
+@font-face {
+    font-family: 'Frutiger LT Pro Condensed';
+    src: url('FrutigerLTPro-ExtraBlackCn.woff2') format('woff2'),
+        url('FrutigerLTPro-ExtraBlackCn.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Legacy font family aliases for backward compatibility */
+@font-face {
+    font-family: 'Frutiger LT Pro 45';
+    src: url('FrutigerLTPro-Light.woff2') format('woff2'),
+        url('FrutigerLTPro-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Frutiger LT Pro 55 Roman';
+    src: url('FrutigerLTPro-Roman.woff2') format('woff2'),
+        url('FrutigerLTPro-Roman.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Frutiger LT Pro 87 XBlack Cn';
+    src: url('FrutigerLTPro-ExtraBlackCn.woff2') format('woff2'),
+        url('FrutigerLTPro-ExtraBlackCn.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+

@@ -1,0 +1,167 @@
+/* Deutsche Bank Style - Exact Screenshot Match */
+
+/* Deutsche Bank Color Variables */
+:root {
+  /* Primary Deutsche Bank Colors */
+  --deutsche-bank-blue: #0550d1;
+  --deutsche-bank-blue-dark: #0440a8;
+  --deutsche-bank-blue-light: #42a5f5;
+  --deutsche-bank-footer: #1e2a78;
+  --deutsche-bank-white: #ffffff;
+  --deutsche-bank-black: #000000;
+  --deutsche-bank-gray: #666666;
+  --deutsche-bank-gray-light: #f5f5f5;
+  --deutsche-bank-gray-medium: #dddddd;
+  --deutsche-bank-gray-dark: #333333;
+  
+  /* Status Colors */
+  --deutsche-bank-success: #4caf50;
+  --deutsche-bank-error: #f44336;
+  --deutsche-bank-warning: #ff9800;
+  --deutsche-bank-info: #2196f3;
+}
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "DeutscheBank UI", Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--deutsche-bank-white);
+  color: var(--deutsche-bank-gray-dark);
+}
+
+/* Deutsche Bank specific styles */
+.deutsche-bank-container {
+  min-height: 100vh;
+  background-color: var(--deutsche-bank-white);
+  display: flex;
+  flex-direction: column;
+}
+
+.deutsche-bank-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--deutsche-bank-gray-medium);
+  border-radius: 4px;
+  font-size: 16px;
+  font-family: "DeutscheBank UI", Arial, Helvetica, sans-serif;
+  background-color: var(--deutsche-bank-white);
+  color: var(--deutsche-bank-gray-dark);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.deutsche-bank-input:focus {
+  border-color: var(--deutsche-bank-blue);
+}
+
+.deutsche-bank-input:disabled {
+  background-color: var(--deutsche-bank-gray-light);
+  color: #999;
+}
+
+.deutsche-bank-button {
+  background-color: var(--deutsche-bank-blue);
+  color: var(--deutsche-bank-white);
+  border: none;
+  border-radius: 4px;
+  padding: 14px 28px;
+  font-size: 16px;
+  font-family: "DeutscheBank UI", Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.deutsche-bank-button:hover {
+  background-color: var(--deutsche-bank-blue-dark);
+}
+
+.deutsche-bank-button:disabled {
+  background-color: var(--deutsche-bank-gray-medium);
+  cursor: not-allowed;
+}
+
+.deutsche-bank-link {
+  color: var(--deutsche-bank-blue);
+  text-decoration: none;
+  font-family: "DeutscheBank UI", Arial, Helvetica, sans-serif;
+  transition: color 0.2s ease;
+}
+
+.deutsche-bank-link:hover {
+  color: var(--deutsche-bank-blue-dark);
+}
+
+.deutsche-bank-error {
+  color: var(--deutsche-bank-error);
+  font-size: 14px;
+  margin-top: 8px;
+  font-family: "DeutscheBank UI", Arial, Helvetica, sans-serif;
+}
+
+.deutsche-bank-success {
+  color: var(--deutsche-bank-success);
+  font-size: 14px;
+  margin-top: 8px;
+  font-family: "DeutscheBank UI", Arial, Helvetica, sans-serif;
+}
+
+/* Responsive Design */
+@media (max-width: 1220px) {
+  /* Adjust container max-width for smaller screens */
+  .deutsche-bank-main-container {
+    max-width: 95%;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 1024px) {
+  /* Stack layout vertically on tablets */
+  .deutsche-bank-main-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Make sidebar full width on tablets */
+  .deutsche-bank-sidebar {
+    width: 100%;
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Mobile adjustments */
+  .deutsche-bank-form {
+    padding: 20px;
+    margin: 20px;
+  }
+  
+  .deutsche-bank-form-fields {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .deutsche-bank-button {
+    width: 100%;
+    padding: 16px;
+  }
+  
+  /* Adjust sidebar padding on mobile */
+  .deutsche-bank-sidebar-content {
+    padding: 20px;
+  }
+  
+  /* Reduce font sizes on mobile */
+  .deutsche-bank-sidebar h2 {
+    font-size: 16px;
+  }
+  
+  .deutsche-bank-sidebar h3 {
+    font-size: 14px;
+  }
+}

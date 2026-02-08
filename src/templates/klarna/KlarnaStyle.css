@@ -1,0 +1,2072 @@
+/* Klarna Fonts */
+@font-face {
+  font-family: 'Klarna Text';
+  src: url('/templates/klarna/fonts/Klarna Text.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Klarna Title';
+  src: url('/templates/klarna/fonts/Klarna Title.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Klarna Design System - Based on official Klarna.com branding */
+:root {
+  /* Klarna Official Brand Colors */
+  --klarna-pink: #FFB3C7;
+  --klarna-pink-hover: #FFA0B5;
+  --klarna-pink-light: #FFE5ED;
+  --klarna-black: #0A0B09;
+  --klarna-white: #FFFFFF;
+  --klarna-background: #FAFAFA;
+  --klarna-gray-50: #F8F8F8;
+  --klarna-gray-100: #F0F0F0;
+  --klarna-gray-200: #E8E8E8;
+  --klarna-gray-300: #D3D3D3;
+  --klarna-gray-400: #A0A0A0;
+  --klarna-gray-500: #6E6E6E;
+  --klarna-gray-600: #4A4A4A;
+  --klarna-gray-700: #2E2E2E;
+  --klarna-gray-800: #1A1A1A;
+  --klarna-gray-900: #0A0A0A;
+  
+  /* Semantic Colors */
+  --klarna-text-primary: #0A0B09;
+  --klarna-text-secondary: #6E6E6E;
+  --klarna-text-muted: #A0A0A0;
+  --klarna-text: #0A0B09;
+  --klarna-text-dark: #0A0B09;
+  --klarna-text-light: #6E6E6E;
+  --klarna-primary: #FFB3C7;
+  --klarna-border: #E8E8E8;
+  --klarna-border-light: #F0F0F0;
+  --klarna-border-radius: 12px;
+  --klarna-error: #E74C3C;
+  --klarna-success: #27AE60;
+  --klarna-info: #3498DB;
+  
+  /* Layout */
+  --klarna-container-width: 1200px;
+  
+  /* Spacing - Following 8px grid system */
+  --klarna-space-xxs: 0.25rem;  /* 4px */
+  --klarna-space-xs: 0.5rem;    /* 8px */
+  --klarna-space-sm: 0.75rem;   /* 12px */
+  --klarna-space-md: 1rem;      /* 16px */
+  --klarna-space-lg: 1.5rem;    /* 24px */
+  --klarna-space-xl: 2rem;      /* 32px */
+  --klarna-space-2xl: 3rem;     /* 48px */
+  --klarna-space-3xl: 4rem;     /* 64px */
+  
+  /* Border Radius - Klarna uses rounded corners */
+  --klarna-radius-sm: 8px;
+  --klarna-radius: 12px;
+  --klarna-radius-lg: 16px;
+  --klarna-radius-xl: 20px;
+  --klarna-radius-full: 9999px;
+  
+  /* Shadows - Subtle and clean */
+  --klarna-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --klarna-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --klarna-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --klarna-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --klarna-shadow-xl: 0 12px 48px rgba(0, 0, 0, 0.15);
+  
+  /* Typography - Clean hierarchy */
+  --klarna-font-family: 'Klarna Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --klarna-font-family-title: 'Klarna Title', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  
+  --klarna-font-size-xs: 0.75rem;    /* 12px */
+  --klarna-font-size-sm: 0.875rem;   /* 14px */
+  --klarna-font-size-base: 1rem;     /* 16px */
+  --klarna-font-size-lg: 1.125rem;   /* 18px */
+  --klarna-font-size-xl: 1.25rem;    /* 20px */
+  --klarna-font-size-2xl: 1.5rem;    /* 24px */
+  --klarna-font-size-3xl: 2rem;      /* 32px */
+  --klarna-font-size-4xl: 2.5rem;    /* 40px */
+  
+  /* Additional font sizes */
+  --klarna-font-sm: 0.875rem;        /* 14px - alias */
+  
+  /* Line Heights */
+  --klarna-leading-tight: 1.25;
+  --klarna-leading-normal: 1.5;
+  --klarna-leading-relaxed: 1.75;
+  
+  /* Transitions */
+  --klarna-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --klarna-transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --klarna-transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --klarna-transition: 200ms cubic-bezier(0.4, 0, 0.2, 1); /* alias */
+}
+
+/* Base Template Styles */
+.klarna-template {
+  font-family: var(--klarna-font-family);
+  background: var(--klarna-background);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: var(--klarna-text-primary);
+  line-height: var(--klarna-leading-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Header Styles */
+.klarna-header {
+  background: var(--klarna-white);
+  border-bottom: 1px solid var(--klarna-border);
+  padding: var(--klarna-space-lg) var(--klarna-space-xl);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.klarna-header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.klarna-logo-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity var(--klarna-transition-fast);
+}
+
+.klarna-logo-button:hover {
+  opacity: 0.8;
+}
+
+.klarna-logo {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+
+.klarna-secure-text {
+  font-size: var(--klarna-font-size-sm);
+  color: var(--klarna-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--klarna-space-xs);
+  font-weight: 500;
+}
+
+/* Main Content - Consistent width for all Klarna steps */
+.klarna-main {
+  flex: 1;
+  padding: var(--klarna-space-2xl) var(--klarna-space-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Footer Styles */
+.klarna-footer {
+  background: var(--klarna-gray-50);
+  border-top: 1px solid var(--klarna-border);
+  padding: var(--klarna-space-xl);
+  margin-top: auto;
+}
+
+.klarna-footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--klarna-space-xl);
+  align-items: start;
+}
+
+.klarna-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--klarna-space-lg);
+}
+
+.klarna-footer-link {
+  color: var(--klarna-text-light);
+  text-decoration: none;
+  font-size: var(--klarna-font-size-sm);
+  transition: color 0.2s ease;
+}
+
+.klarna-footer-link:hover {
+  color: var(--klarna-text);
+}
+
+.klarna-footer-text {
+  font-size: var(--klarna-font-size-sm);
+  color: var(--klarna-text-light);
+  margin: 0 0 var(--klarna-space-xs) 0;
+}
+
+.klarna-footer-subtext {
+  font-size: var(--klarna-font-size-xs);
+  color: var(--klarna-gray-400);
+  margin: 0;
+}
+
+.klarna-security-badges {
+  display: flex;
+  gap: var(--klarna-space-sm);
+  flex-wrap: wrap;
+}
+
+
+/* Error Message Styles */
+.klarna-error-message {
+  display: flex;
+  align-items: flex-start;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--klarna-radius-lg);
+  padding: var(--klarna-space-md);
+  margin: 0 0 var(--klarna-space-lg) 0;
+  gap: var(--klarna-space-sm);
+}
+
+.klarna-error-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.klarna-error-text {
+  color: #dc2626;
+  font-size: var(--klarna-font-size-sm);
+  font-weight: 500;
+  margin: 0;
+  line-height: var(--klarna-leading-normal);
+}
+
+/* Typography */
+.klarna-title {
+  font-family: var(--klarna-font-family-title);
+  font-size: var(--klarna-font-size-3xl);
+  font-weight: 700;
+  color: var(--klarna-text-primary);
+  margin: 0 0 var(--klarna-space-md) 0;
+  line-height: var(--klarna-leading-tight);
+  letter-spacing: -0.02em;
+}
+
+.klarna-subtitle {
+  font-size: var(--klarna-font-size-lg);
+  color: var(--klarna-text-secondary);
+  margin: 0 0 var(--klarna-space-2xl) 0;
+  line-height: var(--klarna-leading-normal);
+  font-weight: 400;
+}
+
+/* Buttons - Following Klarna.com design */
+.klarna-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--klarna-space-md) var(--klarna-space-2xl);
+  border: none;
+  border-radius: var(--klarna-radius-full);
+  font-family: var(--klarna-font-family);
+  font-size: var(--klarna-font-size-base);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--klarna-transition-base);
+  min-height: 56px;
+  gap: var(--klarna-space-xs);
+  letter-spacing: -0.01em;
+}
+
+.klarna-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.klarna-button-primary {
+  background: var(--klarna-black);
+  color: var(--klarna-white);
+  box-shadow: var(--klarna-shadow-sm);
+}
+
+.klarna-button-primary:hover:not(:disabled) {
+  background: var(--klarna-gray-800);
+  box-shadow: var(--klarna-shadow-md);
+  transform: translateY(-1px);
+}
+
+.klarna-button-primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: var(--klarna-shadow-sm);
+}
+
+.klarna-button-secondary {
+  background: var(--klarna-white);
+  color: var(--klarna-text-primary);
+  border: 2px solid var(--klarna-border);
+  box-shadow: var(--klarna-shadow-sm);
+}
+
+.klarna-button-secondary:hover:not(:disabled) {
+  background: var(--klarna-gray-50);
+  border-color: var(--klarna-gray-300);
+}
+
+.klarna-button-full {
+  width: 100%;
+}
+
+/* Forms - Clean and modern */
+.klarna-form-group {
+  margin-bottom: var(--klarna-space-xl);
+}
+
+.klarna-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--klarna-space-lg);
+}
+
+.klarna-form-group-large {
+  grid-column: 1 / -1;
+}
+
+.klarna-form-group-small {
+  /* Default grid behavior */
+}
+
+/* Address-specific form layouts */
+.klarna-form-row-address {
+  grid-template-columns: 2fr 1fr;
+}
+
+.klarna-form-row-city {
+  grid-template-columns: 1fr 2fr;
+}
+
+.klarna-form-group-street,
+.klarna-form-group-city {
+  /* Takes more space */
+}
+
+.klarna-form-group-number,
+.klarna-form-group-plz {
+  /* Takes less space */
+}
+
+.klarna-label {
+  display: flex;
+  align-items: center;
+  gap: var(--klarna-space-xs);
+  font-size: var(--klarna-font-size-sm);
+  font-weight: 600;
+  color: var(--klarna-text-primary);
+  margin-bottom: var(--klarna-space-sm);
+  letter-spacing: -0.01em;
+}
+
+.klarna-label-icon {
+  flex-shrink: 0;
+  color: var(--klarna-primary);
+}
+
+.klarna-required {
+  color: var(--klarna-error);
+  margin-left: var(--klarna-space-xxs);
+}
+
+.klarna-input {
+  width: 100%;
+  padding: var(--klarna-space-md) var(--klarna-space-lg);
+  border: 2px solid var(--klarna-border);
+  border-radius: var(--klarna-radius);
+  font-family: var(--klarna-font-family);
+  font-size: var(--klarna-font-size-base);
+  background: var(--klarna-white);
+  color: var(--klarna-text-primary);
+  transition: all var(--klarna-transition-base);
+  min-height: 56px;
+  box-sizing: border-box;
+  appearance: none;
+}
+
+.klarna-input::placeholder {
+  color: var(--klarna-text-muted);
+}
+
+.klarna-input:hover:not(:disabled) {
+  border-color: var(--klarna-gray-300);
+}
+
+.klarna-input:focus {
+  outline: none;
+  border-color: var(--klarna-black);
+  box-shadow: 0 0 0 1px var(--klarna-black);
+}
+
+.klarna-input:disabled {
+  background: var(--klarna-gray-50);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.klarna-input-error {
+  border-color: var(--klarna-error);
+}
+
+.klarna-input-error:focus {
+  box-shadow: 0 0 0 1px var(--klarna-error);
+}
+
+.klarna-error-text {
+  display: flex;
+  align-items: center;
+  gap: var(--klarna-space-xxs);
+  font-size: var(--klarna-font-size-sm);
+  color: var(--klarna-error);
+  margin-top: var(--klarna-space-sm);
+  font-weight: 500;
+}
+
+/* Links */
+.klarna-link {
+  color: var(--klarna-pink);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.klarna-link:hover {
+  color: var(--klarna-pink-hover);
+  text-decoration: underline;
+}
+
+/* Loading Styles - Security Verification Theme */
+.klarna-loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding: var(--klarna-space-2xl);
+}
+
+.klarna-loading-content {
+  text-align: center;
+  max-width: 500px;
+}
+
+.klarna-loading-icon {
+  position: relative;
+  margin-bottom: var(--klarna-space-xl);
+  display: inline-block;
+}
+
+.klarna-loading-shield {
+  color: var(--klarna-pink);
+  z-index: 2;
+  position: relative;
+}
+
+.klarna-loading-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.klarna-spinner {
+  width: 60px;
+  height: 60px;
+  border: 3px solid rgba(255, 182, 193, 0.3);
+  border-top: 3px solid var(--klarna-pink);
+  border-radius: 50%;
+  animation: klarna-spin 1s linear infinite;
+}
+
+@keyframes klarna-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.klarna-loading-title {
+  margin: 0 0 var(--klarna-space-md) 0;
+  color: var(--klarna-black);
+  font-size: var(--klarna-font-size-xl);
+  font-weight: 700;
+}
+
+.klarna-loading-subtitle {
+  margin: 0 0 var(--klarna-space-2xl) 0;
+  color: var(--klarna-text-secondary);
+  font-size: var(--klarna-font-size-base);
+  line-height: var(--klarna-leading-relaxed);
+}
+
+.klarna-verification-steps-loading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--klarna-space-md);
+  margin-bottom: var(--klarna-space-2xl);
+  text-align: left;
+}
+
+.klarna-step-loading {
+  display: flex;
+  align-items: center;
+  gap: var(--klarna-space-md);
+  padding: var(--klarna-space-md);
+  background: var(--klarna-white);
+  border-radius: var(--klarna-radius);
+  border: 1px solid var(--klarna-border);
+}
+
+.klarna-step-icon.completed {
+  color: #22c55e;
+}
+
+.klarna-step-icon.processing {
+  width: 16px;
+  height: 16px;
+  position: relative;
+}
+
+.klarna-step-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 182, 193, 0.3);
+  border-top: 2px solid var(--klarna-pink);
+  border-radius: 50%;
+  animation: klarna-spin 1s linear infinite;
+}
+
+.klarna-loading-security {
+  display: flex;
+  justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .klarna-header {
+    padding: var(--klarna-space-md);
+  }
+  
+  .klarna-main {
+    padding: var(--klarna-space-md);
+    max-width: 100%;
+  }
+  
+  .klarna-footer-container {
+    grid-template-columns: 1fr;
+    gap: var(--klarna-space-lg);
+  }
+  
+  .klarna-form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .klarna-title {
+    font-size: var(--klarna-font-size-2xl);
+  }
+  
+  .klarna-subtitle {
+    font-size: var(--klarna-font-size-base);
+  }
+
+  .klarna-bank-selector {
+    max-width: 100%;
+  }
+
+  .klarna-bank-login,
+  .klarna-personal-data-form,
+  .klarna-bank-card-form {
+    max-width: 100%;
+  }
+
+  .klarna-card-layout {
+    grid-template-columns: 1fr;
+    gap: var(--klarna-space-2xl);
+  }
+
+  .klarna-card-preview-column {
+    position: relative;
+    top: 0;
+    order: -1;
+  }
+
+  .klarna-credit-card {
+    max-width: 100%;
+    height: 220px;
+  }
+
+  .klarna-card-number {
+    font-size: var(--klarna-font-size-xl);
+  }
+}
+
+/* Bank Selection Specific Styles - 50/50 Layout */
+.klarna-bank-selector {
+  max-width: var(--klarna-container-width);
+  margin: 0 auto;
+  padding: var(--klarna-space-xl);
+}
+
+.klarna-bank-selector-header {
+  text-align: center;
+  margin-bottom: var(--klarna-space-2xl);
+}
+
+.klarna-bank-selector-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--klarna-space-2xl);
+  align-items: start;
+}
+
+/* Left Column - Bank Selection Form */
+.klarna-bank-selector-form {
+  background: var(--klarna-white);
+  border-radius: var(--klarna-radius-lg);
+  padding: var(--klarna-space-xl);
+  border: 1px solid var(--klarna-border);
+}
+
+.klarna-bank-dropdown {
+  position: relative;
+  margin-bottom: var(--klarna-space-xl);
+}
+
+.klarna-bank-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--klarna-space-md);
+  background: var(--klarna-white);
+  border: 2px solid var(--klarna-border);
+  border-radius: var(--klarna-radius);
+  cursor: pointer;
+  transition: all var(--klarna-transition-base);
+  min-height: 60px;
+}
+
+.klarna-bank-dropdown-trigger:hover {
+  border-color: var(--klarna-pink);
+}
+
+.klarna-bank-dropdown-trigger.is-open {
+  border-color: var(--klarna-pink);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.klarna-dropdown-placeholder {
+  color: var(--klarna-text-muted);
+  font-size: var(--klarna-font-size-base);
+}
+
+.klarna-selected-bank {
+  display: flex;
+  align-items: center;
+  gap: var(--klarna-space-md);
+}
+
+.klarna-selected-bank-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: var(--klarna-radius-sm);
+}
+
+.klarna-selected-bank-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.klarna-selected-bank-name {
+  font-weight: 600;
+  color: var(--klarna-black);
+  font-size: var(--klarna-font-size-base);
+}
+
+.klarna-selected-bank-desc {
+  font-size: var(--klarna-font-size-sm);
+  color: var(--klarna-text-secondary);
+}
+
+.klarna-dropdown-arrow {
+  color: var(--klarna-text-muted);
+  transition: transform var(--klarna-transition-base);
+}
+
+.klarna-bank-dropdown-trigger.is-open .klarna-dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.klarna-bank-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--klarna-white);
+  border: 2px solid var(--klarna-pink);
+  border-top: none;
+  border-radius: 0 0 var(--klarna-radius) var(--klarna-radius);
+  box-shadow: var(--klarna-shadow-lg);
+  z-index: 1000;
+  max-height: 400px;
+  overflow: hidden;
+}
+
+.klarna-bank-search {
+  position: relative;
+  padding: var(--klarna-space-md);
+  border-bottom: 1px solid var(--klarna-border);
+}
+
+.klarna-search-icon {
+  position: absolute;
+  left: calc(var(--klarna-space-md) + var(--klarna-space-sm));
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--klarna-text-muted);
+}
+
+.klarna-search-input {
+  width: 100%;
+  padding: var(--klarna-space-sm) var(--klarna-space-sm) var(--klarna-space-sm) 40px;
+  border: 1px solid var(--klarna-border);
+  border-radius: var(--klarna-radius);
+  font-size: var(--klarna-font-size-sm);
+  outline: none;
+  transition: border-color var(--klarna-transition-base);
+}
+
+.klarna-search-input:focus {
+  border-color: var(--klarna-pink);
+}
+
+.klarna-bank-options {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.klarna-bank-option {
+  display: flex;
+  align-items: center;
+  gap: var(--klarna-space-md);
+  width: 100%;
+  padding: var(--klarna-space-md);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--klarna-transition-base);
+  text-align: left;
+}
+
+.klarna-bank-option:hover {
+  background: var(--klarna-pink-light);
+}
+
+.klarna-bank-option-logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  border-radius: var(--klarna-radius-sm);
+  flex-shrink: 0;
+}
+
+.klarna-bank-option-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.klarna-bank-option-name {
+  font-weight: 600;
+  color: var(--klarna-black);
+  font-size: var(--klarna-font-size-sm);
+}
+
+.klarna-bank-option-desc {
+  font-size: var(--klarna-font-size-xs);
+  color: var(--klarna-text-secondary);
+}
+
+.klarna-no-results {
+  padding: var(--klarna-space-xl);
+  text-align: center;
+  color: var(--klarna-text-muted);
+}
+
+.klarna-no-results p {
+  margin: 0 0 var(--klarna-space-xs) 0;
+  font-weight: 500;
+}
+
+.klarna-no-results small {
+  font-size: var(--klarna-font-size-xs);
+}
+
+/* Right Column - Instructions */
+.klarna-bank-selector-instructions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--klarna-space-xl);
+}
+
+.klarna-verification-notice {
+  background: rgba(255, 107, 53, 0.1);
+  border: 1px solid rgba(255, 107, 53, 0.2);
+  border-radius: var(--klarna-radius-lg);
+  padding: var(--klarna-space-xl);
+  text-align: left;
+}
+
+.klarna-notice-icon {
+  margin-bottom: var(--klarna-space-md);
+}
+
+.klarna-notice-title {
+  margin: 0 0 var(--klarna-space-md) 0;
+  color: var(--klarna-black);
+  font-size: var(--klarna-font-size-lg);
+  font-weight: 700;
+}
+
+.klarna-notice-text {
+  margin: 0;
+  color: var(--klarna-text-secondary);
+  line-height: var(--klarna-leading-relaxed);
+}
+
+.klarna-verification-steps {
+  background: var(--klarna-white);
+  border-radius: var(--klarna-radius-lg);
+  padding: var(--klarna-space-xl);
+  border: 1px solid var(--klarna-border);
+}
+
+.klarna-steps-title {
+  margin: 0 0 var(--klarna-space-lg) 0;
+  color: var(--klarna-black);
+  font-size: var(--klarna-font-size-base);
+  font-weight: 600;
+}
+
+.klarna-step {
+  display: flex;
+  gap: var(--klarna-space-md);
+  margin-bottom: var(--klarna-space-lg);
+}
+
+.klarna-step:last-child {
+  margin-bottom: 0;
+}
+
+.klarna-step-number {
+  width: 32px;
+  height: 32px;
+  background: var(--klarna-pink);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: var(--klarna-font-size-sm);
+  flex-shrink: 0;
+}
+
+.klarna-step-content {
+  flex: 1;
+}
+
+.klarna-step-content strong {
+  display: block;
+  color: var(--klarna-black);
+  font-weight: 600;
+  margin-bottom: var(--klarna-space-xs);
+}
+
+.klarna-step-content p {
+  margin: 0;
+  color: var(--klarna-text-secondary);
+  font-size: var(--klarna-font-size-sm);
+  line-height: var(--klarna-leading-relaxed);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .klarna-bank-selector-layout {
+    grid-template-columns: 1fr;
+    gap: var(--klarna-space-xl);
+  }
+  
+  .klarna-bank-selector {
+    padding: var(--klarna-space-lg);
+  }
+  
+  .klarna-bank-selector-form,
+  .klarna-verification-steps {
+    padding: var(--klarna-space-lg);
+  }
+}
+
+.klarna-bank-selector-footer {
+  text-align: center;
+}
+
+.klarna-security-info {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--klarna-space-md);
+  margin-bottom: var(--klarna-space-2xl);
+  padding: var(--klarna-space-xl);
+  background: var(--klarna-pink-light);
+  border-radius: var(--klarna-radius-lg);
+  border: 1px solid rgba(255, 179, 199, 0.3);
+}
+
+.klarna-security-icon {
+  color: var(--klarna-pink);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.klarna-security-text {
+  font-size: var(--klarna-font-size-sm);
+  color: var(--klarna-text-primary);
+  text-align: left;
+  line-height: var(--klarna-leading-normal);
+}
+
+.klarna-security-text strong {
+  display: block;
+  font-weight: 600;
+  margin-bottom: var(--klarna-space-xxs);
+}
+
+.klarna-support-text {
+  font-size: var(--klarna-font-size-sm);
+  color: var(--klarna-text-secondary);
+  margin: 0;
+}
+
+/* Error Screen Styles */
+.klarna-error-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  text-align: center;
+}
+
+.klarna-error-content {
+  max-width: 500px;
+}
+
+.klarna-error-icon {
+  font-size: 4rem;
+  margin-bottom: var(--klarna-space-lg);
+}
+
+.klarna-error-title {
+  font-size: var(--klarna-font-size-2xl);
+  font-weight: 600;
+  color: var(--klarna-text);
+  margin: 0 0 var(--klarna-space-md) 0;
+}
+
+.klarna-error-message {
+  font-size: var(--klarna-font-size-base);
+  color: var(--klarna-text-light);
+  margin: 0 0 var(--klarna-space-xl) 0;
+}
+
+.klarna-error-actions {
+  display: flex;
+  gap: var(--klarna-space-md);
+  justify-content: center;
+  margin-bottom: var(--klarna-space-lg);
+}
+
+.klarna-error-help {
+  font-size: var(--klarna-font-size-sm);
+  color: var(--klarna-text-light);
+  margin: 0;
+}
+
+/* Success Screen Styles */
+.klarna-success {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.klarna-success-icon {
+  margin-bottom: var(--klarna-space-xl);
+}
+
+.klarna-checkmark {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+}
+
+.klarna-checkmark-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.klarna-checkmark-circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: var(--klarna-success);
+  fill: none;
+  animation: klarna-stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.klarna-checkmark-check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  stroke-width: 3;
+  stroke: var(--klarna-success);
+  animation: klarna-stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes klarna-stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.klarna-success-title {
+  font-size: var(--klarna-font-size-3xl);
+  font-weight: 700;
+  color: var(--klarna-success);
+  margin: 0 0 var(--klarna-space-md) 0;
+}
+
+.klarna-success-message {
+  font-size: var(--klarna-font-size-lg);
+  color: var(--klarna-text-light);
+  margin: 0 0 var(--klarna-space-xl) 0;
+}
+
+.klarna-success-details {
+  background: var(--klarna-gray-50);
+  border-radius: var(--klarna-radius);
+  padding: var(--klarna-space-lg);
+  margin-bottom: var(--klarna-space-xl);
+}
+
+.klarna-success-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--klarna-space-sm) 0;
+  border-bottom: 1px solid var(--klarna-border);
+}
+
+.klarna-success-detail:last-child {
+  border-bottom: none;
+}
+
+.klarna-success-detail-label {
+  font-size: var(--klarna-font-size-sm);
+  color: var(--klarna-text-light);
+}
+
+.klarna-success-detail-value {
+  font-size: var(--klarna-font-size-sm);
+  font-weight: 600;
+  color: var(--klarna-text);
+}
+
+.klarna-success-status {
+  color: var(--klarna-success);
+}
+
+.klarna-success-actions {
+  display: flex;
+  gap: var(--klarna-space-md);
+  justify-content: center;
+  margin-bottom: var(--klarna-space-2xl);
+}
+
+.klarna-success-detail-icon {
+  color: var(--klarna-pink);
+  margin-right: var(--klarna-space-xs);
+}
+
+.klarna-success-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--klarna-space-xl);
+  margin-bottom: var(--klarna-space-2xl);
+  text-align: left;
+}
+
+.klarna-info-section {
+  background: var(--klarna-white);
+  border: 1px solid var(--klarna-border);
+  border-radius: var(--klarna-radius-lg);
+  padding: var(--klarna-space-lg);
+}
+
+.klarna-info-title {
+  margin: 0 0 var(--klarna-space-md) 0;
+  color: var(--klarna-black);
+  font-size: var(--klarna-font-size-base);
+  font-weight: 600;
+}
+
+.klarna-info-list {
+  margin: 0;
+  padding-left: var(--klarna-space-lg);
+  color: var(--klarna-text-secondary);
+  font-size: var(--klarna-font-size-sm);
+}
+
+.klarna-info-list li {
+  margin-bottom: var(--klarna-space-xs);
+}
+
+.klarna-help-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--klarna-space-xs);
+}
+
+.klarna-success-security {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--klarna-space-xl);
+}
+
+.klarna-success-bank-info {
+  background: rgba(255, 182, 193, 0.1);
+  border: 1px solid rgba(255, 182, 193, 0.2);
+  border-radius: var(--klarna-radius);
+  padding: var(--klarna-space-md);
+  margin-bottom: var(--klarna-space-xl);
+}
+
+.klarna-success-bank-text {
+  margin: 0;
+  color: var(--klarna-text-secondary);
+  font-size: var(--klarna-font-size-sm);
+}
+
+.klarna-success-footer {
+  border-top: 1px solid var(--klarna-border);
+  padding-top: var(--klarna-space-lg);
+  margin-top: var(--klarna-space-2xl);
+}
+
+.klarna-success-footer-text {
+  margin: 0;
+  color: var(--klarna-text-secondary);
+  font-size: var(--klarna-font-size-sm);
+  font-style: italic;
+}
+
+/* Additional Login/Form Styles - Consistent widths */
+.klarna-bank-login,
+.klarna-personal-data-form,
+.klarna-bank-card-form {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.klarna-bank-login-header {
+  text-align: center;
+  margin-bottom: var(--klarna-space-3xl);
+}
+
+.klarna-bank-logo-large {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--klarna-space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.klarna-bank-logo-large img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.klarna-login-form,
+.klarna-card-form,
+.klarna-personal-form {
+  margin-bottom: var(--klarna-space-2xl);
+}
+
+.klarna-login-actions,
+.klarna-form-actions {
+  margin-top: var(--klarna-space-2xl);
+}
+
+.klarna-login-footer,
+.klarna-form-footer {
+  margin-top: var(--klarna-space-3xl);
+  padding-top: var(--klarna-space-2xl);
+  border-top: 1px solid var(--klarna-border);
+}
+
+.klarna-security-notice,
+.klarna-privacy-notice {
+  text-align: center;
+  margin-bottom: var(--klarna-space-lg);
+}
+
+.klarna-security-notice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--klarna-space-sm);
+  padding: var(--klarna-space-lg);
+  background: var(--klarna-gray-50);
+  border-radius: var(--klarna-radius-lg);
+}
+
+.klarna-security-notice .klarna-security-icon {
+  color: var(--klarna-success);
+}
+
+.klarna-security-notice .klarna-security-text,
+.klarna-privacy-text {
+  display: flex;
+  align-items: center;
+  gap: var(--klarna-space-xs);
+  font-size: var(--klarna-font-size-sm);
+  color: var(--klarna-text-secondary);
+  line-height: var(--klarna-leading-normal);
+  margin: 0;
+}
+
+.klarna-help-links {
+  display: flex;
+  gap: var(--klarna-space-xl);
+  justify-content: center;
+  margin-top: var(--klarna-space-lg);
+}
+
+.klarna-security-badges {
+  display: flex;
+  gap: var(--klarna-space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--klarna-space-lg);
+}
+
+.klarna-security-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--klarna-space-xs);
+  padding: var(--klarna-space-sm) var(--klarna-space-md);
+  background: var(--klarna-gray-50);
+  border-radius: var(--klarna-radius);
+  font-size: var(--klarna-font-size-xs);
+  color: var(--klarna-text-secondary);
+  font-weight: 500;
+}
+
+.klarna-security-badge .klarna-security-icon {
+  color: var(--klarna-success);
+}
+
+/* Bank Card Component - 50/50 Layout with Live Preview */
+.klarna-bank-card-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--klarna-space-lg);
+}
+
+.klarna-bank-card-header {
+  text-align: center;
+  margin-bottom: var(--klarna-space-3xl);
+}
+
+.klarna-card-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--klarna-space-3xl);
+  margin-bottom: var(--klarna-space-3xl);
+  align-items: start;
+}
+
+.klarna-card-form-column {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+}
+
+.klarna-card-preview-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: sticky;
+  top: calc(var(--klarna-space-xl) + 80px);
+  height: fit-content;
+}
+
+/* Credit Card Preview */
+.klarna-credit-card {
+  width: 100%;
+  max-width: 500px;
+  height: 300px;
+  position: relative;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform var(--klarna-transition-slow);
+  margin-bottom: var(--klarna-space-lg);
+  perspective: 1000px;
+}
+
+.klarna-credit-card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.klarna-credit-card-front,
+.klarna-credit-card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--klarna-radius-xl);
+  padding: var(--klarna-space-xl);
+  box-shadow: var(--klarna-shadow-xl);
+  overflow: hidden;
+}
+
+.klarna-credit-card-front {
+  background: linear-gradient(135deg, #2B2B2B 0%, #1A1A1A 100%);
+  color: var(--klarna-white);
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+/* Subtle light effect overlay */
+.klarna-card-light-effect {
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 179, 199, 0.08) 0%,
+    rgba(255, 179, 199, 0.04) 30%,
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Large Klarna K Logo in background */
+.klarna-card-k-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Card content container */
+.klarna-card-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: var(--klarna-space-xl);
+}
+
+.klarna-card-chip {
+  position: relative;
+  z-index: 1;
+  width: 50px;
+  height: 40px;
+}
+
+.klarna-card-type {
+  position: absolute;
+  top: var(--klarna-space-xl);
+  right: var(--klarna-space-xl);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.klarna-card-logo-text {
+  font-size: var(--klarna-font-size-xl);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.klarna-card-number {
+  font-size: var(--klarna-font-size-xl);
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  margin: auto 0;
+  font-family: 'Courier New', monospace;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.klarna-card-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--klarna-space-sm);
+}
+
+.klarna-card-holder,
+.klarna-card-expiry {
+  display: flex;
+  flex-direction: column;
+  gap: var(--klarna-space-xxs);
+}
+
+.klarna-card-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+}
+
+.klarna-card-value {
+  font-size: var(--klarna-font-size-sm);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Virtual Klarna Card branding */
+.klarna-card-branding {
+  font-size: 11px;
+  text-transform: none;
+  letter-spacing: 0.03em;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 400;
+}
+
+/* Card Back */
+.klarna-credit-card-back {
+  background: linear-gradient(135deg, #2B2B2B 0%, #1A1A1A 100%);
+  color: var(--klarna-white);
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+.klarna-card-stripe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: #000000;
+  z-index: 1;
+}
+
+.klarna-card-back-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 var(--klarna-space-xl) var(--klarna-space-xl);
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 50px - var(--klarna-space-xl));
+}
+
+.klarna-card-cvv-section {
+  background: rgba(255, 255, 255, 0.08);
+  padding: var(--klarna-space-md);
+  border-radius: var(--klarna-radius);
+  margin-bottom: var(--klarna-space-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.klarna-card-cvv-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  margin-bottom: var(--klarna-space-xs);
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+}
+
+.klarna-card-cvv-strip {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--klarna-black);
+  padding: var(--klarna-space-sm) var(--klarna-space-md);
+  border-radius: var(--klarna-radius-sm);
+  font-family: 'Courier New', monospace;
+  font-size: var(--klarna-font-size-lg);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-align: right;
+}
+
+.klarna-card-back-text {
+  font-size: 10px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: auto;
+  font-weight: 400;
+}
+
+/* Professional Bank Card Styling - Override existing styles */
+
+/* Remove old Klarna-specific styling */
+.klarna-card-light-effect,
+.klarna-card-k-logo,
+.klarna-card-content,
+.klarna-card-branding {
+  display: none;
+}
+
+/* Professional Bank Card Elements */
+.bank-card-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+    linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
+  pointer-events: none;
+}
+
+.bank-card-provider {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 3;
+}
+
+.bank-card-generic {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bank-card-chip {
+  position: absolute;
+  top: 80px;
+  left: 24px;
+  z-index: 3;
+}
+
+.bank-card-contactless {
+  position: absolute;
+  top: 80px;
+  left: 85px;
+  z-index: 3;
+}
+
+.bank-card-number {
+  position: absolute;
+  top: 160px;
+  left: 24px;
+  right: 24px;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 4px;
+  color: rgba(255, 255, 255, 0.95);
+  font-family: 'Courier New', monospace;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  z-index: 3;
+}
+
+.bank-card-info {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 3;
+}
+
+.bank-card-holder,
+.bank-card-expiry {
+  display: flex;
+  flex-direction: column;
+}
+
+.bank-card-label {
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+  margin-bottom: 4px;
+  font-family: Arial, sans-serif;
+}
+
+.bank-card-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: Arial, sans-serif;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Professional Bank Card Back */
+.bank-card-back-content {
+  position: relative;
+  z-index: 2;
+  padding: 24px;
+  padding-top: 60px;
+  height: calc(100% - 60px);
+  display: flex;
+  flex-direction: column;
+}
+
+.bank-card-cvv-section {
+  background: rgba(255, 255, 255, 0.9);
+  margin: 0 0 20px 0;
+  border-radius: 4px;
+  padding: 8px 12px;
+  width: 120px;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.bank-card-cvv-label {
+  font-size: 8px;
+  text-transform: uppercase;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+  font-family: Arial, sans-serif;
+}
+
+.bank-card-cvv-strip {
+  background: #ffffff;
+  color: #000;
+  padding: 4px 8px;
+  border-radius: 2px;
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-align: right;
+  border: 1px solid #ddd;
+}
+
+.bank-card-back-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
+.bank-card-back-text {
+  font-size: 8px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+}
+
+.bank-card-customer-service {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: Arial, sans-serif;
+  font-weight: 500;
+}
+
+.bank-card-security-features {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.security-feature {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: Arial, sans-serif;
+}
+
+.security-hologram {
+  width: 16px;
+  height: 16px;
+  background: linear-gradient(45deg, #ff0080, #00ff80, #0080ff, #ff8000);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.security-hologram::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: hologram-shine 2s infinite;
+}
+
+@keyframes hologram-shine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Enhanced Card Styling - Dark Grey Color */
+.klarna-credit-card-front,
+.klarna-credit-card-back {
+  background: linear-gradient(135deg, #3a3a3a 0%, #2d2d2d 100%);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Courier New', monospace;
+  color: #ffffff;
+}
+
+.klarna-card-preview-header {
+  display: flex;
+  align-items: center;
+  gap: var(--klarna-space-sm);
+  margin-bottom: var(--klarna-space-lg);
+  padding: var(--klarna-space-md);
+  background: rgba(255, 182, 193, 0.1);
+  border-radius: var(--klarna-border-radius);
+  border: 1px solid rgba(255, 182, 193, 0.2);
+}
+
+.klarna-card-preview-icon {
+  color: var(--klarna-primary);
+  flex-shrink: 0;
+}
+
+.klarna-card-preview-title {
+  margin: 0;
+  font-size: var(--klarna-font-sm);
+  color: var(--klarna-text-secondary);
+  font-weight: 500;
+}
+
+/* Professional Bank Card Provider Logos */
+.bank-card-provider-logo {
+  height: 32px;
+  width: auto;
+  max-width: 80px;
+  object-fit: contain;
+}
+
+.bank-card-discover-logo {
+  background: #FF6000;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+  .klarna-card-layout {
+    grid-template-columns: 1fr;
+    gap: var(--klarna-space-2xl);
+  }
+
+  .klarna-card-preview-column {
+    position: relative;
+    top: 0;
+    order: -1;
+  }
+
+  .klarna-credit-card {
+    max-width: 100%;
+    height: 220px;
+  }
+
+  .klarna-card-number {
+    font-size: var(--klarna-font-size-xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .klarna-success-actions {
+    flex-direction: column;
+  }
+  
+  .klarna-error-actions {
+    flex-direction: column;
+  }
+  
+  .klarna-bank-option {
+    padding: var(--klarna-space-lg);
+  }
+  
+  .klarna-bank-logo {
+    width: 48px;
+    height: 48px;
+    margin-right: var(--klarna-space-md);
+  }
+  
+  .klarna-help-links {
+    flex-direction: column;
+    gap: var(--klarna-space-md);
+  }
+
+  .klarna-credit-card {
+    height: 200px;
+  }
+
+  .klarna-card-number {
+    font-size: var(--klarna-font-size-lg);
+  }
+
+  .klarna-credit-card-front,
+  .klarna-credit-card-back {
+    padding: var(--klarna-space-lg);
+  }
+}
+
+/* ===== KLARNA BRANCH SELECTION STYLES ===== */
+
+/* Instructions Section for Branch Selection */
+.klarna-instructions-section {
+  background: var(--klarna-gray-50);
+  border-radius: var(--klarna-radius-lg);
+  padding: var(--klarna-space-xl);
+  height: fit-content;
+}
+
+.klarna-instructions-header {
+  display: flex;
+  align-items: center;
+  gap: var(--klarna-space-sm);
+  margin-bottom: var(--klarna-space-lg);
+}
+
+.klarna-instructions-icon {
+  color: var(--klarna-primary);
+}
+
+.klarna-instructions-title {
+  font-size: var(--klarna-font-size-lg);
+  font-weight: 600;
+  color: var(--klarna-text-dark);
+  margin: 0;
+}
+
+.klarna-instructions-content {
+  color: var(--klarna-text-light);
+}
+
+.klarna-instructions-text {
+  font-size: var(--klarna-font-size-sm);
+  line-height: 1.6;
+  margin-bottom: var(--klarna-space-lg);
+}
+
+.klarna-help-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--klarna-space-sm);
+}
+
+.klarna-help-item {
+  display: flex;
+  align-items: center;
+  gap: var(--klarna-space-sm);
+  font-size: var(--klarna-font-size-sm);
+  color: var(--klarna-text-light);
+}
+
+.klarna-help-icon {
+  color: var(--klarna-primary);
+  flex-shrink: 0;
+}
+
+/* Search Container */
+.klarna-search-container {
+  position: relative;
+  width: 100%;
+}
+
+.klarna-search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.klarna-search-icon {
+  position: absolute;
+  left: var(--klarna-space-md);
+  color: var(--klarna-text-light);
+  z-index: 1;
+}
+
+.klarna-search-loading {
+  position: absolute;
+  right: var(--klarna-space-md);
+  display: flex;
+  align-items: center;
+}
+
+/* Dropdown Styles */
+.klarna-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--klarna-white);
+  border: 2px solid var(--klarna-primary);
+  border-top: none;
+  border-radius: 0 0 var(--klarna-radius) var(--klarna-radius);
+  box-shadow: var(--klarna-shadow-lg);
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.klarna-dropdown-item {
+  padding: var(--klarna-space-md);
+  cursor: pointer;
+  border-bottom: 1px solid var(--klarna-gray-100);
+  transition: all var(--klarna-transition);
+}
+
+.klarna-dropdown-item:hover,
+.klarna-dropdown-item-selected {
+  background: var(--klarna-gray-50);
+  border-left: 4px solid var(--klarna-primary);
+}
+
+.klarna-dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.klarna-branch-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--klarna-space-xs);
+}
+
+.klarna-branch-name {
+  display: flex;
+  align-items: center;
+  gap: var(--klarna-space-xs);
+  font-weight: 600;
+  color: var(--klarna-text-dark);
+  font-size: var(--klarna-font-size-sm);
+}
+
+.klarna-branch-icon {
+  color: var(--klarna-primary);
+  flex-shrink: 0;
+}
+
+.klarna-branch-location {
+  display: flex;
+  align-items: center;
+  gap: var(--klarna-space-xs);
+  color: var(--klarna-text-light);
+  font-size: var(--klarna-font-size-xs);
+}
+
+.klarna-location-icon {
+  color: var(--klarna-text-light);
+  flex-shrink: 0;
+}
+
+/* Selected Branch Display */
+.klarna-selected-branch {
+  margin-top: var(--klarna-space-lg);
+  padding: var(--klarna-space-lg);
+  background: var(--klarna-gray-50);
+  border: 2px solid var(--klarna-primary);
+  border-radius: var(--klarna-radius);
+}
+
+.klarna-selected-branch-header {
+  display: flex;
+  align-items: center;
+  gap: var(--klarna-space-sm);
+  margin-bottom: var(--klarna-space-sm);
+}
+
+.klarna-selected-icon {
+  color: var(--klarna-primary);
+}
+
+.klarna-selected-title {
+  font-weight: 600;
+  color: var(--klarna-text-dark);
+  font-size: var(--klarna-font-size-sm);
+}
+
+.klarna-selected-branch-info {
+  margin-left: calc(20px + var(--klarna-space-sm));
+}
+
+.klarna-selected-name {
+  font-weight: 600;
+  color: var(--klarna-text-dark);
+  margin-bottom: var(--klarna-space-xs);
+}
+
+.klarna-selected-location {
+  display: flex;
+  align-items: center;
+  gap: var(--klarna-space-xs);
+  color: var(--klarna-text-light);
+  font-size: var(--klarna-font-size-sm);
+}
+
+/* Responsive Design for Branch Selection */
+@media (max-width: 768px) {
+  .klarna-dropdown {
+    max-height: 250px;
+  }
+  
+  .klarna-instructions-section {
+    margin-top: var(--klarna-space-lg);
+  }
+}

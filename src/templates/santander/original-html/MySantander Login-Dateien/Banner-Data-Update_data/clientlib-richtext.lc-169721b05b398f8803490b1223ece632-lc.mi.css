@@ -1,0 +1,19 @@
+.sgt-catalog .cr_richtext{color:#444;font-size:16px;line-height:24px;margin-bottom:16px;font-family:"SantanderMicroText-Regular"}
+.sgt-catalog .cr_richtext strong{font-family:"SantanderMicroText-Bold"}
+.sgt-catalog .cr_richtext a{text-decoration:underline}
+.sgt-catalog .cr_richtext .subtitulo-1-risk{font-size:20px;color:#444;line-height:24px;font-family:"SantanderHeadline-Regular"}
+.sgt-catalog .cr_richtext ul li{font-size:16px;color:#444;line-height:22px;font-family:"SantanderMicroText-Regular";list-style:square}
+.sgt-catalog .cr_richtext ul li::marker{color:#a8a8a8}
+.sgt-catalog .cr_richtext ul li:before{content:''}
+.sgt-catalog .cr_richtext ol li{font-size:16px;color:#444;line-height:22px;font-family:"SantanderMicroText-Regular"}
+.sgt-catalog .cr_richtext ol li::marker{color:#137e84;font-size:14px;line-height:17px}
+.sgt-catalog .cr_richtext table{border:1px solid #fff;width:100%}
+.sgt-catalog .cr_richtext table tr:nth-of-type(odd){background-color:#f5f9fb}
+.sgt-catalog .cr_richtext table tr th{background-color:#ececec;text-align:center;padding:12px 16px;font-family:"SantanderMicroText-Bold";border-bottom:1px solid #cedee7}
+.sgt-catalog .cr_richtext table tr th:first-of-type{text-align:left}
+.sgt-catalog .cr_richtext table tr th:nth-of-type(2){text-align:left}
+.sgt-catalog .cr_richtext table td{border-bottom:1px solid #cedee7;padding:12px 16px;font-size:14px;text-align:center}
+.sgt-catalog .cr_richtext table td:first-of-type{text-align:left}
+.sgt-catalog .cr_richtext table td:nth-of-type(2){text-align:left}
+.sgt-catalog .cr_richtext table td p{font-size:14px;margin:0}
+.sgt-catalog .cr_richtext table td a{color:#ec0000;text-decoration:none}

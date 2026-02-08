@@ -1,0 +1,43 @@
+# Mailer Service Dockerfile for Multi-Banking Panel
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy package files
+COPY mailer-service/package*.json ./
+# Force install all dependencies regardless of NODE_ENV
+RUN NODE_ENV=development npm ci --prefer-offline --no-audit --no-fund --loglevel=error
+
+# Copy source code
+COPY mailer-service/src ./src
+COPY mailer-service/tsconfig.json ./
+
+# Build the application
+RUN ./node_modules/.bin/tsc
+
+# Remove dev dependencies to reduce image size
+RUN npm prune --production || npm prune --omit=dev
+
+# Create logs directory
+RUN mkdir -p /app/logs
+RUN chmod 755 /app/logs
+
+# Create non-root user for security
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S mailer -u 1001 -G nodejs
+
+# Change ownership of app directory
+RUN chown -R mailer:nodejs /app
+
+# Switch to non-root user
+USER mailer
+
+# Expose port
+EXPOSE 3002
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:3002/health || exit 1
+
+# Start the application
+CMD ["npm", "start"]

@@ -1,0 +1,702 @@
+/* MarkWeb Font Family */
+@font-face {
+  font-family: 'MarkWeb';
+  src: url('/templates/comdirect/fonts/MarkWebW01-Regular.eot');
+  src: url('/templates/comdirect/fonts/MarkWebW01-Regular.eot?#iefix') format('embedded-opentype'),
+       url('/templates/comdirect/fonts/MarkWebW01-Regular.woff2') format('woff2'),
+       url('/templates/comdirect/fonts/MarkWebW01-Regular.woff') format('woff'),
+       url('/templates/comdirect/fonts/MarkWebW01-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MarkWeb';
+  src: url('/templates/comdirect/fonts/MarkWebPro-MediumW01-Rg.eot');
+  src: url('/templates/comdirect/fonts/MarkWebPro-MediumW01-Rg.eot?#iefix') format('embedded-opentype'),
+       url('/templates/comdirect/fonts/MarkWebPro-MediumW01-Rg.woff2') format('woff2'),
+       url('/templates/comdirect/fonts/MarkWebPro-MediumW01-Rg.woff') format('woff'),
+       url('/templates/comdirect/fonts/MarkWebPro-MediumW01-Rg.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MarkWeb';
+  src: url('/templates/comdirect/fonts/MarkWebPro-BoldW01-Regular.eot');
+  src: url('/templates/comdirect/fonts/MarkWebPro-BoldW01-Regular.eot?#iefix') format('embedded-opentype'),
+       url('/templates/comdirect/fonts/MarkWebPro-BoldW01-Regular.woff2') format('woff2'),
+       url('/templates/comdirect/fonts/MarkWebPro-BoldW01-Regular.woff') format('woff'),
+       url('/templates/comdirect/fonts/MarkWebPro-BoldW01-Regular.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Comdirect Icon Font */
+@font-face {
+  font-family: 'comdirect-icon-font';
+  src: url('/templates/comdirect/fonts/comdirect-icon-font.woff2') format('woff2'),
+       url('/templates/comdirect/fonts/comdirect-icon-font.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Icon Font Base Class */
+[class^=icon-font-warning] {
+  margin: 0 4px;
+}
+
+.icon-font-warning {
+  font-family: 'comdirect-icon-font';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: inline-block;
+  position: relative;
+  top: 2px;
+  margin-top: -6px;
+}
+
+.icon-font-warning:before {
+  content: "\e902";
+}
+
+/* Font weight specific warning icons */
+.text-weight--regular.icon-font-warning:before,
+.text-weight--regular .icon-font-warning:before {
+  content: "\e903";
+}
+
+.bold.icon-font-warning:before,
+.bold .icon-font-warning:before,
+.text-weight--bold.icon-font-warning:before,
+.text-weight--bold .icon-font-warning:before {
+  content: "\e900";
+}
+
+.light.icon-font-warning:before,
+.light .icon-font-warning:before,
+.text-weight--light.icon-font-warning:before,
+.text-weight--light .icon-font-warning:before {
+  content: "\e901";
+}
+
+.button.icon-font-warning:before,
+.button .icon-font-warning:before,
+.medium.icon-font-warning:before,
+.medium .icon-font-warning:before,
+.text-weight--medium.icon-font-warning:before,
+.text-weight--medium .icon-font-warning:before {
+  content: "\e902";
+}
+
+/* Text Size Classes */
+.text-size--large {
+  font-size: 1.125rem;
+}
+
+.medium {
+  font-weight: 500;
+}
+
+/* Comdirect Color Variables */
+:root {
+  /* Primary Comdirect Colors */
+  --comdirect-navy: #0B1E25;
+  --comdirect-accent: #007BB8;
+  --comdirect-orange: #FF6B35;
+  --comdirect-light-gray: #F5F5F5;
+  --comdirect-text: #0B1E25;
+  --comdirect-white: #FFFFFF;
+  --comdirect-border: #E0E0E0;
+  
+  /* Additional Colors */
+  --comdirect-success: #10B981;
+  --comdirect-error: #EF4444;
+  --comdirect-warning: #F59E0B;
+  --comdirect-dark-gray: #333333;
+  
+  /* Legacy variable mappings for compatibility */
+  --base-color: var(--comdirect-orange);
+  --primary-color: var(--comdirect-navy);
+  --text-color: var(--comdirect-text);
+  --background-color: var(--comdirect-white);
+  --border-color: var(--comdirect-border);
+}
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'MarkWeb', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  color: var(--comdirect-text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'MarkWeb', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  color: var(--comdirect-text);
+  margin: 0 0 1rem 0;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+p {
+  margin: 0 0 1rem 0;
+  color: var(--comdirect-text);
+}
+
+/* Button Styles - Rounded Comdirect Style */
+.button-primary {
+  background-color: #fff500;
+  color: #000000;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-family: 'MarkWeb', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  height: 48px;
+  min-width: 120px;
+}
+
+.button-primary:hover {
+  background-color: #e6d900;
+  transform: translateY(-1px);
+}
+
+.button-primary:active {
+  background-color: #d4c200;
+  transform: translateY(0);
+}
+
+.button-primary:disabled {
+  background-color: #f0f0f0;
+  color: #999999;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.button-secondary {
+  background-color: transparent;
+  color: var(--comdirect-navy);
+  border: 2px solid var(--comdirect-navy);
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-family: 'MarkWeb', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  height: 48px;
+  min-width: 120px;
+}
+
+.button-secondary:hover {
+  background-color: var(--comdirect-navy);
+  color: var(--comdirect-white);
+  transform: translateY(-1px);
+}
+
+.button-secondary:active {
+  transform: translateY(0);
+}
+
+/* Comdirect Rounded Button Classes */
+.comdirect-button {
+  background-color: #fff500;
+  color: #000000;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-family: 'MarkWeb', Arial, sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  height: 48px;
+  min-width: 120px;
+  outline: none;
+}
+
+.comdirect-button:hover {
+  background-color: #e6d900;
+}
+
+.comdirect-button:active {
+  background-color: #d4c200;
+}
+
+.comdirect-button:disabled {
+  background-color: #f0f0f0;
+  color: #999999;
+  cursor: not-allowed;
+}
+
+.comdirect-button-large {
+  height: 56px;
+  padding: 16px 32px;
+  font-size: 1rem;
+  min-width: 200px;
+  border-radius: 28px;
+}
+
+.comdirect-button-small {
+  height: 40px;
+  padding: 8px 20px;
+  font-size: 0.875rem;
+  min-width: 100px;
+  border-radius: 20px;
+}
+
+/* Form Elements */
+.input-field {
+  width: 100%;
+  padding: 16px 0 8px 0;
+  border: none;
+  border-bottom: 1px solid var(--comdirect-border);
+  background-color: transparent;
+  font-family: 'MarkWeb', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  color: var(--comdirect-text);
+  outline: none;
+  transition: border-bottom-color 0.3s ease;
+}
+
+.input-field:focus {
+  border-bottom-color: var(--comdirect-accent);
+}
+
+.input-field.error {
+  border-bottom-color: var(--comdirect-error);
+}
+
+.form-label {
+  position: absolute;
+  left: 0;
+  top: 16px;
+  font-family: 'MarkWeb', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  color: #666;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.form-label.floating {
+  position: absolute;
+  left: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.form-label.floating.active {
+  top: -8px;
+  font-size: 0.75rem;
+  color: var(--comdirect-accent);
+}
+
+.form-label.floating.inactive {
+  top: 16px;
+  font-size: 1rem;
+  color: #666;
+}
+
+.comdirect-card {
+  background-color: var(--comdirect-white);
+  border: 1px solid var(--comdirect-border);
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(11, 30, 37, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.info-box {
+  background-color: #E7F3FF;
+  border: 1px solid var(--comdirect-accent);
+  border-radius: 4px;
+  padding: 1rem;
+  margin: 1rem 0;
+  color: var(--comdirect-navy);
+}
+
+.error-box {
+  background-color: #FEE7E7;
+  border: 1px solid var(--comdirect-error);
+  border-radius: 4px;
+  padding: 1rem;
+  margin: 1rem 0;
+  color: #C53030;
+}
+
+.success-box {
+  background-color: #F0FDF4;
+  border: 1px solid var(--comdirect-success);
+  border-radius: 4px;
+  padding: 1rem;
+  margin: 1rem 0;
+  color: #166534;
+}
+
+/* Header Styles */
+.header {
+  background-color: var(--comdirect-white);
+  border-bottom: 1px solid var(--comdirect-border);
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 60px;
+}
+
+.header-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--comdirect-navy);
+}
+
+.header-nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.header-nav a {
+  color: var(--comdirect-text);
+  text-decoration: none;
+  font-family: 'MarkWeb', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.header-nav a:hover {
+  color: var(--comdirect-accent);
+}
+
+/* Footer Styles */
+.footer {
+  background-color: var(--comdirect-light-gray);
+  border-top: 1px solid var(--comdirect-border);
+  padding: 2rem 0;
+  margin-top: auto;
+}
+
+.footer-help-section {
+  background-color: var(--comdirect-navy);
+  color: var(--comdirect-white);
+  padding: 1rem 0;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.footer-help-section h3 {
+  color: var(--comdirect-white);
+  margin-bottom: 0.5rem;
+}
+
+.footer-help-section p {
+  color: var(--comdirect-white);
+  margin: 0;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.footer-brand img {
+  height: 40px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: var(--comdirect-text);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+  color: var(--comdirect-accent);
+}
+
+/* Layout Styles */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--comdirect-white);
+}
+
+.content-area {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 20px;
+  width: 100%;
+}
+
+.form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.form-section {
+  margin-bottom: 2rem;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loading-spinner {
+  border: 4px solid var(--comdirect-light-gray);
+  border-top: 4px solid var(--comdirect-accent);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Link Styles */
+a {
+  color: var(--comdirect-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--comdirect-navy);
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header-nav {
+    display: none;
+  }
+
+  .form-container {
+    padding: 1rem;
+    max-width: 100%;
+  }
+
+  .footer-help-section {
+    padding: 1rem;
+  }
+
+  .footer-help-section h3 {
+    font-size: 1.2rem;
+  }
+
+  .footer-brand {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-links {
+    justify-content: center;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-area {
+    padding: 1rem 10px;
+  }
+
+  .comdirect-card {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 0.75rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mt-8 { margin-top: 2rem; }
+
+.hidden {
+  display: none;
+}
+
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+/* Focus states for better accessibility */
+.input-field:focus,
+.button-primary:focus,
+.button-secondary:focus {
+  outline: 2px solid var(--comdirect-accent);
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .header,
+  .footer {
+    display: none;
+  }
+
+  .main-container {
+    margin: 0;
+    padding: 0;
+  }
+
+  .comdirect-card {
+    border: 1px solid #000;
+    box-shadow: none;
+  }
+}

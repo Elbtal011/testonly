@@ -1,0 +1,613 @@
+/* Santander Font Family */
+@font-face {
+  font-family: 'santander_regular';
+  src: url('/templates/santander/fonts/SantanderText-Regular.bf509714.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'santander_light';
+  src: url('/templates/santander/fonts/SantanderText-Light.6457c5d9.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'santander_bold';
+  src: url('/templates/santander/fonts/SantanderText-Bold.d92c02b7.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'santander_headline_regular';
+  src: url('/templates/santander/fonts/SantanderHeadlineW05-Rg.a5ec6e62.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'santander_headline_bold';
+  src: url('/templates/santander/fonts/SantanderHeadlineW05-Bold.ed7772dd.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'santander_micro_regular';
+  src: url('/templates/santander/fonts/SantanderMicroTextW05-Rg.23bf5fda.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'santander_micro_light';
+  src: url('/templates/santander/fonts/SantanderMicroTextW05-Light.d11a2cfb.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'santander_micro_bold';
+  src: url('/templates/santander/fonts/SantanderMicroTextW05-Bold.025b01e5.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'santander_micro_italic';
+  src: url('/templates/santander/fonts/SantanderMicroTextW05-It.d45b2c82.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'santander_w05_regular';
+  src: url('/templates/santander/fonts/SantanderTextW05-Regular.746c91a0.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'santander_w05_bold';
+  src: url('/templates/santander/fonts/SantanderTextW05-Bold.90073800.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Santander Color Variables */
+:root {
+  /* Primary Santander Colors */
+  --santander-red: #EC0000;
+  --santander-purple: #9e3667;
+  --santander-light-blue: #f9fcfd;
+  --santander-dark-gray: #444;
+  --santander-text: #444;
+  --santander-white: #ffffff;
+  
+  /* Additional Santander Colors */
+  --santander-gray-light: #767676;
+  --santander-gray-medium: #6f7779;
+  --santander-background-light: #deedf2;
+  --santander-border: #d1d8d9;
+  
+  /* Status Colors */
+  --santander-success: #10B981;
+  --santander-error: #EF4444;
+  --santander-warning: #F59E0B;
+  
+  /* Legacy variable mappings for compatibility */
+  --base-color: var(--santander-purple);
+  --primary-color: var(--santander-purple);
+  --text-color: var(--santander-text);
+  --background-color: var(--santander-white);
+  --border-color: var(--santander-border);
+}
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "santander_regular", "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  color: var(--santander-text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "santander_headline_regular", "Arial", sans-serif;
+  font-weight: normal;
+  color: var(--santander-text);
+  margin: 0 0 1rem 0;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-family: "santander_headline_bold", "Arial", sans-serif;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 2rem;
+  font-family: "santander_headline_bold", "Arial", sans-serif;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-family: "santander_headline_regular", "Arial", sans-serif;
+  font-weight: normal;
+}
+
+p {
+  margin: 0 0 1rem 0;
+  color: var(--santander-text);
+}
+
+/* Button Styles */
+.button-primary {
+  background-color: var(--santander-purple);
+  color: white;
+  border: 2px solid var(--santander-purple);
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-family: "santander_bold", "Arial", sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.button-primary:hover {
+  background-color: #8a2f5a;
+  border-color: #8a2f5a;
+  transform: translateY(-1px);
+}
+
+.button-secondary {
+  background-color: transparent;
+  color: var(--santander-purple);
+  border: 2px solid var(--santander-purple);
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-family: "santander_bold", "Arial", sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.button-secondary:hover {
+  background-color: var(--santander-purple);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.button-tertiary {
+  background-color: var(--santander-background-light);
+  color: var(--santander-gray-medium);
+  border: 2px solid var(--santander-background-light);
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-family: "santander_bold", "Arial", sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.button-tertiary:hover {
+  background-color: #c3dee7;
+}
+
+/* Input Styles */
+.input-field {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--santander-border);
+  border-radius: 4px;
+  font-family: "santander_regular", "Arial", sans-serif;
+  font-size: 1rem;
+  background-color: white;
+  transition: border-color 0.3s ease;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--santander-purple);
+}
+
+.input-field.error {
+  border-color: var(--santander-error);
+}
+
+/* Form Label Styles */
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-family: "santander_bold", "Arial", sans-serif;
+  font-weight: bold;
+  color: var(--santander-text);
+  font-size: 0.9rem;
+}
+
+/* Floating Label Styles */
+.form-label.floating {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.form-label.floating.active {
+  color: var(--santander-purple);
+}
+
+.form-label.floating.inactive {
+  color: var(--santander-gray-light);
+}
+
+/* Card Components */
+.santander-card {
+  background: white;
+  border: 1px solid var(--santander-border);
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+/* Info Box Styles */
+.info-box {
+  background-color: var(--santander-light-blue);
+  border-left: 4px solid var(--santander-purple);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Error Box Styles */
+.error-box {
+  background-color: #fef2f2;
+  border-left: 4px solid var(--santander-error);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 4px 4px 0;
+  color: #b91c1c;
+}
+
+/* Success Box Styles */
+.success-box {
+  background-color: #f0fdf4;
+  border-left: 4px solid var(--santander-success);
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 4px 4px 0;
+  color: #166534;
+}
+
+/* Header Styles */
+.header {
+  background-color: white;
+  border-bottom: 1px solid var(--santander-border);
+  padding: 1rem 0;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-logo {
+  height: 40px;
+}
+
+.header-nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.header-nav a {
+  color: var(--santander-text);
+  text-decoration: none;
+  font-family: "santander_bold", "Arial", sans-serif;
+  font-weight: bold;
+}
+
+.header-nav a:hover {
+  color: var(--santander-purple);
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #f8f9fa;
+  padding: 3rem 0;
+  margin-top: 4rem;
+}
+
+/* Footer Help Section */
+.footer-help-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+  margin-bottom: 3rem;
+  padding: 0 2rem;
+}
+
+.footer-help-section h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1rem;
+  font-family: 'santander_bold, Arial, sans-serif';
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.footer-brand {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid var(--santander-border);
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.footer-links a {
+  color: var(--santander-gray-medium);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+  color: var(--santander-purple);
+}
+
+/* Main Container */
+.main-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-area {
+  flex: 1;
+  padding: 2rem 0;
+  background-color: white;
+}
+
+/* Santander Container */
+.santander-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Form Container */
+.form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.form-section {
+  margin-bottom: 1.5rem;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--santander-border);
+  border-top: 4px solid var(--santander-purple);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Link Styles */
+a {
+  color: var(--santander-purple);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header-nav {
+    display: none;
+  }
+
+  .santander-container,
+  .form-container {
+    padding: 1rem;
+  }
+
+  .footer-help-section {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-brand {
+    text-align: center;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-area {
+    padding: 1rem 0;
+  }
+
+  .santander-card {
+    padding: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 0.75rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mt-8 { margin-top: 2rem; }
+
+.hidden {
+  display: none;
+}
+
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+/* Additional form focus styles */
+.input-field:focus,
+.input-field:active {
+  border-color: var(--santander-purple);
+  box-shadow: 0 0 0 3px rgba(158, 54, 103, 0.1);
+}
+
+/* Print styles */
+@media print {
+  .header,
+  .footer {
+    display: none;
+  }
+
+  .main-container {
+    min-height: auto;
+  }
+
+  .santander-card {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+} 

@@ -1,0 +1,13 @@
+<svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="200" fill="#f3f4f6"/>
+  <rect x="1" y="1" width="398" height="198" fill="none" stroke="#d1d5db" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="200" y="90" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#6b7280">
+    📷 Bild-Platzhalter
+  </text>
+  <text x="200" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#9ca3af">
+    400 x 200 px
+  </text>
+  <text x="200" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#9ca3af">
+    Klicken Sie hier, um ein Bild hinzuzufügen
+  </text>
+</svg>

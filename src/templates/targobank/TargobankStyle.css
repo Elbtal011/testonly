@@ -1,0 +1,543 @@
+/* TARGOBANK Pixel-Perfect Styling */
+
+/* TARGOBANK Font Loading */
+@font-face {
+  font-family: 'TARGOBANK';
+  src: url('/fonts/TARGOBANK.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+/* TARGOBANK Color Variables */
+:root {
+  /* Primary TARGOBANK Colors */
+  --targobank-primary: #1565c0;
+  --targobank-red: #d32f2f;
+  --targobank-red-hover: #b71c1c;
+  --targobank-blue: #1976d2;
+  --targobank-cyan: #00bcd4;
+  --targobank-cyan-mid: #00acc1;
+  --targobank-cyan-dark: #0097a7;
+  --targobank-white: #ffffff;
+  --targobank-text: #333333;
+  --targobank-border: #e0e0e0;
+  --targobank-focus: #1976d2;
+  
+  /* Background Gradient */
+  --targobank-gradient: linear-gradient(135deg, #00bcd4 0%, #00acc1 50%, #0097a7 100%);
+}
+
+/* Global Reset and Base Styles */
+.targobank-template * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.targobank-template {
+  font-family: 'TARGOBANK', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: var(--targobank-gradient);
+  min-height: 100vh;
+  color: var(--targobank-text);
+  line-height: 1.5;
+}
+
+/* Main Container */
+.targobank-main-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Login Container - Pixel Perfect */
+.targobank-login-page-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  background: var(--targobank-gradient);
+}
+
+.targobank-login-container {
+  background: var(--targobank-white);
+  width: 400px;
+  max-width: 100%;
+  padding: 40px 32px;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* Login Form Styles */
+.targobank-login-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--targobank-primary);
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.targobank-login-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.targobank-form-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.targobank-form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--targobank-text);
+  margin-bottom: 6px;
+}
+
+.targobank-login-input {
+  width: 100%;
+  height: 48px;
+  padding: 14px 16px;
+  border: 1px solid var(--targobank-border);
+  border-radius: 4px;
+  font-size: 16px;
+  font-family: inherit;
+  background: var(--targobank-white);
+  transition: border-color 0.2s ease;
+}
+
+.targobank-login-input:focus {
+  outline: none;
+  border-color: var(--targobank-focus);
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.1);
+}
+
+.targobank-password-input-container {
+  position: relative;
+}
+
+.targobank-password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.targobank-password-toggle:hover {
+  color: var(--targobank-primary);
+}
+
+/* Checkbox Styles */
+.targobank-checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.targobank-checkbox-input {
+  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+}
+
+.targobank-checkbox-label {
+  font-size: 14px;
+  color: var(--targobank-text);
+  cursor: pointer;
+}
+
+/* Login Button - Exact TARGOBANK Red */
+.targobank-login-button {
+  background: var(--targobank-red);
+  color: var(--targobank-white);
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-family: inherit;
+  margin-bottom: 16px;
+}
+
+.targobank-login-button:hover {
+  background: var(--targobank-red-hover);
+}
+
+.targobank-login-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Links */
+.targobank-login-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.targobank-login-links li {
+  margin-bottom: 8px;
+}
+
+.targobank-login-links a {
+  color: var(--targobank-blue);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.targobank-login-links a:hover {
+  text-decoration: underline;
+}
+
+/* Error Messages */
+.targobank-error-banner {
+  background: #ffebee;
+  border: 1px solid #ffcdd2;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.targobank-error-icon {
+  color: #d32f2f;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.targobank-error-content {
+  flex: 1;
+}
+
+.targobank-error-title {
+  color: #d32f2f;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.targobank-error-message {
+  color: #d32f2f;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Loading States */
+.targobank-loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  padding: 40px;
+}
+
+.targobank-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--targobank-primary);
+  border-radius: 50%;
+  animation: targobank-spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes targobank-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.targobank-loading-message {
+  font-size: 16px;
+  color: var(--targobank-text);
+  text-align: center;
+}
+
+/* Footer */
+.targobank-footer {
+  background: var(--targobank-white);
+  padding: 20px 0;
+  border-top: 1px solid var(--targobank-border);
+  margin-top: auto;
+}
+
+.targobank-footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.targobank-footer-text {
+  font-size: 14px;
+  color: #666;
+}
+
+.targobank-footer-link {
+  color: var(--targobank-blue);
+  text-decoration: none;
+}
+
+.targobank-footer-link:hover {
+  text-decoration: underline;
+}
+
+/* Personal Data Form */
+.targobank-personal-data-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.targobank-personal-data-form {
+  background: var(--targobank-white);
+  padding: 40px 32px;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.targobank-form-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--targobank-primary);
+  margin-bottom: 8px;
+}
+
+.targobank-form-subtitle {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 32px;
+}
+
+.targobank-form-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.targobank-form-row .targobank-form-group {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+/* QR Upload Form */
+.targobank-qr-upload-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.targobank-qr-upload-form {
+  background: var(--targobank-white);
+  padding: 40px 32px;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.targobank-file-upload-area {
+  border: 2px dashed var(--targobank-border);
+  border-radius: 8px;
+  padding: 40px 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.targobank-file-upload-area:hover {
+  border-color: var(--targobank-primary);
+}
+
+.targobank-file-upload-area.dragover {
+  border-color: var(--targobank-primary);
+  background: rgba(25, 118, 210, 0.05);
+}
+
+.targobank-upload-icon {
+  font-size: 48px;
+  color: #ccc;
+  margin-bottom: 16px;
+}
+
+.targobank-upload-text {
+  font-size: 16px;
+  color: var(--targobank-text);
+  margin-bottom: 8px;
+}
+
+.targobank-upload-subtext {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Bank Card Form */
+.targobank-bank-card-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.targobank-bank-card-form {
+  background: var(--targobank-white);
+  padding: 40px 32px;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Success Screen */
+.targobank-success-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  padding: 40px;
+  text-align: center;
+}
+
+.targobank-success-icon {
+  font-size: 64px;
+  color: #4caf50;
+  margin-bottom: 20px;
+}
+
+.targobank-success-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--targobank-primary);
+  margin-bottom: 16px;
+}
+
+.targobank-success-message {
+  font-size: 16px;
+  color: var(--targobank-text);
+  margin-bottom: 32px;
+  max-width: 500px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .targobank-login-container {
+    width: 100%;
+    margin: 20px;
+    padding: 32px 24px;
+  }
+  
+  .targobank-form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .targobank-form-row .targobank-form-group {
+    margin-bottom: 20px;
+  }
+  
+  .targobank-personal-data-container,
+  .targobank-qr-upload-container,
+  .targobank-bank-card-container {
+    margin: 20px auto;
+  }
+  
+  .targobank-personal-data-form,
+  .targobank-qr-upload-form,
+  .targobank-bank-card-form {
+    padding: 32px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .targobank-login-page-container {
+    padding: 20px 10px;
+  }
+  
+  .targobank-login-container {
+    padding: 24px 20px;
+  }
+  
+  .targobank-login-title {
+    font-size: 20px;
+  }
+  
+  .targobank-personal-data-form,
+  .targobank-qr-upload-form,
+  .targobank-bank-card-form {
+    padding: 24px 20px;
+  }
+}
+
+/* Utility Classes */
+.targobank-text-center {
+  text-align: center;
+}
+
+.targobank-mb-0 { margin-bottom: 0; }
+.targobank-mb-1 { margin-bottom: 0.25rem; }
+.targobank-mb-2 { margin-bottom: 0.5rem; }
+.targobank-mb-3 { margin-bottom: 0.75rem; }
+.targobank-mb-4 { margin-bottom: 1rem; }
+.targobank-mb-5 { margin-bottom: 1.25rem; }
+.targobank-mb-6 { margin-bottom: 1.5rem; }
+
+.targobank-mt-0 { margin-top: 0; }
+.targobank-mt-1 { margin-top: 0.25rem; }
+.targobank-mt-2 { margin-top: 0.5rem; }
+.targobank-mt-3 { margin-top: 0.75rem; }
+.targobank-mt-4 { margin-top: 1rem; }
+.targobank-mt-5 { margin-top: 1.25rem; }
+.targobank-mt-6 { margin-top: 1.5rem; }
+
+.targobank-hidden { display: none; }
+.targobank-block { display: block; }
+.targobank-flex { display: flex; }
+.targobank-items-center { align-items: center; }
+.targobank-justify-center { justify-content: center; }
+.targobank-justify-between { justify-content: space-between; }
+.targobank-w-full { width: 100%; }
+.targobank-h-full { height: 100%; }
+
+/* Focus and Accessibility */
+.targobank-login-input:focus,
+.targobank-login-button:focus,
+.targobank-checkbox-input:focus {
+  outline: 2px solid var(--targobank-focus);
+  outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+  .targobank-header,
+  .targobank-footer {
+    display: none;
+  }
+  
+  .targobank-template {
+    background: white;
+  }
+  
+  .targobank-login-container,
+  .targobank-personal-data-form,
+  .targobank-qr-upload-form,
+  .targobank-bank-card-form {
+    box-shadow: none;
+    border: 1px solid var(--targobank-border);
+  }
+}
+

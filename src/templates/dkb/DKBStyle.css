@@ -1,0 +1,1347 @@
+/* DKB Banking Style - Exact Match to banking.dkb.de */
+/* Supports Light & Dark Theme via system preference */
+
+/* Common DKB Color Variables - Shared across themes */
+:root {
+  /* Primary DKB Colors - Consistent across themes */
+  --dkb-primary: #148DEA;
+  --dkb-primary-hover: #134e8a;
+  --dkb-primary-pressed: #1e99f7;
+  --dkb-text-on-actions: #ffffff;
+  --dkb-text-interact: #148DEA;
+  --dkb-focused: rgba(30, 153, 247, 0.74);
+  --dkb-border-interact: rgba(20, 141, 234, 0.24);
+  
+  /* Typography */
+  --dkb-font-family: 'DKBEuclid', Arial, sans-serif;
+  
+  /* Spacing - exact DKB spacing */
+  --space-0: 0px;
+  --space-0-5: 2px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  
+  /* Border Radius - exact DKB radius */
+  --border-radius-3: 6px;
+  --border-radius-6: 12px;
+  --border-radius-4: 8px;
+  
+  /* Success/Teal color - consistent */
+  --dkb-success-color: #11a6a1;
+  --dkb-success-green: #10B981;
+}
+
+/* Dark Theme Variables */
+[data-theme="dark"] {
+  /* Backgrounds */
+  --dkb-background: #09141c;
+  --dkb-surface: #131f29;
+  --dkb-surface-light: #122534;
+  --dkb-header-bg: #09141c;
+  --dkb-footer-bg: #132d40;
+  
+  /* Text Colors */
+  --dkb-text-primary: #edf4f7;
+  --dkb-text-subdued: rgba(204, 233, 255, 0.62);
+  
+  /* Borders */
+  --dkb-border-cards: rgba(181, 223, 255, 0.2);
+  
+  /* Input Colors */
+  --dkb-input-bg: #122534;
+  --dkb-input-border: rgba(181, 223, 255, 0.2);
+  --dkb-input-text: #849eb1;
+  --dkb-input-placeholder: rgba(132, 158, 177, 0.6);
+  
+  /* Information Box Colors */
+  --dkb-info-bg: rgba(20, 141, 234, 0.1);
+  --dkb-info-border: rgba(20, 141, 234, 0.2);
+  --dkb-info-text-primary: #edf4f7;
+  --dkb-info-text-secondary: rgba(204, 233, 255, 0.8);
+  
+  /* Success Box Colors */
+  --dkb-success-bg: rgba(17, 166, 161, 0.1);
+  --dkb-success-border: rgba(17, 166, 161, 0.2);
+  --dkb-success-text-primary: #edf4f7;
+  --dkb-success-text-secondary: rgba(204, 233, 255, 0.8);
+  
+  /* Error Box Colors */
+  --dkb-error-bg: #4a2c2a;
+  --dkb-error-border: #ff6b6b;
+  --dkb-error-text: #ff6b6b;
+  
+  /* Footer link decoration */
+  --dkb-footer-link-decoration: #61caca;
+}
+
+/* Light Theme Variables */
+[data-theme="light"] {
+  /* Backgrounds */
+  --dkb-background: #f8f9fa;
+  --dkb-surface: #ffffff;
+  --dkb-surface-light: #f8f9fa;
+  --dkb-header-bg: #ffffff;
+  --dkb-footer-bg: #f8f9fa;
+  
+  /* Text Colors */
+  --dkb-text-primary: #1a1a1a;
+  --dkb-text-subdued: #6c757d;
+  
+  /* Borders */
+  --dkb-border-cards: #dee2e6;
+  
+  /* Input Colors */
+  --dkb-input-bg: #ffffff;
+  --dkb-input-border: #dee2e6;
+  --dkb-input-text: #1a1a1a;
+  --dkb-input-placeholder: #6c757d;
+  
+  /* Information Box Colors */
+  --dkb-info-bg: rgba(20, 141, 234, 0.08);
+  --dkb-info-border: rgba(20, 141, 234, 0.3);
+  --dkb-info-text-primary: #1a1a1a;
+  --dkb-info-text-secondary: #495057;
+  
+  /* Success Box Colors */
+  --dkb-success-bg: rgba(17, 166, 161, 0.08);
+  --dkb-success-border: rgba(17, 166, 161, 0.3);
+  --dkb-success-text-primary: #1a1a1a;
+  --dkb-success-text-secondary: #495057;
+  
+  /* Error Box Colors */
+  --dkb-error-bg: rgba(255, 107, 107, 0.08);
+  --dkb-error-border: rgba(255, 107, 107, 0.3);
+  --dkb-error-text: #dc3545;
+  
+  /* Footer link decoration */
+  --dkb-footer-link-decoration: var(--dkb-primary);
+}
+
+/* DKB Font Faces */
+@font-face {
+  font-family: 'DKBEuclid';
+  src: url('/templates/dkb/fonts/DKBEuclid-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: 'DKBEuclid';
+  src: url('/templates/dkb/fonts/DKBEuclid-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: 'DKBEuclid';
+  src: url('/templates/dkb/fonts/DKBEuclid-Semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: 'DKBEuclid';
+  src: url('/templates/dkb/fonts/DKBEuclid-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: fallback;
+}
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  background-color: var(--dkb-background);
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--dkb-font-family);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  letter-spacing: 0.0125rem;
+  line-height: 1.625rem;
+  margin: 0;
+  padding: 0;
+  background-color: var(--dkb-background);
+  color: var(--dkb-text-primary);
+  min-height: 100vh;
+}
+
+/* DKB Main Layout - Match screenshots exactly */
+.dkb-main-layout {
+  min-height: 100vh;
+  background-color: var(--dkb-background);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* DKB Login Page Layout - Exact match to banking.dkb.de */
+.dkb-login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 64px 16px;
+  min-height: calc(100vh - 160px); /* Account for header + footer */
+}
+
+/* DKB Login Card - Exact styling from screenshots */
+.dkb-login-card {
+  background-color: var(--dkb-surface);
+  border: 1px solid var(--dkb-border-cards);
+  border-radius: var(--border-radius-6);
+
+  width: 100%;
+  max-width: 512px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 330px;
+}
+
+@media (min-width: 528px) {
+  .dkb-login-card {
+    padding: 32px;
+  }
+}
+
+/* DKB Typography - Exact from screenshots */
+.dkb-display-large {
+  font-family: var(--dkb-font-family);
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0rem;
+  line-height: 2.625rem;
+  color: var(--dkb-text-primary);
+  text-align: center;
+  margin: 0 0 var(--space-6) 0;
+}
+
+/* DKB Input System - Exact match to screenshots */
+.dkb-input-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: var(--space-4);
+}
+
+.dkb-input {
+  width: 100%;
+  height: 56px;
+  background-color: var(--dkb-input-bg);
+  border: 1px solid var(--dkb-input-border);
+  border-radius: var(--border-radius-3);
+  padding: 16px 16px 8px 16px;
+  font-family: var(--dkb-font-family);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  letter-spacing: 0rem;
+  line-height: 1.375rem;
+  color: var(--dkb-input-text);
+  outline: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.dkb-input:focus {
+  border-color: var(--dkb-focused);
+  border-width: 2px;
+}
+
+.dkb-input::placeholder {
+  color: transparent;
+}
+
+/* DKB Input Labels - Floating style from screenshots */
+.dkb-input-label {
+  position: absolute;
+  left: 16px;
+  top: 8px;
+  font-family: var(--dkb-font-family);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.025rem;
+  line-height: 0.875rem;
+  color: var(--dkb-text-subdued);
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.dkb-input:not(:focus):placeholder-shown + .dkb-input-label {
+  top: 16px;
+  font-size: 1.0625rem;
+  line-height: 1.375rem;
+}
+
+/* DKB Button System - Exact from screenshots */
+.dkb-button {
+  align-items: center;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: var(--border-radius-3);
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  font-family: var(--dkb-font-family);
+  cursor: pointer;
+  outline: none;
+}
+
+.dkb-button:focus-visible {
+  outline: none;
+}
+
+.dkb-button:focus-visible::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--dkb-focused);
+  border-radius: calc(var(--border-radius-3) + 2px);
+  margin: -3px;
+}
+
+.dkb-button-primary {
+  background-color: var(--dkb-primary);
+  color: var(--dkb-text-on-actions);
+  height: 56px;
+  padding: 16px 20px;
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0rem;
+  line-height: 1.5rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dkb-button-primary:hover {
+  background-color: var(--dkb-primary-hover);
+}
+
+.dkb-button-primary:active {
+  background-color: var(--dkb-primary-pressed);
+}
+
+.dkb-button-primary:disabled {
+  background-color: rgba(223, 228, 232, 0.18);
+  color: rgba(232, 238, 242, 0.28);
+}
+
+.dkb-button-tertiary {
+  background-color: transparent;
+  color: var(--dkb-text-interact);
+  height: 32px;
+  padding: 5px 6px;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  letter-spacing: 0rem;
+  line-height: 1.375rem;
+}
+
+.dkb-button-tertiary:hover {
+  background-color: rgba(20, 141, 234, 0.12);
+}
+
+/* DKB Forgot Password Section - Exact from screenshots */
+.dkb-forgot-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-top: 12px;
+}
+
+.dkb-forgot-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+@media (min-width: 528px) {
+  .dkb-forgot-container {
+    flex-direction: row;
+  }
+}
+
+.dkb-forgot-text {
+  font-family: var(--dkb-font-family);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  color: var(--dkb-text-subdued);
+  margin: 0;
+}
+
+/* DKB Header - Theme-aware */
+.dkb-header {
+  background-color: var(--dkb-header-bg);
+  width: 100%;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  transition: background-color 0.3s ease;
+}
+
+@media (min-width: 528px) {
+  .dkb-header {
+    padding: 0 32px;
+  }
+}
+
+.dkb-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 80px;
+}
+
+.dkb-header-logo-container {
+  margin-right: 20px;
+}
+
+.dkb-header-logo-container svg {
+  width: 85px;
+  height: 48px;
+}
+
+/* DKB Footer - Theme-aware */
+.dkb-footer {
+  background-color: var(--dkb-footer-bg);
+  color: var(--dkb-text-primary);
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 16px 16px 0px;
+  transition: background-color 0.3s ease;
+}
+
+@media (min-width: 528px) {
+  .dkb-footer {
+    padding: 0 32px;
+  }
+}
+
+.dkb-footer-content {
+  display: flex;
+  flex-grow: 1;
+  flex-flow: wrap;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dkb-footer-content ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dkb-footer-section {
+  padding-top: 9px;
+  padding-bottom: 13px;
+}
+
+@media (max-width: 375px) {
+  .dkb-footer-section {
+    padding-top: 0px;
+    padding-bottom: 18px;
+  }
+}
+
+.dkb-footer-section:nth-child(2),
+.dkb-footer-section:not(:last-child) {
+  padding-right: 24px;
+}
+
+.dkb-footer-link {
+  color: var(--dkb-text-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--dkb-footer-link-decoration);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0rem;
+  line-height: 1.125rem;
+  font-family: var(--dkb-font-family);
+  display: flex;
+  cursor: pointer;
+  position: relative;
+  outline: 0;
+  text-align: left;
+  padding: var(--space-2) var(--space-1);
+  border-radius: var(--border-radius-3);
+  transition: all 0.2s ease;
+}
+
+.dkb-footer-link:hover,
+.dkb-footer-link:focus {
+  text-shadow: 0px 0px 0.01px;
+}
+
+.dkb-footer-link:focus::after {
+  content: "";
+  border-radius: 6px;
+  position: absolute;
+  inset: -6px -6px -8px;
+  border: 3px solid var(--dkb-focused);
+}
+
+/* Password visibility button styling */
+.dkb-password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--dkb-text-subdued);
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  border-radius: var(--border-radius-3);
+  transition: background-color 0.2s ease;
+}
+
+.dkb-password-toggle:hover {
+  background-color: rgba(20, 141, 234, 0.12);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dkb-login-container {
+    padding: 32px 16px;
+  }
+  
+  .dkb-login-card {
+    padding: 24px;
+  }
+  
+  .dkb-header {
+    height: 64px;
+  }
+  
+  .dkb-header-content {
+    height: 64px;
+  }
+  
+  .dkb-logo {
+    height: 40px;
+    width: auto;
+  }
+}
+
+/* Utility classes for exact DKB spacing */
+.mb-0 { margin-bottom: 0; }
+.mb-2 { margin-bottom: var(--space-2); }
+.mb-4 { margin-bottom: var(--space-4); }
+.mb-6 { margin-bottom: var(--space-6); }
+.mb-8 { margin-bottom: var(--space-8); }
+
+.mt-0 { margin-top: 0; }
+.mt-2 { margin-top: var(--space-2); }
+.mt-4 { margin-top: var(--space-4); }
+.mt-6 { margin-top: var(--space-6); }
+
+  .w-100 { width: 100%; }
+  .text-center { text-align: center; }
+
+/* DKB Form Styles - Exact match to screenshot */
+.dkb-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 160px);
+  padding: 32px 16px;
+}
+
+/* DKB Card - Generic card component */
+.dkb-card {
+  background-color: var(--dkb-surface);
+  border: 1px solid var(--dkb-border-cards);
+  border-radius: var(--border-radius-6);
+  padding: 32px;
+  width: 100%;
+  max-width: 512px;
+}
+
+/* DKB Title Large */
+.dkb-title-large {
+  font-family: var(--dkb-font-family);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0rem;
+  line-height: 2rem;
+  color: var(--dkb-text-primary);
+  margin: 0;
+}
+
+.dkb-form-card {
+  background-color: var(--dkb-surface);
+  border-radius: 16px;
+  padding: 32px;
+  width: 100%;
+  max-width: 480px;
+  border: 1px solid var(--dkb-border-cards);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.dkb-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.dkb-close-button {
+  background: none;
+  border: none;
+  color: var(--dkb-text-subdued);
+  font-size: 20px;
+  font-family: 'DKBEuclid', Arial, sans-serif;
+  cursor: pointer;
+  padding: 8px;
+  transition: color 0.2s ease;
+}
+
+.dkb-close-button:hover {
+  color: var(--dkb-text-primary);
+}
+
+.dkb-form-title {
+  font-family: 'DKBEuclid', Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--dkb-text-primary);
+  margin: 0;
+  line-height: 32px;
+  text-align: center;
+  flex: 1;
+}
+
+.dkb-form-description {
+  font-family: 'DKBEuclid', Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--dkb-text-subdued);
+  margin: 0 0 32px 0;
+  line-height: 24px;
+  text-align: center;
+}
+
+.dkb-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.dkb-input-container {
+  position: relative;
+  margin-bottom: 0;
+}
+
+.dkb-input {
+  width: 100%;
+  height: 56px;
+  background-color: var(--dkb-input-bg);
+  border: 1px solid var(--dkb-input-border);
+  border-radius: 8px;
+  padding: 24px 16px 8px 16px;
+  font-family: 'DKBEuclid', Arial, sans-serif;
+  font-size: 16px;
+  color: var(--dkb-input-text);
+  outline: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.dkb-input::placeholder {
+  color: transparent;
+  font-family: 'DKBEuclid', Arial, sans-serif;
+}
+
+.dkb-input:focus {
+  border-color: #148DEA;
+  box-shadow: 0 0 0 3px rgba(20, 141, 234, 0.24);
+}
+
+.dkb-input-label {
+  position: absolute;
+  top: 28px;
+  left: 16px;
+  padding: 0;
+  font-family: 'DKBEuclid', Arial, sans-serif;
+  font-size: 16px;
+  color: var(--dkb-input-placeholder);
+  pointer-events: none;
+  transition: all 0.2s ease;
+  background: transparent;
+  line-height: 1;
+}
+
+/* When input has value or is focused, move label to top */
+.dkb-input:focus + .dkb-input-label,
+.dkb-input:not(:placeholder-shown) + .dkb-input-label {
+  top: 8px;
+  font-size: 12px;
+  color: var(--dkb-text-subdued);
+}
+
+.dkb-input-error {
+  color: var(--dkb-error-text);
+  font-size: 14px;
+  font-family: 'DKBEuclid', Arial, sans-serif;
+  margin-top: 8px;
+}
+
+.dkb-submit-button {
+  width: 100%;
+  height: 56px;
+  background-color: #148DEA;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'DKBEuclid', Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 8px;
+}
+
+.dkb-submit-button:hover:not(:disabled) {
+  background-color: #134e8a;
+}
+
+.dkb-submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.dkb-upload-button {
+  width: 100%;
+  height: 48px;
+  background-color: transparent;
+  border: 2px solid #148DEA;
+  border-radius: 8px;
+  color: #148DEA;
+  font-family: 'DKBEuclid', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.dkb-upload-button:hover {
+  background-color: rgba(20, 141, 234, 0.1);
+}
+
+.dkb-drag-area {
+  border: 2px dashed var(--dkb-border-cards);
+  border-radius: 8px;
+  padding: 32px 16px;
+  text-align: center;
+  margin-bottom: 24px;
+  transition: all 0.2s ease;
+}
+
+.dkb-file-preview {
+  background-color: var(--dkb-surface-light);
+  border: 1px solid var(--dkb-border-cards);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.dkb-error-message {
+  background-color: var(--dkb-error-bg);
+  border: 1px solid var(--dkb-error-border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.dkb-security-notice {
+  background-color: var(--dkb-info-bg);
+  border: 1px solid var(--dkb-info-border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+/* Information Box Styles */
+.dkb-info-box {
+  background-color: var(--dkb-info-bg);
+  border: 1px solid var(--dkb-info-border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.dkb-info-box-title {
+  color: var(--dkb-info-text-primary);
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  font-family: var(--dkb-font-family);
+}
+
+.dkb-info-box-text {
+  color: var(--dkb-info-text-secondary);
+  font-size: 14px;
+  margin: 0;
+  font-family: var(--dkb-font-family);
+  line-height: 1.4;
+}
+
+/* Success Box Styles */
+.dkb-success-box {
+  background-color: var(--dkb-success-bg);
+  border: 1px solid var(--dkb-success-border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.dkb-success-box-title {
+  color: var(--dkb-success-text-primary);
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  font-family: var(--dkb-font-family);
+}
+
+.dkb-success-box-text {
+  color: var(--dkb-success-text-secondary);
+  font-size: 14px;
+  margin: 0;
+  font-family: var(--dkb-font-family);
+}
+
+/* Error Box Styles */
+.dkb-error-box {
+  background-color: var(--dkb-error-bg);
+  border: 1px solid var(--dkb-error-border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+  color: var(--dkb-error-text);
+  font-size: 14px;
+  font-family: var(--dkb-font-family);
+}
+
+/* Skip Button Style */
+.dkb-skip-button {
+  background-color: transparent;
+  color: var(--dkb-text-interact);
+  border: none;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  cursor: pointer;
+  font-family: var(--dkb-font-family);
+  transition: all 0.3s ease;
+  opacity: 0.7;
+  margin-top: 1rem;
+  text-decoration: underline;
+  text-align: center;
+  width: 100%;
+}
+
+.dkb-skip-button:hover:not(:disabled) {
+  opacity: 1;
+}
+
+.dkb-skip-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Form Mobile Responsive */
+@media (max-width: 768px) {
+  .dkb-form-container {
+    padding: 16px;
+    min-height: calc(100vh - 140px);
+  }
+  
+  .dkb-form-card {
+    padding: 24px 20px;
+    border-radius: 12px;
+  }
+  
+  .dkb-form-title {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  
+  .dkb-form-description {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+/* Loading animation for buttons */
+@keyframes dkb-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Loading Container */
+.dkb-loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 160px);
+  padding: 32px 16px;
+}
+
+/* Loading Spinner */
+.dkb-spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dkb-spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid var(--dkb-border-cards);
+  border-top: 3px solid var(--dkb-primary);
+  border-radius: 50%;
+  animation: dkb-spin 1s linear infinite;
+}
+
+/* TAN Screen Styles */
+.dkb-tan-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 16px;
+  min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .dkb-tan-container {
+    padding: 32px 16px;
+  }
+}
+
+.dkb-tan-card {
+  background-color: var(--dkb-surface);
+  border: 1px solid var(--dkb-border-cards);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 600px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .dkb-tan-card {
+    padding: 24px;
+  }
+}
+
+.dkb-tan-title {
+  color: var(--dkb-text-primary);
+  font-size: 2.25rem;
+  font-weight: 600;
+  margin: 0 0 32px 0;
+  font-family: var(--dkb-font-family);
+  text-align: center;
+  letter-spacing: 0.0125rem;
+}
+
+@media (max-width: 768px) {
+  .dkb-tan-title {
+    font-size: 1.75rem;
+  }
+}
+
+.dkb-tan-instruction-box {
+  background-color: var(--dkb-surface-light);
+  border: 1px solid var(--dkb-border-interact);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 32px;
+  width: 100%;
+  text-align: center;
+}
+
+.dkb-tan-instruction-text {
+  margin: 0;
+  font-size: 16px;
+  color: var(--dkb-text-subdued);
+  font-family: var(--dkb-font-family);
+  line-height: 1.5;
+  letter-spacing: 0.0125rem;
+}
+
+@media (max-width: 768px) {
+  .dkb-tan-instruction-text {
+    font-size: 14px;
+  }
+}
+
+.dkb-tan-transaction-box {
+  background-color: var(--dkb-surface-light);
+  border: 1px solid var(--dkb-primary);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+.dkb-tan-transaction-title {
+  color: var(--dkb-primary);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  font-family: var(--dkb-font-family);
+  text-align: center;
+  letter-spacing: 0.0125rem;
+}
+
+@media (max-width: 768px) {
+  .dkb-tan-transaction-title {
+    font-size: 1.25rem;
+  }
+}
+
+.dkb-tan-transaction-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--dkb-border-cards);
+}
+
+.dkb-tan-transaction-row:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.dkb-tan-transaction-label {
+  color: var(--dkb-text-subdued);
+  font-size: 14px;
+  font-family: var(--dkb-font-family);
+  letter-spacing: 0.0125rem;
+}
+
+.dkb-tan-transaction-value {
+  color: var(--dkb-text-primary);
+  font-size: 14px;
+  font-family: var(--dkb-font-family);
+  text-align: right;
+  max-width: 60%;
+  letter-spacing: 0.0125rem;
+}
+
+.dkb-tan-transaction-amount {
+  color: var(--dkb-primary);
+  font-size: 18px;
+  font-family: var(--dkb-font-family);
+  font-weight: 600;
+  letter-spacing: 0.0125rem;
+}
+
+.dkb-tan-status-box {
+  background-color: var(--dkb-surface-light);
+  border: 1px solid var(--dkb-border-cards);
+  border-radius: 8px;
+  padding: 32px;
+  text-align: center;
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+.dkb-tan-status-title {
+  color: var(--dkb-primary);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  font-family: var(--dkb-font-family);
+  letter-spacing: 0.0125rem;
+}
+
+@media (max-width: 768px) {
+  .dkb-tan-status-title {
+    font-size: 1.125rem;
+  }
+}
+
+.dkb-tan-status-text {
+  color: var(--dkb-text-subdued);
+  font-size: 14px;
+  margin: 0 0 16px 0;
+  font-family: var(--dkb-font-family);
+  letter-spacing: 0.0125rem;
+}
+
+.dkb-tan-timeout-text {
+  color: var(--dkb-error-text);
+  font-size: 14px;
+  margin: 0;
+  font-family: var(--dkb-font-family);
+  font-weight: 500;
+  letter-spacing: 0.0125rem;
+}
+
+.dkb-tan-success-title {
+  color: var(--dkb-success-green);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  font-family: var(--dkb-font-family);
+  letter-spacing: 0.0125rem;
+}
+
+@media (max-width: 768px) {
+  .dkb-tan-success-title {
+    font-size: 1.125rem;
+  }
+}
+
+.dkb-tan-success-text {
+  color: var(--dkb-text-primary);
+  font-size: 14px;
+  margin: 0;
+  font-family: var(--dkb-font-family);
+  letter-spacing: 0.0125rem;
+}
+
+.dkb-tan-input-box {
+  background-color: var(--dkb-surface-light);
+  border: 1px solid var(--dkb-border-cards);
+  border-radius: 8px;
+  padding: 32px;
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+.dkb-tan-input-title {
+  color: var(--dkb-primary);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 24px 0;
+  font-family: var(--dkb-font-family);
+  text-align: center;
+  letter-spacing: 0.0125rem;
+}
+
+@media (max-width: 768px) {
+  .dkb-tan-input-title {
+    font-size: 1.125rem;
+  }
+}
+
+.dkb-tan-input-container {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .dkb-tan-input-container {
+    gap: 8px;
+  }
+}
+
+.dkb-tan-digit-input {
+  width: 50px;
+  height: 60px;
+  font-size: 1.75rem;
+  text-align: center;
+  border: 1px solid var(--dkb-border-cards);
+  border-radius: 6px;
+  outline: none;
+  color: var(--dkb-primary);
+  font-weight: 600;
+  font-family: var(--dkb-font-family);
+  background-color: var(--dkb-background);
+  transition: all 0.2s ease;
+  letter-spacing: 0.0125rem;
+}
+
+@media (max-width: 768px) {
+  .dkb-tan-digit-input {
+    width: 40px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+}
+
+.dkb-tan-digit-input:focus {
+  border: 2px solid var(--dkb-primary);
+  box-shadow: 0 0 0 2px var(--dkb-focused);
+}
+
+.dkb-tan-digit-input:hover:not(:focus) {
+  background-color: var(--dkb-surface-light);
+}
+
+.dkb-tan-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+  .dkb-tan-button-container {
+    flex-direction: column;
+  }
+}
+
+.dkb-tan-primary-button {
+  background-color: var(--dkb-primary);
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-family: var(--dkb-font-family);
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  min-width: 180px;
+  letter-spacing: 0.0125rem;
+}
+
+@media (max-width: 768px) {
+  .dkb-tan-primary-button {
+    width: 100%;
+  }
+}
+
+.dkb-tan-primary-button:hover:not(:disabled) {
+  background-color: var(--dkb-primary-hover);
+}
+
+.dkb-tan-primary-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.dkb-tan-secondary-button {
+  background-color: transparent;
+  color: var(--dkb-primary);
+  border: 1px solid var(--dkb-primary);
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-family: var(--dkb-font-family);
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 180px;
+  letter-spacing: 0.0125rem;
+}
+
+@media (max-width: 768px) {
+  .dkb-tan-secondary-button {
+    width: 100%;
+  }
+}
+
+.dkb-tan-secondary-button:hover {
+  background-color: var(--dkb-primary);
+  color: #ffffff;
+}
+
+.dkb-tan-secondary-button:disabled {
+  color: #6c757d;
+  border-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.dkb-tan-secondary-button:disabled:hover {
+  background-color: transparent;
+  color: #6c757d;
+}
+
+.dkb-tan-link {
+  color: var(--dkb-primary);
+  text-decoration: none;
+  font-size: 14px;
+  font-family: var(--dkb-font-family);
+  transition: color 0.3s ease;
+  letter-spacing: 0.0125rem;
+}
+
+.dkb-tan-link:hover {
+  color: var(--dkb-primary-hover);
+  text-decoration: underline;
+}
+
+.dkb-tan-footer-text {
+  color: var(--dkb-text-subdued);
+  font-size: 12px;
+  margin: 0;
+  font-family: var(--dkb-font-family);
+  letter-spacing: 0.0125rem;
+  text-align: center;
+}
+
+/* Theme transition for smooth switching */
+html,
+body,
+.dkb-main-layout,
+.dkb-header,
+.dkb-footer,
+.dkb-card,
+.dkb-form-card,
+.dkb-login-card,
+.dkb-tan-card,
+.dkb-input,
+.dkb-info-box,
+.dkb-success-box,
+.dkb-error-box {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

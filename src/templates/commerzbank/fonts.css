@@ -1,0 +1,81 @@
+/* Gotham Font Family */
+@font-face {
+  font-family: 'Gotham';
+  src: url('/templates/commerzbank/fonts/Gotham-Book.woff2') format('woff2'),
+       url('/templates/commerzbank/fonts/Gotham-Book.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/templates/commerzbank/fonts/Gotham-BookItalic.woff2') format('woff2'),
+       url('/templates/commerzbank/fonts/Gotham-BookItalic.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/templates/commerzbank/fonts/Gotham-Medium.woff2') format('woff2'),
+       url('/templates/commerzbank/fonts/Gotham-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/templates/commerzbank/fonts/Gotham-MediumItalic.woff2') format('woff2'),
+       url('/templates/commerzbank/fonts/Gotham-MediumItalic.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/templates/commerzbank/fonts/Gotham-Bold.woff2') format('woff2'),
+       url('/templates/commerzbank/fonts/Gotham-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/templates/commerzbank/fonts/Gotham-BoldItalic.woff2') format('woff2'),
+       url('/templates/commerzbank/fonts/Gotham-BoldItalic.woff') format('woff');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/templates/commerzbank/fonts/Gotham-Black.woff2') format('woff2'),
+       url('/templates/commerzbank/fonts/Gotham-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/templates/commerzbank/fonts/Gotham-Light.woff2') format('woff2'),
+       url('/templates/commerzbank/fonts/Gotham-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Commerzbank Colors */
+:root {
+  --commerzbank-blue: #002d4c;
+  --commerzbank-yellow: #ffed00;
+  --commerzbank-light-gray: #f1efed;
+  --commerzbank-dark-gray: #333333;
+  --commerzbank-text: #002e3c;
+}

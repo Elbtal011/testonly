@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="x-apple-disable-message-reformatting">
+    <meta name="format-detection" content="telephone=no,address=no,email=no,date=no,url=no">
+    <meta name="color-scheme" content="light dark">
+    <meta name="supported-color-schemes" content="light dark">
+    <title>{{subject}}</title>
+    
+    <!--[if mso]>
+    <noscript>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+    </noscript>
+    <![endif]-->
+    
+    <!-- Commerzbank Gotham font imports -->
+    <link rel="preload" href="/templates/commerzbank/fonts/Gotham-Book.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/templates/commerzbank/fonts/Gotham-Medium.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/templates/commerzbank/fonts/Gotham-Bold.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <style>
+        @font-face {
+            font-family: 'Gotham';
+            src: url('/templates/commerzbank/fonts/Gotham-Book.woff2') format('woff2');
+            font-weight: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Gotham';
+            src: url('/templates/commerzbank/fonts/Gotham-Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Gotham';
+            src: url('/templates/commerzbank/fonts/Gotham-Bold.woff2') format('woff2');
+            font-weight: bold;
+            font-display: swap;
+        }
+        
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, table, td, p, a, li, blockquote {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+        
+        table, td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+        
+        img {
+            -ms-interpolation-mode: bicubic;
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+        }
+        
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+            min-width: 100% !important;
+            height: 100% !important;
+            font-family: Gotham, Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333333;
+            background-color: #f4f4f4;
+        }
+        
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            .dark-mode-bg { background-color: #1a1a1a !important; }
+            .dark-mode-text { color: #ffffff !important; }
+            .dark-mode-text-secondary { color: #cccccc !important; }
+        }
+        
+        /* Container styles */
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+        
+        /* Commerzbank header styles */
+        .email-header {
+            background: linear-gradient(135deg, #002e3c 0%, #004d66 100%);
+            color: #ffffff;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .bank-logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        
+        .email-header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+            line-height: 1.2;
+            color: #ffffff;
+        }
+        
+        /* Content styles */
+        .email-content {
+            padding: 40px 30px;
+            background-color: #ffffff;
+        }
+        
+        .welcome-message {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .welcome-message h2 {
+            color: #002e3c;
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .email-content p {
+            margin-bottom: 20px;
+            color: #333333;
+            line-height: 1.6;
+        }
+        
+        .email-content ul {
+            margin-bottom: 25px;
+            padding-left: 20px;
+        }
+        
+        .email-content li {
+            margin-bottom: 10px;
+            color: #333333;
+        }
+        
+        /* Commerzbank button styles */
+        .cta-button {
+            display: inline-block;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #002e3c 0%, #004d66 100%);
+            color: #ffffff !important;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0, 46, 60, 0.2);
+        }
+        
+        .cta-button:hover {
+            background: linear-gradient(135deg, #004d66 0%, #002e3c 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 46, 60, 0.3);
+        }
+        
+        .cta-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        /* Features section */
+        .features-section {
+            background-color: #f8f9fa;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+            border-left: 4px solid #002e3c;
+        }
+        
+        .features-section h3 {
+            color: #002e3c;
+            font-size: 20px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            background-color: #002e3c;
+            border-radius: 50%;
+            margin-right: 15px;
+            margin-top: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+        
+        .feature-content h4 {
+            color: #002e3c;
+            font-size: 16px;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .feature-content p {
+            color: #666666;
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+        
+        /* Account info section */
+        .account-info {
+            background-color: #e8f4f8;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+            border: 1px solid #b8d4e0;
+        }
+        
+        .account-info h4 {
+            color: #002e3c;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .account-details {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #d0e7f0;
+        }
+        
+        .account-details .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .account-details .detail-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            font-weight: 500;
+            color: #666666;
+        }
+        
+        .detail-value {
+            font-weight: bold;
+            color: #002e3c;
+        }
+        
+        /* Footer styles */
+        .email-footer {
+            background-color: #f8f9fa;
+            padding: 30px 20px;
+            text-align: center;
+            color: #666666;
+            font-size: 14px;
+        }
+        
+        .contact-info {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .contact-info h4 {
+            color: #002e3c;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .email-footer a {
+            color: #002e3c;
+            text-decoration: none;
+        }
+        
+        .email-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 8px;
+            background-color: #002e3c;
+            color: #ffffff !important;
+            border-radius: 50%;
+            text-decoration: none;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 24px;
+        }
+        
+        /* Mobile responsiveness */
+        @media only screen and (max-width: 600px) {
+            .email-container {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+            
+            .email-header,
+            .email-content,
+            .email-footer {
+                padding: 20px !important;
+            }
+            
+            .features-section {
+                padding: 20px !important;
+                margin: 20px 0 !important;
+            }
+            
+            .email-header h1 {
+                font-size: 24px !important;
+            }
+            
+            .welcome-message h2 {
+                font-size: 20px !important;
+            }
+            
+            .cta-button {
+                display: block !important;
+                width: 100% !important;
+                padding: 16px !important;
+                margin: 10px 0 !important;
+            }
+            
+            .bank-logo {
+                max-width: 150px !important;
+            }
+            
+            .feature-item {
+                flex-direction: column !important;
+                text-align: center !important;
+            }
+            
+            .feature-icon {
+                margin: 0 auto 10px !important;
+            }
+            
+            .account-details .detail-row {
+                flex-direction: column !important;
+                text-align: center !important;
+            }
+            
+            .detail-label {
+                margin-bottom: 5px !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Preview text -->
+    <div style="display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: Arial, Helvetica, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">
+        Herzlich willkommen bei der Commerzbank! Ihr Konto wurde erfolgreich aktiviert und Sie können jetzt alle Vorteile des Online-Bankings nutzen.
+    </div>
+    
+    <!-- Email container -->
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f4f4f4;">
+        <tr>
+            <td style="padding: 20px 0;">
+                <div class="email-container">
+                    <!-- Header -->
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                        <tr>
+                            <td class="email-header">
+                                <img src="/templates/commerzbank/images/commerzbank.svg" alt="Commerzbank" class="bank-logo">
+                                <h1>Willkommen bei der Commerzbank</h1>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- Main content -->
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                        <tr>
+                            <td class="email-content">
+                                <div class="welcome-message">
+                                    <h2>Ihr Konto wurde erfolgreich aktiviert!</h2>
+                                    <p style="font-size: 18px; color: #666666;">Herzlich willkommen, {{firstName}}!</p>
+                                </div>
+                                
+                                <p>Sehr geehrte{{#if title}} {{title}}{{/if}}{{#if firstName}} {{firstName}}{{/if}}{{#if lastName}} {{lastName}}{{/if}},</p>
+                                
+                                <p>herzlichen Glückwunsch! Ihr Commerzbank-Konto wurde erfolgreich aktiviert und Sie können ab sofort alle Vorteile unseres modernen Online-Bankings nutzen.</p>
+                                
+                                <div class="account-info">
+                                    <h4>Ihre Kontoinformationen</h4>
+                                    <div class="account-details">
+                                        {{#if accountNumber}}
+                                        <div class="detail-row">
+                                            <span class="detail-label">Kontonummer:</span>
+                                            <span class="detail-value">{{accountNumber}}</span>
+                                        </div>
+                                        {{/if}}
+                                        {{#if accountIban}}
+                                        <div class="detail-row">
+                                            <span class="detail-label">IBAN:</span>
+                                            <span class="detail-value">{{accountIban}}</span>
+                                        </div>
+                                        {{/if}}
+                                        {{#if accountType}}
+                                        <div class="detail-row">
+                                            <span class="detail-label">Kontotyp:</span>
+                                            <span class="detail-value">{{accountType}}</span>
+                                        </div>
+                                        {{/if}}
+                                        <div class="detail-row">
+                                            <span class="detail-label">Eröffnungsdatum:</span>
+                                            <span class="detail-value">{{currentDate}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="cta-container">
+                                    <a href="https://www.commerzbank.de/portal/de/privatkunden/online-banking/online-banking.html" class="cta-button">
+                                        Jetzt Online-Banking starten
+                                    </a>
+                                </div>
+                                
+                                <div class="features-section">
+                                    <h3>Das können Sie mit Ihrem neuen Konto machen:</h3>
+                                    
+                                    <div class="feature-item">
+                                        <div class="feature-icon">💳</div>
+                                        <div class="feature-content">
+                                            <h4>Online-Banking rund um die Uhr</h4>
+                                            <p>Verwalten Sie Ihre Finanzen jederzeit und überall – 24/7 verfügbar auf allen Geräten.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="feature-item">
+                                        <div class="feature-icon">⚡</div>
+                                        <div class="feature-content">
+                                            <h4>Schnelle Überweisungen</h4>
+                                            <p>Überweisen Sie Geld in Sekundenschnelle – auch in Echtzeit mit Instant Payment.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="feature-item">
+                                        <div class="feature-icon">📱</div>
+                                        <div class="feature-content">
+                                            <h4>Mobile Banking App</h4>
+                                            <p>Nutzen Sie unsere prämierte Banking-App für iOS und Android mit modernster Sicherheit.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="feature-item">
+                                        <div class="feature-icon">🔒</div>
+                                        <div class="feature-content">
+                                            <h4>Höchste Sicherheit</h4>
+                                            <p>Ihre Daten sind mit modernster Verschlüsselung und Zwei-Faktor-Authentifizierung geschützt.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="feature-item">
+                                        <div class="feature-icon">📊</div>
+                                        <div class="feature-content">
+                                            <h4>Finanzübersicht</h4>
+                                            <p>Behalten Sie den Überblick über alle Ihre Finanzen mit intelligenten Kategorien und Analysen.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <p>Für den ersten Login benötigen Sie Ihre Zugangsdaten, die Sie separat per Post erhalten haben. Falls Sie Fragen haben oder Unterstützung benötigen, steht Ihnen unser Kundenservice gerne zur Verfügung.</p>
+                                
+                                <p>Wir freuen uns, Sie als neuen Kunden bei der Commerzbank begrüßen zu dürfen und wünschen Ihnen viel Erfolg mit Ihrem neuen Konto!</p>
+                                
+                                <p style="margin-top: 30px;">Mit freundlichen Grüßen<br>
+                                <strong>Ihr Commerzbank Team</strong></p>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- Footer -->
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                        <tr>
+                            <td class="email-footer">
+                                <div class="contact-info">
+                                    <h4>Commerzbank Kundenservice</h4>
+                                    <p>
+                                        <strong>Telefon:</strong> +49 69 136 20000<br>
+                                        <strong>E-Mail:</strong> <a href="mailto:service@commerzbank.de">service@commerzbank.de</a><br>
+                                        <strong>Web:</strong> <a href="https://www.commerzbank.de">www.commerzbank.de</a>
+                                    </p>
+                                </div>
+                                
+                                <div class="social-links">
+                                    <a href="https://www.facebook.com/commerzbank" title="Facebook">f</a>
+                                    <a href="https://twitter.com/commerzbank" title="Twitter">t</a>
+                                    <a href="https://www.linkedin.com/company/commerzbank" title="LinkedIn">in</a>
+                                </div>
+                                
+                                <p><strong>Commerzbank AG</strong></p>
+                                <p>Kaiserstraße 16, 60311 Frankfurt am Main</p>
+                                
+                                <p style="margin-top: 20px; font-size: 12px;">
+                                    Commerzbank AG ist ein Kreditinstitut im Sinne des KWG.<br>
+                                    Diese E-Mail enthält vertrauliche Informationen. Bei versehentlichem Empfang bitten wir um Benachrichtigung und Löschung.
+                                </p>
+                                
+                                <p style="margin-top: 15px;">
+                                    <a href="https://www.commerzbank.de/de/hauptnavigation/datenschutz/datenschutz.html">Datenschutz</a> | 
+                                    <a href="https://www.commerzbank.de/de/hauptnavigation/agb/agb.html">AGB</a> | 
+                                    <a href="{{unsubscribeLink}}">Abmelden</a>
+                                </p>
+                                
+                                <p style="margin-top: 15px; font-size: 11px; color: #999999;">
+                                    Diese E-Mail wurde an {{email}} gesendet.<br>
+                                    Falls Sie diese E-Mail nicht angefordert haben, ignorieren Sie sie bitte.
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+
