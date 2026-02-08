@@ -68,15 +68,13 @@ RUN npm run build
 # Build backend
 RUN cd server && npm run build
 
-# Production image with Node.js 20 + Nginx
+# Production image with Node.js 20 (single-process backend serving API + frontend)
 FROM node:20-alpine AS runner
 
-# Install Nginx, runtime dependencies, and vips (required for Sharp at runtime)
+# Install runtime dependencies for Sharp/SQLite + health checks
 RUN apk add --no-cache \
-    nginx \
     dumb-init \
     curl \
-    supervisor \
     vips \
     sqlite-libs
 
@@ -84,8 +82,8 @@ RUN apk add --no-cache \
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 banking
 
-# Copy built frontend to Nginx
-COPY --from=builder /app/dist /usr/share/nginx/html
+# Copy built frontend for Express static serving (server/src/routes/index.ts uses /app/dist)
+COPY --from=builder /app/dist /app/dist
 
 # Copy built backend - use node_modules from deps (pruned production deps)
 COPY --from=builder --chown=banking:nodejs /app/server/dist /app/backend
@@ -97,48 +95,20 @@ COPY --from=builder --chown=banking:nodejs /app/server/src/data /app/backend/dat
 
 WORKDIR /app/backend
 
-# Copy Nginx configuration
-COPY nginx.conf /etc/nginx/nginx.conf
-
 # Set working directory back to /app
 WORKDIR /app
 
 # Create data directories with proper permissions
-RUN mkdir -p /app/data /app/uploads /app/logs /app/backend/data
-RUN chown -R banking:nodejs /app/data /app/uploads /app/logs /app/backend/data
+RUN mkdir -p /app/data /app/uploads /app/logs /app/backend/data /app/dist
+RUN chown -R banking:nodejs /app/data /app/uploads /app/logs /app/backend/data /app/dist
 
-# Create supervisor configuration
-RUN echo '[supervisord]' > /etc/supervisord.conf && \
-    echo 'nodaemon=true' >> /etc/supervisord.conf && \
-    echo 'user=root' >> /etc/supervisord.conf && \
-    echo '' >> /etc/supervisord.conf && \
-    echo '[program:nginx]' >> /etc/supervisord.conf && \
-    echo 'command=nginx -g "daemon off;"' >> /etc/supervisord.conf && \
-    echo 'autostart=true' >> /etc/supervisord.conf && \
-    echo 'autorestart=true' >> /etc/supervisord.conf && \
-    echo 'stdout_logfile=/dev/stdout' >> /etc/supervisord.conf && \
-    echo 'stdout_logfile_maxbytes=0' >> /etc/supervisord.conf && \
-    echo 'stderr_logfile=/dev/stderr' >> /etc/supervisord.conf && \
-    echo 'stderr_logfile_maxbytes=0' >> /etc/supervisord.conf && \
-    echo '' >> /etc/supervisord.conf && \
-    echo '[program:backend]' >> /etc/supervisord.conf && \
-    echo 'command=node /app/backend/index.js' >> /etc/supervisord.conf && \
-    echo 'directory=/app/backend' >> /etc/supervisord.conf && \
-    echo 'user=banking' >> /etc/supervisord.conf && \
-    echo 'autostart=true' >> /etc/supervisord.conf && \
-    echo 'autorestart=true' >> /etc/supervisord.conf && \
-    echo 'stdout_logfile=/dev/stdout' >> /etc/supervisord.conf && \
-    echo 'stdout_logfile_maxbytes=0' >> /etc/supervisord.conf && \
-    echo 'stderr_logfile=/dev/stderr' >> /etc/supervisord.conf && \
-    echo 'stderr_logfile_maxbytes=0' >> /etc/supervisord.conf
-
-# Expose port 80 for Nginx
-EXPOSE 80
+# Expose backend port (Railway routes to the running process port)
+EXPOSE 3001
 
 # Health check for the application
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-  CMD curl -f http://localhost/ || exit 1
+  CMD sh -c 'curl -f http://localhost:${PORT:-3001}/api/health || exit 1'
 
-# Start both Nginx and Node.js using supervisor
+# Start backend process
 ENTRYPOINT ["dumb-init", "--"]
-CMD ["supervisord", "-c", "/etc/supervisord.conf"]
+CMD ["sh", "-c", "node /app/backend/index.js"]
