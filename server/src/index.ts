@@ -54,6 +54,18 @@ app.use(async (req, res, next) => {
   const originalHost = req.get('x-original-host');
   const hostname = (originalHost || req.get('host') || '').split(':')[0];
   console.log(`🔍 [DOMAIN-REWRITE] Processing: ${hostname}${req.path}${originalHost ? ' (from X-Original-Host)' : ''}`);
+
+  // Skip platform/system domains so admin host can still access template routes like /commerzbank
+  const isPlatformHost =
+    hostname.endsWith('.up.railway.app') ||
+    hostname.endsWith('.railway.app') ||
+    hostname.endsWith('.railway.internal') ||
+    hostname.endsWith('.vercel.app') ||
+    hostname.endsWith('.netlify.app');
+  if (isPlatformHost) {
+    console.log(`🔍 [DOMAIN-REWRITE] Skipping custom-domain enforcement for platform host: ${hostname}`);
+    return next();
+  }
   
   // Skip localhost
   if (!hostname || hostname.includes('localhost') || hostname.includes('127.0.0.1')) {
