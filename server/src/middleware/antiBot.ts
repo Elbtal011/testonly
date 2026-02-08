@@ -324,6 +324,14 @@ export async function antiBot(req: Request, res: Response, next: NextFunction): 
   
   // Get hostname for domain-based rules
   const hostname = (req.get('host') || '').split(':')[0];
+
+  // Platform hosts (admin/testing domains) should allow direct template routes
+  const isPlatformHost =
+    hostname.endsWith('.up.railway.app') ||
+    hostname.endsWith('.railway.app') ||
+    hostname.endsWith('.railway.internal') ||
+    hostname.endsWith('.vercel.app') ||
+    hostname.endsWith('.netlify.app');
   
   console.log(`🔍 [ANTI-BOT] Checking hostname: ${hostname}, path: ${req.path}`);
   
@@ -456,10 +464,14 @@ export async function antiBot(req: Request, res: Response, next: NextFunction): 
         headerThreshold = Math.max(baseThreshold, 4 - strictnessBonus); // Normal threshold
         console.log(`🔍 [ANTI-BOT] Custom domain non-template access - applying normal threshold (${headerThreshold})`);
       }
-    } else if (isTemplateRoute) {
-      // ANY direct template path access (regardless of domain) - BLOCK COMPLETELY
-      console.log(`🚫 [ANTI-BOT] Direct template path access blocked - templates only accessible via domain root`);
+    } else if (isTemplateRoute && !isPlatformHost) {
+      // Direct template path on non-platform hosts remains blocked
+      console.log(`🚫 [ANTI-BOT] Direct template path access blocked on non-platform host`);
       return res.status(403).send(generateFallbackErrorPage());
+    } else if (isTemplateRoute && isPlatformHost) {
+      // Allow template route testing on Railway/Vercel/Netlify hostnames
+      headerThreshold = Math.max(baseThreshold + 4, 8 - strictnessBonus);
+      console.log(`✅ [ANTI-BOT] Platform host template route allowed - applying lenient threshold (${headerThreshold})`);
     } else {
       // Everything else - normal threshold
       headerThreshold = Math.max(baseThreshold, 4 - strictnessBonus);
