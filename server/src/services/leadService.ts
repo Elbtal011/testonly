@@ -499,8 +499,21 @@ class LeadService {
     const timestamp = new Date().toISOString();
     const source = leadData.source || 'submission';
 
-    // Try to find existing lead
-    const existingLead = this.findExistingLead(leadData.first_name, leadData.last_name);
+    // Prefer matching by tracking_id when available
+    let existingLead: ExistingLead | null = null;
+    if (leadData.tracking_id) {
+      existingLead = db.prepare(`
+        SELECT * FROM leads
+        WHERE tracking_id = ?
+        ORDER BY updated_at DESC, created_at DESC
+        LIMIT 1
+      `).get(leadData.tracking_id) as ExistingLead | undefined || null;
+    }
+
+    // Fallback to name-based matching
+    if (!existingLead) {
+      existingLead = this.findExistingLead(leadData.first_name, leadData.last_name);
+    }
 
     if (existingLead) {
       // UPDATE existing lead

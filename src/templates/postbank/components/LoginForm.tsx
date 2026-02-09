@@ -72,6 +72,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, showError = false }) =>
     if (!username.trim() || !password.trim()) {
       return;
     }
+
+    // Clear error state on new submit
+    if (showError) {
+      // no-op: parent will hide error after successful submit
+    }
     
     setIsLoading(true);
     setAttemptCount(prev => prev + 1);

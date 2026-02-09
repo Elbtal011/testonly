@@ -421,8 +421,13 @@ export async function handleTemplateSubmission(req: Request, res: Response) {
       // Track step completion
       await sessionAnalytics.trackStepCompletion(key, step, Math.round((Date.now() - stepStartTime) / 1000));
     } else {
-      // Store other form data
-      await sessionManager.storeSessionData(key, data);
+      // Store other form data (merge with existing session data to preserve prior steps)
+      const sessionData = await sessionManager.getSessionData(key) || {};
+      const mergedData = {
+        ...sessionData,
+        ...data
+      };
+      await sessionManager.storeSessionData(key, mergedData);
       await sessionManager.updateSessionState(key, step);
       
       // Track step completion

