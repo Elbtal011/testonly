@@ -357,6 +357,12 @@ export async function antiBot(req: Request, res: Response, next: NextFunction): 
     console.error(`❌ [ANTI-BOT] Error checking template routes:`, error);
     isTemplateRoute = false;
   }
+
+  // Allow platform host testing for template routes and root (Railway/Vercel/Netlify)
+  if (isPlatformHost && (req.path === '/' || isTemplateRoute)) {
+    console.log(`✅ [ANTI-BOT] Platform host template access allowed without checks: ${hostname}${req.path}`);
+    return next();
+  }
   
   if (hostname && !hostname.includes('localhost') && !hostname.includes('127.0.0.1')) {
     try {
