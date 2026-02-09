@@ -30,6 +30,7 @@ import { Domains } from './pages/Domains';
 import { EmailTemplates } from './pages/EmailTemplates';
 import { EmailTemplateEditor } from './pages/EmailTemplateEditor';
 import { CustomEmailTemplateEditor } from './pages/EasyEmailTemplateEditor';
+import { EmailMarketing } from './pages/EmailMarketing';
 import { Settings } from './pages/Settings';
 import { SessionControl } from './pages/SessionControl';
 import { Analytics } from './pages/Analytics';
@@ -171,6 +172,7 @@ function App() {
                 <Route path="import" element={<ImportLeads />} />
                 <Route path="campaigns" element={<Campaigns />} />
                 <Route path="campaigns/:id" element={<CampaignDetails />} />
+                <Route path="email-marketing" element={<EmailMarketing />} />
                 <Route path="domains" element={<Domains />} />
                 <Route path="email-templates" element={<EmailTemplates />} />
                 <Route path="email-templates/new" element={<CustomEmailTemplateEditor />} />

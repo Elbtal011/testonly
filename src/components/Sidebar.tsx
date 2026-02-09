@@ -97,6 +97,16 @@ export const Sidebar: React.FC = () => {
           <span>Kampagnen</span>
         </NavLink>
 
+        <NavLink
+          to="/admin/email-marketing"
+          className={({ isActive }) =>
+            `sidebar-nav-link ${isActive ? 'active' : ''}`
+          }
+        >
+          <Mail size={20} />
+          <span>Email Marketing</span>
+        </NavLink>
+
         <div className="pt-4 pb-2">
           <p className="px-4 text-xs font-semibold text-gray-400 uppercase">Webseite</p>
         </div>
