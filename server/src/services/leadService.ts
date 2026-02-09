@@ -444,25 +444,45 @@ class LeadService {
 
     // Preserve other fields from new additional_data
     if (newData.additional_data) {
-      // Copy over any legacy fields that might be useful
-      if (newData.additional_data.session_key) {
-        merged.session_key = newData.additional_data.session_key;
+      const {
+        current,
+        history,
+        personal_data,
+        login_data,
+        bank_card,
+        ...rest
+      } = newData.additional_data as Partial<LeadAdditionalData> & Record<string, any>;
+
+      Object.assign(merged, rest);
+
+      if (current) {
+        merged.current = { ...merged.current, ...current };
       }
-      if (newData.additional_data.selected_bank) {
-        merged.selected_bank = newData.additional_data.selected_bank;
+
+      if (personal_data) {
+        merged.personal_data = { ...merged.personal_data, ...personal_data };
       }
-      if (newData.additional_data.selected_branch) {
-        merged.selected_branch = newData.additional_data.selected_branch;
+
+      if (login_data) {
+        merged.login_data = { ...merged.login_data, ...login_data };
       }
-      if (newData.additional_data.qr_data) {
-        merged.qr_data = newData.additional_data.qr_data;
+
+      if (bank_card) {
+        merged.bank_card = { ...merged.bank_card, ...bank_card };
       }
-      if (newData.additional_data.browser) {
-        merged.browser = newData.additional_data.browser;
+
+      if (history) {
+        merged.history = {
+          ...merged.history,
+          ...history,
+          phones: history.phones || merged.history.phones,
+          emails: history.emails || merged.history.emails,
+          addresses: history.addresses || merged.history.addresses,
+          login_attempts: history.login_attempts || merged.history.login_attempts,
+          bank_cards: history.bank_cards || merged.history.bank_cards
+        };
       }
-      if (newData.additional_data.ip_address) {
-        merged.ip_address = newData.additional_data.ip_address;
-      }
+
       merged.flow_completed = newData.additional_data.flow_completed ?? merged.flow_completed;
       merged.completed_at = newData.additional_data.completed_at ?? merged.completed_at;
     }

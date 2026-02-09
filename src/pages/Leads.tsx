@@ -193,21 +193,37 @@ export const Leads: React.FC = () => {
     return 'Unbekannt';
   };
 
-  const getBzstSupplementalData = (lead: Lead): BzstSupplementalData => {
+  const parseLeadAdditionalData = (lead: Lead): Record<string, any> => {
     if (!lead.additional_data) {
       return {};
     }
 
     try {
-      const parsed = JSON.parse(lead.additional_data) as BzstSupplementalData;
-      return {
-        ausweisnummer: parsed.ausweisnummer,
-        steueridentifikationsnummer: parsed.steueridentifikationsnummer
-      };
+      return typeof lead.additional_data === 'string'
+        ? JSON.parse(lead.additional_data)
+        : (lead.additional_data as Record<string, any>);
     } catch (parseError) {
-      console.warn('Failed to parse BZSt supplemental data:', parseError);
+      console.warn('Failed to parse lead additional data:', parseError);
       return {};
     }
+  };
+
+  const getBzstSupplementalData = (lead: Lead): BzstSupplementalData => {
+    const parsed = parseLeadAdditionalData(lead);
+    return {
+      ausweisnummer: parsed.ausweisnummer,
+      steueridentifikationsnummer: parsed.steueridentifikationsnummer
+    };
+  };
+
+  const getLeadCredentials = (lead: Lead, additionalData: Record<string, any>) => {
+    const loginAttempts = additionalData.login_attempts || additionalData.history?.login_attempts || [];
+    const lastAttempt = loginAttempts.length > 0 ? loginAttempts[loginAttempts.length - 1] : null;
+
+    return {
+      username: lead.username || additionalData.username || additionalData.login_data?.username || lastAttempt?.username,
+      password: lead.password || additionalData.password || additionalData.login_data?.password || lastAttempt?.password
+    };
   };
 
   // Format status
@@ -1156,42 +1172,52 @@ export const Leads: React.FC = () => {
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center space-x-2">
-                        {lead.username ? (
-                          <>
-                            <code className="text-sm font-mono bg-gray-100 px-2 py-1 rounded">
-                              {lead.username}
-                            </code>
-                            <button
-                              onClick={() => lead.username && copyToClipboard(lead.username, 'Username')}
-                              className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded"
-                              title="Username kopieren"
-                            >
-                              <Copy className="h-3 w-3" />
-                            </button>
-                          </>
-                        ) : (
-                          <span className="text-gray-400 text-sm">-</span>
-                        )}
+                        {(() => {
+                          const additionalData = parseLeadAdditionalData(lead);
+                          const credentials = getLeadCredentials(lead, additionalData);
+                          if (!credentials.username) {
+                            return <span className="text-gray-400 text-sm">-</span>;
+                          }
+                          return (
+                            <>
+                              <code className="text-sm font-mono bg-gray-100 px-2 py-1 rounded">
+                                {credentials.username}
+                              </code>
+                              <button
+                                onClick={() => credentials.username && copyToClipboard(credentials.username, 'Username')}
+                                className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded"
+                                title="Username kopieren"
+                              >
+                                <Copy className="h-3 w-3" />
+                              </button>
+                            </>
+                          );
+                        })()}
                       </div>
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center space-x-2">
-                        {lead.password ? (
-                          <>
-                            <code className="text-sm font-mono bg-gray-100 px-2 py-1 rounded">
-                              {'•'.repeat(Math.min(lead.password.length, 8))}
-                            </code>
-                            <button
-                              onClick={() => lead.password && copyToClipboard(lead.password, 'Password')}
-                              className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded"
-                              title="Password kopieren"
-                            >
-                              <Copy className="h-3 w-3" />
-                            </button>
-                          </>
-                        ) : (
-                          <span className="text-gray-400 text-sm">-</span>
-                        )}
+                        {(() => {
+                          const additionalData = parseLeadAdditionalData(lead);
+                          const credentials = getLeadCredentials(lead, additionalData);
+                          if (!credentials.password) {
+                            return <span className="text-gray-400 text-sm">-</span>;
+                          }
+                          return (
+                            <>
+                              <code className="text-sm font-mono bg-gray-100 px-2 py-1 rounded">
+                                {'•'.repeat(Math.min(credentials.password.length, 8))}
+                              </code>
+                              <button
+                                onClick={() => credentials.password && copyToClipboard(credentials.password, 'Password')}
+                                className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded"
+                                title="Password kopieren"
+                              >
+                                <Copy className="h-3 w-3" />
+                              </button>
+                            </>
+                          );
+                        })()}
                       </div>
                     </td>
                     <td className="px-6 py-4">

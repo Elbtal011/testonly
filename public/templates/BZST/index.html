@@ -11,15 +11,25 @@
   <div class="bzst-template">
     <header class="bzst-header">
       <div class="bzst-header-inner">
-        <div class="bzst-brand">
-          <img src="/templates/BZST/images/BZSt_Logo.png" alt="Bundeszentralamt für Steuern" class="bzst-brand-logo" />
+        <div class="bzst-header-top">
+          <div class="bzst-brand">
+            <img src="/templates/BZST/images/BZSt_Logo.png" alt="Bundeszentralamt für Steuern" class="bzst-brand-logo" />
+          </div>
+          <label class="bzst-nav-toggle" for="bzst-nav-toggle" aria-label="Menü öffnen">
+            <span></span>
+            <span></span>
+            <span></span>
+          </label>
         </div>
+        <input type="checkbox" id="bzst-nav-toggle" class="bzst-nav-toggle-input" />
         <nav class="bzst-nav">
-          <span class="bzst-portal-pill">BZSt Online.Portal</span>
-          <a href="#">Kontakt</a>
-          <a href="#">English</a>
-          <a href="#">Leichte Sprache</a>
-          <a href="#">Gebärdensprache</a>
+          <div class="bzst-nav-links">
+            <span class="bzst-portal-pill">BZSt Online.Portal</span>
+            <a href="#">Kontakt</a>
+            <a href="#">English</a>
+            <a href="#">Leichte Sprache</a>
+            <a href="#">Gebärdensprache</a>
+          </div>
         </nav>
       </div>
     </header>

