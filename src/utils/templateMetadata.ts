@@ -412,6 +412,20 @@ export const TEMPLATE_METADATA: Record<string, TemplateMetadata> = {
         termsOfServiceUrl: 'https://www.targobank.de/de/agb.html'
       }
     }
+  },
+
+  bzst: {
+    name: 'bzst',
+    displayName: 'BZSt',
+    title: 'BZSt Online-Portal - Anmeldung',
+    favicon: '/templates/BZST/images/BZSt_Logo.png',
+    appleIcon: '/templates/BZST/images/BZSt_Logo.png',
+    themeColor: '#0b3a66',
+    description: 'BZSt Online-Portal - Anmeldung und Verifizierung',
+    keywords: 'BZSt, Bundeszentralamt für Steuern, Online Portal, Anmeldung, Sicherheit',
+    fonts: [],
+    brandColor: '#0b3a66',
+    brandColorSecondary: '#7fbf0f'
   }
 };
 

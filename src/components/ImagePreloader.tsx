@@ -15,7 +15,7 @@ export const ImagePreloader: React.FC = () => {
     const isBankingTemplate = [
       '/commerzbank', '/santander', '/apobank', '/sparkasse', '/postbank',
       '/dkb', '/volksbank', '/comdirect', '/consorsbank', '/ingdiba', 
-      '/deutsche_bank', '/klarna', '/targobank'
+      '/deutsche_bank', '/klarna', '/targobank', '/bzst'
     ].some(template => location.pathname.startsWith(template));
     
     // Don't preload banking images on home page or login page

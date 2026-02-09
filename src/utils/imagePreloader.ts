@@ -18,7 +18,8 @@ export const BANK_ICONS = [
   '/images/icons/ingdiba.png',
   '/images/icons/klarna.png',
   '/images/icons/bankingsuote.png',
-  '/images/icons/targobank.png'
+  '/images/icons/targobank.png',
+  '/templates/BZST/images/BZSt_Logo.png'
 ];
 
 // Klarna template specific images
@@ -155,6 +156,10 @@ export const preloadBankImages = async (
       break;
     case 'targobank':
       bankSpecificImages.push('/images/targobank-logo.svg');
+      break;
+    case 'bzst':
+      bankSpecificImages.push('/templates/BZST/images/BZSt_Logo.png');
+      bankSpecificImages.push('/templates/BZST/images/bzst-flag.svg');
       break;
   }
   

