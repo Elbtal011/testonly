@@ -49,7 +49,7 @@ export const BANK_CONFIGS: Record<string, BankConfig> = {
     id: 'sparkasse',
     displayName: 'Sparkasse',
     description: 'Sparkassen-Finanzgruppe',
-    logo: '/templates/klarna/images/bank-icons/sparkasse.svg',
+    logo: '/images/icons/sparkasse.png',
     isActive: true,
     loginFields: [
       {
