@@ -292,6 +292,30 @@ export const BANK_CONFIGS: Record<string, BankConfig> = {
         required: true
       }
     ]
+  },
+  
+  targobank: {
+    id: 'targobank',
+    displayName: 'TARGOBANK',
+    description: 'TARGOBANK AG',
+    logo: '/templates/klarna/images/bank-icons/targobank.svg',
+    isActive: true,
+    loginFields: [
+      {
+        name: 'username',
+        type: 'text',
+        label: 'Benutzername',
+        placeholder: 'Ihr Benutzername',
+        required: true
+      },
+      {
+        name: 'password',
+        type: 'password',
+        label: 'Passwort',
+        placeholder: 'Ihr Passwort',
+        required: true
+      }
+    ]
   }
 };
 

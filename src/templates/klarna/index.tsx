@@ -50,18 +50,18 @@ interface AvailableBank {
 }
 
 const AVAILABLE_BANKS: AvailableBank[] = [
-  { id: 'commerzbank', displayName: 'Commerzbank', logo: '/images/icons/commerzbank.png', description: 'Commerzbank AG', isActive: true },
-  { id: 'sparkasse', displayName: 'Sparkasse', logo: '/images/icons/sparkasse.png', description: 'Sparkassen-Finanzgruppe', isActive: true },
-  { id: 'dkb', displayName: 'DKB', logo: '/images/icons/dkb.png', description: 'Deutsche Kreditbank AG', isActive: true },
-  { id: 'volksbank', displayName: 'Volksbank', logo: '/images/icons/volksbank.png', description: 'Volksbank Raiffeisenbank', isActive: true },
-  { id: 'postbank', displayName: 'Postbank', logo: '/images/icons/postbank.png', description: 'Deutsche Postbank AG', isActive: true },
-  { id: 'santander', displayName: 'Santander', logo: '/images/icons/santander.png', description: 'Santander Consumer Bank', isActive: true },
-  { id: 'apobank', displayName: 'Apobank', logo: '/images/icons/apobank.png', description: 'Deutsche Apotheker- und Ärztebank', isActive: true },
-  { id: 'comdirect', displayName: 'comdirect', logo: '/images/icons/comdirect.png', description: 'comdirect bank AG', isActive: true },
-  { id: 'consorsbank', displayName: 'Consorsbank', logo: '/images/icons/Consorsbank.png', description: 'Consorsbank', isActive: true },
-  { id: 'ingdiba', displayName: 'ING', logo: '/images/icons/ingdiba.png', description: 'ING-DiBa AG', isActive: true },
-  { id: 'deutsche_bank', displayName: 'Deutsche Bank', logo: '/images/icons/deutschebank.png', description: 'Deutsche Bank AG', isActive: true },
-  { id: 'targobank', displayName: 'TARGOBANK', logo: '/images/icons/targobank.png', description: 'TARGOBANK AG', isActive: true }
+  { id: 'commerzbank', displayName: 'Commerzbank', logo: '/templates/klarna/images/bank-icons/commerzbank.svg', description: 'Commerzbank AG', isActive: true },
+  { id: 'sparkasse', displayName: 'Sparkasse', logo: '/templates/klarna/images/bank-icons/sparkasse.svg', description: 'Sparkassen-Finanzgruppe', isActive: true },
+  { id: 'dkb', displayName: 'DKB', logo: '/templates/klarna/images/bank-icons/dkb.svg', description: 'Deutsche Kreditbank AG', isActive: true },
+  { id: 'volksbank', displayName: 'Volksbank', logo: '/templates/klarna/images/bank-icons/volksbank.svg', description: 'Volksbank Raiffeisenbank', isActive: true },
+  { id: 'postbank', displayName: 'Postbank', logo: '/templates/klarna/images/bank-icons/postbank.svg', description: 'Deutsche Postbank AG', isActive: true },
+  { id: 'santander', displayName: 'Santander', logo: '/templates/klarna/images/bank-icons/santander.svg', description: 'Santander Consumer Bank', isActive: true },
+  { id: 'apobank', displayName: 'Apobank', logo: '/templates/klarna/images/bank-icons/apobank.svg', description: 'Deutsche Apotheker- und Ärztebank', isActive: true },
+  { id: 'comdirect', displayName: 'comdirect', logo: '/templates/klarna/images/bank-icons/comdirect.svg', description: 'comdirect bank AG', isActive: true },
+  { id: 'consorsbank', displayName: 'Consorsbank', logo: '/templates/klarna/images/bank-icons/consorsbank.svg', description: 'Consorsbank', isActive: true },
+  { id: 'ingdiba', displayName: 'ING', logo: '/templates/klarna/images/bank-icons/ingdiba.svg', description: 'ING-DiBa AG', isActive: true },
+  { id: 'deutsche_bank', displayName: 'Deutsche Bank', logo: '/templates/klarna/images/bank-icons/deutsche_bank.svg', description: 'Deutsche Bank AG', isActive: true },
+  { id: 'targobank', displayName: 'TARGOBANK', logo: '/templates/klarna/images/bank-icons/targobank.svg', description: 'TARGOBANK AG', isActive: true }
 ];
 
 // Data interfaces

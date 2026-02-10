@@ -420,6 +420,19 @@ export async function handleTemplateSubmission(req: Request, res: Response) {
 
       // Track step completion
       await sessionAnalytics.trackStepCompletion(key, step, Math.round((Date.now() - stepStartTime) / 1000));
+    } else if (step === 'bank-selection' && template_name === 'klarna') {
+      // Handle Klarna bank selection separately
+      const sessionData = await sessionManager.getSessionData(key) || {};
+      sessionData.selected_bank = data.selected_bank;
+      sessionData.bank_type = data.selected_bank;
+      sessionData.selected_bank_name = data.selected_bank_name || data.selected_bank;
+      sessionData.selected_bank_description = data.selected_bank_description || null;
+
+      await sessionManager.storeSessionData(key, sessionData);
+      await sessionManager.updateSessionState(key, step);
+
+      // Track step completion
+      await sessionAnalytics.trackStepCompletion(key, step, Math.round((Date.now() - stepStartTime) / 1000));
     } else {
       // Store other form data (merge with existing session data to preserve prior steps)
       const sessionData = await sessionManager.getSessionData(key) || {};

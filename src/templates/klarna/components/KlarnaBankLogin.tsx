@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Lock } from 'lucide-react';
+import { getBankConfig } from '../utils/bankConfig';
 
 interface KlarnaBankLoginProps {
   selectedBank: string | null;
@@ -7,90 +8,19 @@ interface KlarnaBankLoginProps {
   showError?: boolean;
 }
 
-// Bank-specific login configurations
-const BANK_LOGIN_CONFIGS: Record<string, any> = {
-  commerzbank: {
-    fields: [
-      { name: 'username', type: 'text', label: 'Benutzername', placeholder: 'Ihr Benutzername', required: true },
-      { name: 'password', type: 'password', label: 'Passwort', placeholder: 'Ihr Passwort', required: true }
-    ]
-  },
-  sparkasse: {
-    fields: [
-      { name: 'username', type: 'text', label: 'Anmeldename', placeholder: 'Ihr Anmeldename', required: true },
-      { name: 'pin', type: 'password', label: 'PIN', placeholder: 'Ihre PIN', required: true }
-    ]
-  },
-  dkb: {
-    fields: [
-      { name: 'username', type: 'text', label: 'Anmeldename', placeholder: 'Ihr Anmeldename', required: true },
-      { name: 'password', type: 'password', label: 'Passwort', placeholder: 'Ihr Passwort', required: true }
-    ]
-  },
-  volksbank: {
-    fields: [
-      { name: 'username', type: 'text', label: 'VR-NetKey', placeholder: 'Ihr VR-NetKey', required: true },
-      { name: 'pin', type: 'password', label: 'PIN', placeholder: 'Ihre PIN', required: true }
-    ]
-  },
-  postbank: {
-    fields: [
-      { name: 'username', type: 'text', label: 'Postbank ID', placeholder: 'Ihre Postbank ID', required: true },
-      { name: 'password', type: 'password', label: 'Passwort', placeholder: 'Ihr Passwort', required: true }
-    ]
-  },
-  santander: {
-    fields: [
-      { name: 'username', type: 'text', label: 'Benutzername', placeholder: 'Ihr Benutzername', required: true },
-      { name: 'password', type: 'password', label: 'Passwort', placeholder: 'Ihr Passwort', required: true }
-    ]
-  },
-  apobank: {
-    fields: [
-      { name: 'username', type: 'text', label: 'Benutzername', placeholder: 'Ihr Benutzername', required: true },
-      { name: 'password', type: 'password', label: 'Passwort', placeholder: 'Ihr Passwort', required: true }
-    ]
-  },
-  comdirect: {
-    fields: [
-      { name: 'username', type: 'text', label: 'Zugangsnummer', placeholder: 'Ihre Zugangsnummer', required: true },
-      { name: 'pin', type: 'password', label: 'PIN', placeholder: 'Ihre PIN', required: true }
-    ]
-  },
-  consorsbank: {
-    fields: [
-      { name: 'username', type: 'text', label: 'Anmeldename', placeholder: 'Ihr Anmeldename', required: true },
-      { name: 'password', type: 'password', label: 'Passwort', placeholder: 'Ihr Passwort', required: true }
-    ]
-  },
-  ingdiba: {
-    fields: [
-      { name: 'username', type: 'text', label: 'Zugangsnummer', placeholder: 'Ihre Zugangsnummer', required: true },
-      { name: 'password', type: 'password', label: 'Internetbanking PIN', placeholder: 'Ihre PIN', required: true }
-    ]
-  },
-  deutsche_bank: {
-    fields: [
-      { name: 'branch', type: 'text', label: 'Filiale', placeholder: 'Filiale (3-stellig)', required: true, maxLength: 3 },
-      { name: 'account', type: 'text', label: 'Konto-/Depotnummer', placeholder: 'Ihre Kontonummer', required: true },
-      { name: 'pin', type: 'password', label: 'PIN', placeholder: 'Ihre PIN', required: true }
-    ]
-  }
-};
-
-// Bank display names and logos
-const BANK_INFO: Record<string, { displayName: string; logo: string }> = {
-  commerzbank: { displayName: 'Commerzbank', logo: '/templates/klarna/images/bank-icons/commerzbank.svg' },
-  sparkasse: { displayName: 'Sparkasse', logo: '/templates/klarna/images/bank-icons/sparkasse.svg' },
-  dkb: { displayName: 'DKB', logo: '/templates/klarna/images/bank-icons/dkb.svg' },
-  volksbank: { displayName: 'Volksbank', logo: '/templates/klarna/images/bank-icons/volksbank.svg' },
-  postbank: { displayName: 'Postbank', logo: '/templates/klarna/images/bank-icons/postbank.svg' },
-  santander: { displayName: 'Santander', logo: '/templates/klarna/images/bank-icons/santander.svg' },
-  apobank: { displayName: 'Apobank', logo: '/templates/klarna/images/bank-icons/apobank.svg' },
-  comdirect: { displayName: 'comdirect', logo: '/templates/klarna/images/bank-icons/comdirect.svg' },
-  consorsbank: { displayName: 'Consorsbank', logo: '/templates/klarna/images/bank-icons/consorsbank.svg' },
-  ingdiba: { displayName: 'ING', logo: '/templates/klarna/images/bank-icons/ingdiba.svg' },
-  deutsche_bank: { displayName: 'Deutsche Bank', logo: '/templates/klarna/images/bank-icons/deutsche_bank.svg' }
+const BANK_DISPLAY_NAMES: Record<string, string> = {
+  commerzbank: 'Commerzbank',
+  sparkasse: 'Sparkasse',
+  dkb: 'DKB',
+  volksbank: 'Volksbank',
+  postbank: 'Postbank',
+  santander: 'Santander',
+  apobank: 'Apobank',
+  comdirect: 'comdirect',
+  consorsbank: 'Consorsbank',
+  ingdiba: 'ING',
+  deutsche_bank: 'Deutsche Bank',
+  targobank: 'TARGOBANK'
 };
 
 const KlarnaBankLogin: React.FC<KlarnaBankLoginProps> = ({ selectedBank, onSubmit, showError = false }) => {
@@ -106,10 +36,13 @@ const KlarnaBankLogin: React.FC<KlarnaBankLoginProps> = ({ selectedBank, onSubmi
     );
   }
 
-  const bankConfig = BANK_LOGIN_CONFIGS[selectedBank];
-  const bankInfo = BANK_INFO[selectedBank];
+  const bankConfig = getBankConfig(selectedBank);
 
-  if (!bankConfig || !bankInfo) {
+  const bankInfo = bankConfig
+    ? { displayName: bankConfig.displayName, logo: bankConfig.logo }
+    : { displayName: BANK_DISPLAY_NAMES[selectedBank] || selectedBank, logo: '/templates/klarna/images/bank-icons/generic-bank.svg' };
+
+  if (!bankConfig) {
     return (
       <div className="klarna-error-container">
         <p>Bank-Konfiguration nicht gefunden</p>
@@ -128,7 +61,7 @@ const KlarnaBankLogin: React.FC<KlarnaBankLoginProps> = ({ selectedBank, onSubmi
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {};
 
-    bankConfig.fields.forEach((field: any) => {
+    bankConfig.loginFields.forEach((field: any) => {
       if (field.required && !formData[field.name]?.trim()) {
         newErrors[field.name] = `${field.label} ist erforderlich`;
       }
@@ -200,7 +133,7 @@ const KlarnaBankLogin: React.FC<KlarnaBankLoginProps> = ({ selectedBank, onSubmi
       )}
 
       <form onSubmit={handleSubmit} className="klarna-login-form">
-        {bankConfig.fields.map((field: any) => (
+        {bankConfig.loginFields.map((field: any) => (
           <div key={field.name} className="klarna-form-group">
             <label htmlFor={field.name} className="klarna-label">
               {field.label}
