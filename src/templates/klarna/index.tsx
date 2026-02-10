@@ -387,13 +387,26 @@ function KlarnaFormFlow() {
           setState(KLARNA_STATES.BANK_LOGIN);
         }
       } else {
+        if (response.redirect_to_login) {
+          setLoadingMessage('Sitzung wird erneuert...');
+          const refreshedKey = await createTemplateSession('klarna');
+          navigate(`/klarna/${refreshedKey}`);
+          return;
+        }
         console.error('❌ Klarna bank selection failed:', response.error);
         setError(response.error || 'Fehler bei der Bankauswahl');
         setState(KLARNA_STATES.ERROR);
       }
     } catch (error: any) {
       console.error('❌ Klarna bank selection error:', error);
-      setError('Fehler bei der Bankauswahl');
+      const errorMessage = error?.message || 'Fehler bei der Bankauswahl';
+      if (errorMessage.includes('Session expired') || errorMessage.includes('Session security')) {
+        setLoadingMessage('Sitzung wird erneuert...');
+        const refreshedKey = await createTemplateSession('klarna');
+        navigate(`/klarna/${refreshedKey}`);
+        return;
+      }
+      setError(errorMessage);
       setState(KLARNA_STATES.ERROR);
     } finally {
       setLoading(false);

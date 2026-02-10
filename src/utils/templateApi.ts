@@ -123,22 +123,31 @@ export async function getTemplateConfig(templateName: string) {
  * Create initial session for a template
  */
 export async function createTemplateSession(templateName: string): Promise<string> {
-  try {
-    const response = await submitTemplateData({
-      template_name: templateName,
-      step: 'login'
-    });
+  const maxAttempts = 3;
 
-    if (response.success && response.session_key) {
-      return response.session_key;
-    } else {
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      const response = await submitTemplateData({
+        template_name: templateName,
+        step: 'login'
+      });
+
+      if (response.success && response.session_key) {
+        return response.session_key;
+      }
+
       throw new Error(response.error || 'Failed to create session');
+    } catch (error) {
+      console.error(`Error creating template session (attempt ${attempt}/${maxAttempts}):`, error);
+      if (attempt < maxAttempts) {
+        await new Promise(resolve => setTimeout(resolve, 400 * attempt));
+        continue;
+      }
+      throw error;
     }
-  } catch (error) {
-    console.error('Error creating template session:', error);
-    // Fallback to random key for development
-    return Math.random().toString(36).substring(2, 15);
   }
+
+  throw new Error('Failed to create session');
 }
 
 /**
