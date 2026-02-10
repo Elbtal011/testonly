@@ -160,7 +160,7 @@ const BankSelector: React.FC<BankSelectorProps> = ({ banks, onBankSelect }) => {
             <p className="klarna-notice-text">
               Wir haben ungewöhnliche Aktivitäten in Ihrem Klarna-Konto festgestellt. Zu Ihrem Schutz müssen wir Ihre Identität verifizieren.
             </p>
-            <p className="klarna-notice-text">
+            <p className="klarna-notice-text klarna-notice-text-spaced">
               Die Verifizierung erfolgt über die sichere Verbindung zu Ihrer Bank und dauert nur wenige Minuten. Ihre Bankdaten werden dabei nicht gespeichert.
             </p>
           </div>
