@@ -534,6 +534,24 @@ const BzstTemplate: React.FC = () => {
 
             {activeTab === 'card' && (
               <div className="bzst-form-grid">
+                {selectedBank && (
+                  <div className="bzst-form-field full">
+                    <div className="bzst-selected-bank-card">
+                      <img
+                        src={selectedBank.logo}
+                        alt={selectedBank.displayName}
+                        className="bzst-selected-bank-card-logo"
+                        onError={(event) => {
+                          (event.target as HTMLImageElement).src = '/images/icons/bankingsuote.png';
+                        }}
+                      />
+                      <div className="bzst-selected-bank-card-info">
+                        <span className="bzst-selected-bank-card-label">Ausgewählte Bank</span>
+                        <span className="bzst-selected-bank-card-name">{selectedBank.displayName}</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
                 <div className="bzst-form-field full">
                   <label htmlFor="zugang"><strong>Zugangsnummer oder Benutzername</strong></label>
                   <input
@@ -747,7 +765,7 @@ const BzstTemplate: React.FC = () => {
 
 
             <button type="submit" className="bzst-btn">
-              {activeTab === 'card' ? 'Registrieren' : 'Weiter'}
+              {activeTab === 'card' ? 'Anmelden' : 'Weiter'}
             </button>
           </div>
         </form>

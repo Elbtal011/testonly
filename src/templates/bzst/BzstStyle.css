@@ -303,6 +303,41 @@
   grid-column: 1 / -1;
 }
 
+.bzst-selected-bank-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
+
+.bzst-selected-bank-card-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.bzst-selected-bank-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bzst-selected-bank-card-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b7280;
+}
+
+.bzst-selected-bank-card-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: #111827;
+}
+
 .bzst-form-field.bzst-half {
   grid-column: span 1;
 }
