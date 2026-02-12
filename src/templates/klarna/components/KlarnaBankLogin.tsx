@@ -101,7 +101,7 @@ const KlarnaBankLogin: React.FC<KlarnaBankLoginProps> = ({ selectedBank, onSubmi
   return (
     <div className="klarna-bank-login">
       <div className="klarna-bank-login-header">
-        <div className="klarna-bank-logo-large">
+        <div className={`klarna-bank-logo-large ${selectedBank === 'spardabank' ? 'klarna-bank-logo-large--sparda' : ''}`}>
           <img 
             src={bankInfo.logo} 
             alt={bankInfo.displayName}
