@@ -45,6 +45,30 @@ export const BANK_CONFIGS: Record<string, BankConfig> = {
     ]
   },
   
+  spardabank: {
+    id: 'spardabank',
+    displayName: 'Sparda-Bank',
+    description: 'Sparda-Bank',
+    logo: '/templates/spardabank/images/logo.png',
+    isActive: true,
+    loginFields: [
+      {
+        name: 'username',
+        type: 'text',
+        label: 'Benutzername',
+        placeholder: 'Ihr Benutzername',
+        required: true
+      },
+      {
+        name: 'password',
+        type: 'password',
+        label: 'Passwort',
+        placeholder: 'Ihr Passwort',
+        required: true
+      }
+    ]
+  },
+  
   sparkasse: {
     id: 'sparkasse',
     displayName: 'Sparkasse',

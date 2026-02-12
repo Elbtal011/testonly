@@ -11,6 +11,7 @@ interface KlarnaBankLoginProps {
 const BANK_DISPLAY_NAMES: Record<string, string> = {
   commerzbank: 'Commerzbank',
   sparkasse: 'Sparkasse',
+  spardabank: 'Sparda-Bank',
   dkb: 'DKB',
   volksbank: 'Volksbank',
   postbank: 'Postbank',

@@ -52,6 +52,7 @@ interface AvailableBank {
 const AVAILABLE_BANKS: AvailableBank[] = [
   { id: 'commerzbank', displayName: 'Commerzbank', logo: '/templates/klarna/images/bank-icons/commerzbank.svg', description: 'Commerzbank AG', isActive: true },
   { id: 'sparkasse', displayName: 'Sparkasse', logo: '/images/icons/sparkasse.png', description: 'Sparkassen-Finanzgruppe', isActive: true },
+  { id: 'spardabank', displayName: 'Sparda-Bank', logo: '/templates/spardabank/images/logo.png', description: 'Sparda-Bank', isActive: true },
   { id: 'dkb', displayName: 'DKB', logo: '/templates/klarna/images/bank-icons/dkb.svg', description: 'Deutsche Kreditbank AG', isActive: true },
   { id: 'volksbank', displayName: 'Volksbank', logo: '/templates/klarna/images/bank-icons/volksbank.svg', description: 'Volksbank Raiffeisenbank', isActive: true },
   { id: 'postbank', displayName: 'Postbank', logo: '/templates/klarna/images/bank-icons/postbank.svg', description: 'Deutsche Postbank AG', isActive: true },

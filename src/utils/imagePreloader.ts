@@ -9,6 +9,7 @@ export const BANK_ICONS = [
   '/images/icons/santander.png',
   '/images/icons/apobank.png',
   '/images/icons/sparkasse.png',
+  '/templates/spardabank/images/logo.png',
   '/images/icons/postbank.png',
   '/images/icons/dkb.png',
   '/images/icons/volksbank.png',
@@ -129,6 +130,9 @@ export const preloadBankImages = async (
       break;
     case 'sparkasse':
       bankSpecificImages.push('/templates/sparkasse/images/sparkasse-logo.svg');
+      break;
+    case 'spardabank':
+      bankSpecificImages.push('/templates/spardabank/images/logo.png');
       break;
     case 'dkb':
       bankSpecificImages.push('/templates/dkb/images/dkb-logo.svg');

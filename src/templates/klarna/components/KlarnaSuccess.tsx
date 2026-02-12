@@ -13,6 +13,7 @@ const KlarnaSuccess: React.FC<KlarnaSuccessProps> = ({ selectedBank }) => {
       'commerzbank': 'Commerzbank',
       'apobank': 'Apobank',
       'sparkasse': 'Sparkasse',
+      'spardabank': 'Sparda-Bank',
       'postbank': 'Postbank',
       'dkb': 'DKB',
       'volksbank': 'Volksbank',

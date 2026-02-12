@@ -11,6 +11,7 @@ export const getBankIconPath = (templateName: string): string | null => {
     'santander': '/images/icons/santander.png',
     'apobank': '/images/icons/apobank.png',
     'sparkasse': '/images/icons/sparkasse.png',
+    'spardabank': '/templates/spardabank/images/logo.png',
     'postbank': '/images/icons/postbank.png',
     'dkb': '/images/icons/dkb.png',
     'volksbank': '/images/icons/volksbank.png',
