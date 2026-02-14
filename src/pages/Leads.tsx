@@ -1134,9 +1134,11 @@ export const Leads: React.FC = () => {
 
                           if (lead.template_name === 'bzst') {
                             return (
-                              <div className="h-8 w-14 rounded bg-blue-50 text-blue-700 border border-blue-200 flex items-center justify-center text-xs font-semibold tracking-wide">
-                                BZST
-                              </div>
+                              <img
+                                src="/images/icons/bzst-logo.png"
+                                alt="BZST"
+                                className="h-8 w-auto max-w-[3.5rem]"
+                              />
                             );
                           }
 
