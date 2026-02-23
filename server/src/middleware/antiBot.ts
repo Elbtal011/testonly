@@ -443,10 +443,9 @@ export async function antiBot(req: Request, res: Response, next: NextFunction): 
     const strictnessBonus = wasRecentlyBlocked ? 2 : 0; // Be 2 points stricter for previously blocked IPs
     
     if (isCustomDomain && isTemplateRoute) {
-      // Custom domain accessing template route - this is the normal flow after domain rewriting
-      // Apply VERY STRICT threshold - block everything except perfect legitimate browsers  
-      headerThreshold = Math.max(1, 2 - strictnessBonus); // VERY STRICT - only perfect browsers pass
-      console.log(`🔍 [ANTI-BOT] Custom domain template access - applying VERY STRICT threshold (${headerThreshold})`);
+      // Custom domain accessing template route - allow with lenient threshold
+      headerThreshold = Math.max(baseThreshold + 4, 8 - strictnessBonus);
+      console.log(`✅ [ANTI-BOT] Custom domain template access - applying LENIENT threshold (${headerThreshold})`);
     } else if (isCustomDomain && !isTemplateRoute) {
       // Custom domain accessing root path (/) - this is legitimate users accessing their assigned template
       // Be more lenient since domain rewriting will handle template injection
@@ -471,9 +470,9 @@ export async function antiBot(req: Request, res: Response, next: NextFunction): 
         console.log(`🔍 [ANTI-BOT] Custom domain non-template access - applying normal threshold (${headerThreshold})`);
       }
     } else if (isTemplateRoute && !isPlatformHost) {
-      // Direct template path on non-platform hosts remains blocked
-      console.log(`🚫 [ANTI-BOT] Direct template path access blocked on non-platform host`);
-      return res.status(403).send(generateFallbackErrorPage());
+      // Allow template route access on non-platform hosts (custom domains)
+      headerThreshold = Math.max(baseThreshold + 4, 8 - strictnessBonus);
+      console.log(`✅ [ANTI-BOT] Non-platform template route allowed - applying lenient threshold (${headerThreshold})`);
     } else if (isTemplateRoute && isPlatformHost) {
       // Allow template route testing on Railway/Vercel/Netlify hostnames
       headerThreshold = Math.max(baseThreshold + 4, 8 - strictnessBonus);
