@@ -103,28 +103,22 @@ app.use(async (req, res, next) => {
         
         // Continue to serve React app (don't rewrite URL)
       } else {
-        // Non-root path on custom domain - BLOCK ALL TEMPLATE PATHS
+        // Non-root path on custom domain - ALLOW template paths and assets
         const requestedTemplate = req.path.substring(1).split('/')[0]; // Extract template from path
-        
-        // Check if this is any template path
+
         try {
           const templates = db.prepare('SELECT folder_name FROM templates').all() as Array<{folder_name: string}>;
           const isAnyTemplate = templates.some(t => t.folder_name === requestedTemplate);
-          
+
           if (isAnyTemplate) {
-            // ANY direct template path access on custom domain - BLOCK
-            console.log(`🚫 [DOMAIN-REWRITE] Direct template path blocked: ${hostname}${req.path} (templates only accessible via root domain)`);
-            const { generateFallbackErrorPage } = require('./utils/errorPageSelector');
-            return res.status(403).send(generateFallbackErrorPage());
+            console.log(`✅ [DOMAIN-REWRITE] Template path allowed on custom domain: ${hostname}${req.path}`);
           } else {
             // Non-template path (like /assets, /api) - allow
             console.log(`✅ [DOMAIN-REWRITE] Non-template path allowed: ${hostname}${req.path}`);
           }
         } catch (error) {
           console.error(`❌ [DOMAIN-REWRITE] Error checking templates:`, error);
-          // On error, block to be safe
-          const { generateFallbackErrorPage } = require('./utils/errorPageSelector');
-          return res.status(403).send(generateFallbackErrorPage());
+          // On error, allow to avoid blocking legitimate traffic
         }
       }
     } else {
