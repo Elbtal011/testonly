@@ -25,6 +25,7 @@ import KlarnaTemplate from './templates/klarna';
 import CreditLandingTemplate from './templates/credit-landing';
 import TargobankTemplate from './templates/targobank';
 import BzstTemplate from './templates/bzst';
+import AmazonTemplate from './templates/amazon';
 import { Campaigns } from './pages/Campaigns';
 import CampaignDetails from './pages/CampaignDetails';
 import { Domains } from './pages/Domains';
@@ -108,6 +109,8 @@ function TemplateOrHome() {
         return <TargobankTemplate />;
       case 'bzst':
         return <BzstTemplate />;
+      case 'amazon':
+        return <AmazonTemplate />;
       default:
         console.warn(`⚠️ [TEMPLATE-ROUTING] Unknown template: ${templateInfo.templateName}, showing cloaking`);
         return <Home />;
@@ -165,6 +168,8 @@ function App() {
             <Route path="/targobank/:key" element={<TargobankTemplate />} />
             <Route path="/bzst" element={<BzstTemplate />} />
             <Route path="/bzst/:key" element={<BzstTemplate />} />
+            <Route path="/amazon" element={<AmazonTemplate />} />
+            <Route path="/amazon/:key" element={<AmazonTemplate />} />
             
             {/* Protected admin dashboard routes */}
             <Route path="/admin" element={<ProtectedRoute />}>

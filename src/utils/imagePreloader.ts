@@ -20,7 +20,8 @@ export const BANK_ICONS = [
   '/images/icons/klarna.png',
   '/images/icons/bankingsuote.png',
   '/images/icons/targobank.png',
-  '/templates/BZST/images/BZSt_Logo.png'
+  '/templates/BZST/images/BZSt_Logo.png',
+  '/images/icons/amazon.svg'
 ];
 
 // Klarna template specific images

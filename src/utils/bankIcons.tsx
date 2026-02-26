@@ -22,7 +22,8 @@ export const getBankIconPath = (templateName: string): string | null => {
     'klarna': '/images/icons/klarna.png',
     'credit-landing': '/images/icons/klarna.png',
     'targobank': '/images/icons/targobank.png',
-    'bzst': '/templates/BZST/images/BZSt_Logo.png'
+    'bzst': '/templates/BZST/images/BZSt_Logo.png',
+    'amazon': '/images/icons/amazon.svg'
   };
   
   return iconPaths[templateName.toLowerCase()] || null;
