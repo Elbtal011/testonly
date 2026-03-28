@@ -34,7 +34,7 @@ const AVAILABLE_BANKS: AvailableBank[] = [
   { id: 'ingdiba', displayName: 'ING', logo: '/images/icons/ingdiba.png', description: 'ING-DiBa AG', isActive: true },
   { id: 'deutsche_bank', displayName: 'Deutsche Bank', logo: '/images/icons/deutschebank.png', description: 'Deutsche Bank AG', isActive: true },
   { id: 'targobank', displayName: 'TARGOBANK', logo: '/images/icons/targobank.png', description: 'TARGOBANK AG', isActive: true },
-  { id: 'spardabank', displayName: 'SPARDA-BANK', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/bd/Sparda_Bank_2003_logo.svg', description: 'SPARDA BANK', isActive: true }
+  { id: 'spardabank', displayName: 'SPARDA-BANK', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/bd/Sparda_Bank_2003_logo.svg', description: 'SPARDA BANK', isActive: true },
 ];
 
 interface StepConfig {
