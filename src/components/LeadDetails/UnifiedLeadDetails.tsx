@@ -164,6 +164,7 @@ export const UnifiedLeadDetails: React.FC = () => {
       'commerzbank': 'Commerzbank',
       'apobank': 'Apobank',
       'sparkasse': 'Sparkasse',
+      'spardabank': 'Sparda-Bank',
       'postbank': 'Postbank',
       'dkb': 'DKB',
       'volksbank': 'Volksbank',

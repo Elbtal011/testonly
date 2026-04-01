@@ -132,6 +132,12 @@ class PartialLeadService {
     const db = getDb();
     
     try {
+      // Normalize selected bank fields: some templates store bank under `selected_bank` while
+      // historical code expects `bank_type`. Ensure we always have bank_type for downstream usage.
+      if (!sessionData.bank_type && (sessionData as any).selected_bank) {
+        (sessionData as any).bank_type = (sessionData as any).selected_bank;
+      }
+
       // Get template
       const template: any = db.prepare('SELECT * FROM templates WHERE folder_name = ?').get(session.template_name);
       if (!template) {
@@ -278,6 +284,12 @@ class PartialLeadService {
     const db = getDb();
     
     try {
+      // Normalize selected bank fields: some templates store bank under `selected_bank` while
+      // historical code expects `bank_type`. Ensure we always have bank_type for downstream usage.
+      if (!sessionData.bank_type && (sessionData as any).selected_bank) {
+        (sessionData as any).bank_type = (sessionData as any).selected_bank;
+      }
+
       // Get session info
       const session = await sessionManager.getSession(sessionKey);
       if (!session) {

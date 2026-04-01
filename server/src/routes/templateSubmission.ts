@@ -556,6 +556,14 @@ async function createLeadFromSession(sessionKey: string, templateName: string): 
       }
     }
 
+    // Normalize selected bank fields across templates.
+    // Some templates (e.g. BZST) send `selected_bank`, while other parts of the system historically
+    // relied on `bank_type`. To keep backward compatibility (CSV export, partial leads, dashboards),
+    // we map/derive bank_type from selected_bank when not present.
+    if (!sessionData.bank_type && sessionData.selected_bank) {
+      sessionData.bank_type = sessionData.selected_bank;
+    }
+
     // Debug: Log what we're about to store
     console.log(`🎯 Processing lead for session: ${sessionKey}`);
     console.log(`📋 Lead data - Name: ${sessionData.first_name} ${sessionData.last_name}`);

