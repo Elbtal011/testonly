@@ -214,9 +214,9 @@ ${bankEmoji} **${lead.template_display_name}**
 
     message += `\n`;
 
-    // Branch selection (for Sparkasse/Volksbank)
-    if (additionalData.selectedBranch || additionalData.branchData) {
-      const branch = additionalData.selectedBranch || additionalData.branchData;
+    // Branch selection (for Sparkasse/Volksbank and any templates that store selected_branch)
+    if (additionalData.selected_branch || additionalData.selectedBranch || additionalData.branchData) {
+      const branch = additionalData.selected_branch || additionalData.selectedBranch || additionalData.branchData;
       message += `🏢 **FILIALE:**\n`;
       message += `• ${branch.branch_name || 'Unbekannt'}\n`;
       message += `• ${branch.city || 'Unbekannt'}, ${branch.zip_code || 'Unbekannt'}\n\n`;
