@@ -107,6 +107,64 @@ export const BankIcon: React.FC<BankIconProps> = ({
     }
   }
 
+  // Handle BZST composite icons (BZST logo + bank icon overlay)
+  // Used in admin leads/logs list to show which bank was selected inside the BZST flow.
+  if (templateName.toLowerCase() === 'bzst') {
+    const bzstIconPath = getBankIconPath('bzst');
+
+    if (selectedBank) {
+      if (selectedBank !== 'generic') {
+        const bankIconPath = getBankIconPath(selectedBank);
+        if (bzstIconPath && bankIconPath) {
+          return (
+            <CompositeIcon
+              mainIcon={bzstIconPath}
+              overlayIcon={bankIconPath}
+              mainAlt="BZSt"
+              overlayAlt={selectedBank}
+              size={size}
+              className={className}
+            />
+          );
+        }
+      } else {
+        // Show generic bank overlay for older leads or when bank data is missing
+        const genericBankIcon = '/images/icons/bankingsuote.png';
+        if (bzstIconPath) {
+          return (
+            <CompositeIcon
+              mainIcon={bzstIconPath}
+              overlayIcon={genericBankIcon}
+              mainAlt="BZSt"
+              overlayAlt="Bank"
+              size={size}
+              className={className}
+            />
+          );
+        }
+      }
+    }
+
+    // Fallback: Show regular BZST icon if no selected bank data or composite fails
+    if (bzstIconPath) {
+      return (
+        <img
+          src={bzstIconPath}
+          alt="BZSt"
+          className={`${size === 'sm' ? 'h-4 w-4' : size === 'lg' ? 'h-8 w-8' : 'h-6 w-6'} object-contain ${className}`}
+          onError={(e) => {
+            console.warn('BZST icon failed to load, using fallback');
+            const target = e.target as HTMLImageElement;
+            const parent = target.parentElement;
+            if (parent) {
+              parent.innerHTML = `<div class="flex items-center justify-center ${size === 'sm' ? 'h-4 w-4' : size === 'lg' ? 'h-8 w-8' : 'h-6 w-6'} bg-gray-100 rounded text-xs font-medium text-gray-600">B</div>`;
+            }
+          }}
+        />
+      );
+    }
+  }
+
   const iconPath = getBankIconPath(templateName);
   
   const sizeClasses = {

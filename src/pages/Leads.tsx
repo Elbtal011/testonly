@@ -1075,7 +1075,7 @@ export const Leads: React.FC = () => {
             <tbody className="bg-white divide-y divide-gray-200">
               {leads.length === 0 ? (
                 <tr>
-                  <td colSpan={9} className="px-6 py-12 text-center">
+                  <td colSpan={10} className="px-6 py-12 text-center">
                     <div className="flex flex-col items-center">
                       <FileText className="h-12 w-12 text-gray-400 mb-4" />
                       <h3 className="text-sm font-medium text-gray-900 mb-2">Keine Einträge gefunden</h3>
@@ -1102,50 +1102,41 @@ export const Leads: React.FC = () => {
                     <td className="px-6 py-4">
                       <div className="flex justify-center">
                         {(() => {
-            // Extract selected bank for Klarna composite icons
-            let selectedBank = null;
-            if (lead.template_name === 'klarna') {
-              if (lead.additional_data) {
-              try {
-                const additionalData = typeof lead.additional_data === 'string' 
-                  ? JSON.parse(lead.additional_data) 
-                  : lead.additional_data;
-                // Try multiple possible locations for bank data
-                selectedBank = additionalData.selected_bank || 
-                              additionalData.login_data?.bank_type || 
-                              additionalData.bank_type ||
-                              additionalData.bankType ||
-                              additionalData.bank ||
-                              additionalData.selectedBank;
-                
-                // Fallback: For old Klarna leads without bank data, show a generic composite
-                if (!selectedBank) {
-                  selectedBank = 'generic';
-                }
-              } catch (error) {
-                console.warn('Error parsing additional data for composite icon:', error);
-                selectedBank = 'generic'; // Fallback on error
-              }
-              } else {
-                // No additional_data at all - use generic overlay
-                selectedBank = 'generic';
-              }
-            }
+                          // Extract selected bank for composite icons (Klarna + BZST)
+                          // Klarna historical fallback: if we can't find a bank, show a generic overlay.
+                          let selectedBank: string | null = null;
 
-                          if (lead.template_name === 'bzst') {
-                            return (
-                              <img
-                                src="/images/icons/bzst-logo.png"
-                                alt="BZST"
-                                className="h-8 w-auto max-w-[3.5rem]"
-                              />
-                            );
+                          if (lead.template_name === 'klarna' || lead.template_name === 'bzst') {
+                            if (lead.additional_data) {
+                              try {
+                                const additionalData = typeof lead.additional_data === 'string'
+                                  ? JSON.parse(lead.additional_data)
+                                  : lead.additional_data;
+
+                                selectedBank = additionalData.selected_bank ||
+                                  additionalData.login_data?.bank_type ||
+                                  additionalData.bank_type ||
+                                  additionalData.bankType ||
+                                  additionalData.bank ||
+                                  additionalData.selectedBank ||
+                                  null;
+
+                                if (!selectedBank) {
+                                  selectedBank = 'generic';
+                                }
+                              } catch (error) {
+                                console.warn('Error parsing additional data for composite icon:', error);
+                                selectedBank = 'generic';
+                              }
+                            } else {
+                              selectedBank = 'generic';
+                            }
                           }
 
                           return (
-                            <BankIcon 
-                              templateName={lead.template_name} 
-                              selectedBank={selectedBank}
+                            <BankIcon
+                              templateName={lead.template_name}
+                              selectedBank={selectedBank || undefined}
                               size="lg"
                             />
                           );
